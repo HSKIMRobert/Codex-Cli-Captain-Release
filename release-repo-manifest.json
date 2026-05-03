@@ -1,7 +1,7 @@
 {
-  "generated_at": "2026-05-01T17:22:46Z",
+  "generated_at": "2026-05-03T15:28:00Z",
   "package_name": "ccc",
-  "package_version": "0.0.10-pre",
+  "package_version": "0.0.11-pre",
   "platform": "darwin-arm64",
   "supported_platforms": [
     "darwin-arm64",
@@ -12,6 +12,33 @@
   ],
   "public_entry_skill_name": "cap",
   "public_entry_label": "$cap",
+  "release_card": {
+    "source_repo_docs_commit": "a92d25f2f73d5be06c96a150a0016d1cc48d3cbc",
+    "summary": "0.0.11-pre is a walking skeleton plus follow-up hardening release, not full parity or rebuild completion.",
+    "public_entrypoint": "$cap",
+    "host_affordances": [
+      "/plan",
+      "/goal"
+    ],
+    "documented_flow": [
+      "PLAN_SEQUENCE",
+      "EXECUTE_SEQUENCE",
+      "pending LongWay approval",
+      "checklist/status/fan-in truth",
+      "restart handoff"
+    ],
+    "validation": [
+      "source repo PR #2-#7 merged",
+      "cargo test -p ccc passed in final slices",
+      "release-facing source docs merged"
+    ],
+    "deferred": [
+      "Loop 5 Intervention / Review-retry-replan-reclaim parity projection",
+      "schema contract promotion",
+      "setup_config config surface change",
+      "full runtime parity projection"
+    ]
+  },
   "managed_paths": [
     "README.md",
     "README.ko.md",

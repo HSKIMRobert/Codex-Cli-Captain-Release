@@ -16,18 +16,37 @@
 여러분은 그저 하고자 하는 것 앞에 <code>$cap</code>만 붙이면 됩니다.<br>
 그러면 놀라운 일이 펼쳐질 거예요!</em></p>
 
-현재 공개 버전: `0.0.10-pre`.
+현재 공개 버전: `0.0.11-pre`.
 
 <table>
 <tr>
 <td>
 
 <strong>주의 - 사전 릴리즈 기본 권장 경로</strong><br><br>
-<code>0.0.10-pre</code>가 현재 공개 사전 릴리즈 기본값입니다. macOS는 공식 지원 경로이며, macOS arm64는 로컬에서 설치와 동작을 확인했습니다. Linux/Windows asset은 초기 테스트용으로 제공되며 같은 <code>ccc setup</code> / <code>ccc check-install</code> 흐름을 사용할 것으로 기대하지만, 실제 Linux/Windows 환경에서의 검증은 아직 충분하지 않습니다. 필요하면 <code>CCC_VERSION=v0.0.9-pre</code>로 이전 사전 릴리즈를 설치할 수 있습니다.
+<code>0.0.11-pre</code>가 현재 공개 사전 릴리즈 기본값입니다. macOS는 공식 지원 경로이며, macOS arm64는 로컬에서 설치와 동작을 확인했습니다. Linux/Windows asset은 초기 테스트용으로 제공되며 같은 <code>ccc setup</code> / <code>ccc check-install</code> 흐름을 사용할 것으로 기대하지만, 실제 Linux/Windows 환경에서의 검증은 아직 충분하지 않습니다. 필요하면 <code>CCC_VERSION=v0.0.10-pre</code>로 이전 사전 릴리즈를 설치할 수 있습니다.
 
 </td>
 </tr>
 </table>
+
+## 0.0.11-pre 릴리즈 카드
+
+`0.0.11-pre`는 walking skeleton과 후속 hardening을 위한 릴리즈이며, full parity나 rebuild 완료 릴리즈가 아닙니다. 이 릴리즈는 `$cap`을 public CCC entrypoint로 두고, host `/plan`과 `/goal`은 optional affordance로 둡니다. `$cap`은 두 host surface 없이도 동작합니다.
+
+이번 릴리즈는 PLAN_SEQUENCE와 EXECUTE_SEQUENCE, 실행 전 pending LongWay 승인, checklist/status/fan-in을 운영상 truth로 삼는 흐름, persisted state에서 이어가기 위한 restart handoff를 공개 문서에 반영합니다.
+
+검증 요약:
+
+- Source repo PR #2부터 PR #7까지 merge됐으며, release-facing source docs commit은 `a92d25f2f73d5be06c96a150a0016d1cc48d3cbc`입니다.
+- 최종 구현 slice에서 `cargo test -p ccc`가 통과했습니다.
+- Public release repo 문서 갱신 전에 release-facing source docs가 merge됐습니다.
+
+`0.0.11-pre`에서 의도적으로 미룬 항목:
+
+- Loop 5 Intervention / Review-retry-replan-reclaim parity projection.
+- Schema contract promotion.
+- `setup_config` config surface change.
+- Full runtime parity projection.
 
 ## 설치 및 업데이트
 

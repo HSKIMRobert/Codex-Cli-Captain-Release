@@ -16,18 +16,37 @@
 やりたいことの前に <code>$cap</code> を付けるだけです。<br>
 きっと想像以上の展開になります。</em></p>
 
-現在の公開バージョン: `0.0.10-pre`.
+現在の公開バージョン: `0.0.11-pre`.
 
 <table>
 <tr>
 <td>
 
 <strong>注意 - プレリリースの推奨デフォルト経路</strong><br><br>
-<code>0.0.10-pre</code> が現在の公開プレリリース default です。macOS は正式サポート対象で、macOS arm64 はローカルでインストールと動作を確認済みです。Linux/Windows asset は初期テスト用に提供しており、同じ <code>ccc setup</code> / <code>ccc check-install</code> の流れで動作する想定ですが、実際の Linux/Windows 環境での検証はまだ十分ではありません。必要であれば <code>CCC_VERSION=v0.0.9-pre</code> で以前のプレリリースをインストールできます。
+<code>0.0.11-pre</code> が現在の公開プレリリース default です。macOS は正式サポート対象で、macOS arm64 はローカルでインストールと動作を確認済みです。Linux/Windows asset は初期テスト用に提供しており、同じ <code>ccc setup</code> / <code>ccc check-install</code> の流れで動作する想定ですが、実際の Linux/Windows 環境での検証はまだ十分ではありません。必要であれば <code>CCC_VERSION=v0.0.10-pre</code> で以前のプレリリースをインストールできます。
 
 </td>
 </tr>
 </table>
+
+## 0.0.11-pre リリースカード
+
+`0.0.11-pre` は walking skeleton と follow-up hardening のためのリリースであり、full parity や rebuild 完了のリリースではありません。このリリースでは `$cap` を public CCC entrypoint とし、host `/plan` と `/goal` は optional host affordance として扱います。`$cap` はどちらの host surface がなくても動作します。
+
+このリリースは、PLAN_SEQUENCE と EXECUTE_SEQUENCE、実行前の pending LongWay approval、checklist/status/fan-in を運用上の truth とする流れ、persisted state から作業を続けるための restart handoff を公開文書に反映します。
+
+検証サマリー:
+
+- Source repo PR #2 から PR #7 までが merge 済みで、release-facing source docs commit は `a92d25f2f73d5be06c96a150a0016d1cc48d3cbc` です。
+- 最終実装 slice で `cargo test -p ccc` が通過しました。
+- Public release repo 文書更新の前に release-facing source docs が merge 済みです。
+
+`0.0.11-pre` で意図的に延期した項目:
+
+- Loop 5 Intervention / Review-retry-replan-reclaim parity projection.
+- Schema contract promotion.
+- `setup_config` config surface change.
+- Full runtime parity projection.
 
 ## インストールと更新
 

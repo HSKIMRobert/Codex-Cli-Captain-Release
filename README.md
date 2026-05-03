@@ -16,18 +16,37 @@ Then give CCC a try.<br>
 Just put <code>$cap</code> in front of what you want to do.<br>
 Watch the magic happen.</em></p>
 
-Current public release: `0.0.10-pre`.
+Current public release: `0.0.11-pre`.
 
 <table>
 <tr>
 <td>
 
 <strong>CAUTION - PRE-RELEASE DEFAULT PATH</strong><br><br>
-<code>0.0.10-pre</code> is the current public pre-release default. macOS is the officially supported path, with macOS arm64 locally tested. Linux and Windows assets are provided for early testing and are expected to use the same <code>ccc setup</code> / <code>ccc check-install</code> flow, but they have not yet been fully verified on real Linux or Windows environments. If needed, install the previous pre-release with <code>CCC_VERSION=v0.0.9-pre</code>.
+<code>0.0.11-pre</code> is the current public pre-release default. macOS is the officially supported path, with macOS arm64 locally tested. Linux and Windows assets are provided for early testing and are expected to use the same <code>ccc setup</code> / <code>ccc check-install</code> flow, but they have not yet been fully verified on real Linux or Windows environments. If needed, install the previous pre-release with <code>CCC_VERSION=v0.0.10-pre</code>.
 
 </td>
 </tr>
 </table>
+
+## 0.0.11-pre Release Card
+
+`0.0.11-pre` is a walking skeleton plus follow-up hardening release, not a full parity or rebuild-complete release. It makes `$cap` the public CCC entrypoint while keeping host `/plan` and `/goal` as optional affordances; `$cap` works without either host surface.
+
+This release documents the CCC operator flow around PLAN_SEQUENCE and EXECUTE_SEQUENCE, pending LongWay approval before execution, checklist/status/fan-in as the operational truth, and restart handoff for continuing work from persisted state.
+
+Validation summary:
+
+- Source repo PR #2 through PR #7 are merged, ending with release-facing source docs commit `a92d25f2f73d5be06c96a150a0016d1cc48d3cbc`.
+- `cargo test -p ccc` passed in the final implementation slices.
+- Release-facing source docs are merged before this public release repo documentation update.
+
+Deferred from `0.0.11-pre`:
+
+- Loop 5 Intervention / Review-retry-replan-reclaim parity projection.
+- Schema contract promotion.
+- `setup_config` config surface change.
+- Full runtime parity projection.
 
 ## Install & Update
 
