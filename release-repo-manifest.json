@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-05-04T13:16:47Z",
+  "generated_at": "2026-05-04T14:15:14Z",
   "package_name": "ccc",
   "package_version": "0.0.11-pre",
   "platform": "darwin-arm64",
@@ -13,8 +13,8 @@
   "public_entry_skill_name": "cap",
   "public_entry_label": "$cap",
   "release_card": {
-    "source_repo_docs_commit": "3f14eca92fc3df4466b941c653a3c107a25cb252",
-    "summary": "0.0.11-pre is a walking skeleton plus follow-up hardening release with near-native app artifact dashboard fallback, compact CLI LongWay status blocks, MCP app-panel render metadata, LongWay checklist projection, subagent activity/model/task projection, diagnostic smoke routing, completed diagnostic fan-in closure, optional Tolaria mirrors, and branch consolidation recorded.",
+    "source_repo_docs_commit": "51af8a2e97618a9efe1742ed23445cef4fd264c0",
+    "summary": "0.0.11-pre is a walking skeleton plus follow-up hardening release with boxed Codex App/CLI transcript fallback, MCP app-panel border/render metadata, near-native app artifact dashboard fallback, LongWay checklist and planned-row projection, subagent activity/model/task/next-action projection, diagnostic smoke routing, completed diagnostic fan-in closure, optional Tolaria mirrors, and branch consolidation recorded.",
     "public_entrypoint": "$cap",
     "host_affordances": [
       "/plan",
@@ -31,25 +31,28 @@
       "ccc_render_app_panel MCP Apps render surface",
       "ccc status --app-panel --artifact fallback",
       "workspace-level latest app-panel artifact fallback",
-      "compact CCC LongWay transcript status block",
+      "boxed CCC LongWay transcript status block",
       "subagent activity, task ownership, and configured model projection",
+      "subagent next-action projection",
       "checklist-style LongWay row projection",
+      "planned-row checklist projection in transcript and Markdown artifacts",
       "visibility diagnostic smoke routing",
       "optional Tolaria graph and memory mirrors",
       "completed diagnostic fan-in closes runs"
     ],
     "validation": [
-      "source repo main pushed at 3f14eca",
+      "source repo main pushed at 51af8a2",
       "cargo fmt --check passed",
       "cargo test -p ccc passed with 224 tests",
       "release-target cargo build passed for darwin arm64, darwin x86_64, linux arm64, linux x86_64, and windows x86_64 using rustup cargo/rustc; Linux targets used Zig linker wrappers",
-      "app-panel payload/text test proves subagent activity names child agent, role, configured model, variant, lane, task, and lifecycle status",
-      "app-panel payload/text test proves checklist-style LongWay row fallback is rendered",
+      "app-panel payload/text test proves subagent activity names child agent, role, configured model, variant, lane, task, lifecycle status, and next action",
+      "app-panel payload/text test proves boxed CCC LongWay transcript fallback and planned-row checklist fallback are rendered",
+      "MCP app-panel resource exposes text/html;profile=mcp-app and ui.prefersBorder metadata for hosts that render component resources",
       "app-panel artifact smoke created run-local CCC_LONGWAY_PANEL.md/json and workspace-level CCC_LATEST_PANEL.md/json",
-      "extracted darwin arm64 tarball binary prints compact CCC LongWay text and returns latest_markdown_path/latest_json_path artifact fields",
+      "extracted darwin arm64 tarball binary prints boxed CCC LongWay text and returns latest_markdown_path/latest_json_path artifact fields",
       "task-card fan-in resolve regression proves completed smoke runs close instead of staying active/await_fan_in",
       "branch cleanup leaves only main and origin/main",
-      "darwin arm64, darwin x86_64, linux arm64, linux x86_64, and windows x86_64 tarballs refreshed on 2026-05-04 from 3f14eca",
+      "darwin arm64, darwin x86_64, linux arm64, linux x86_64, and windows x86_64 tarballs refreshed on 2026-05-04 from 51af8a2",
       "macOS packaged binaries report 0.0.11-pre; Linux and Windows assets are package-verifiable on macOS but require native host validation"
     ],
     "deferred": [
