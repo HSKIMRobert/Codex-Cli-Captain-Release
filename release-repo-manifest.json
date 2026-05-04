@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-05-04T11:42:54Z",
+  "generated_at": "2026-05-04T12:35:24Z",
   "package_name": "ccc",
   "package_version": "0.0.11-pre",
   "platform": "darwin-arm64",
@@ -13,8 +13,8 @@
   "public_entry_skill_name": "cap",
   "public_entry_label": "$cap",
   "release_card": {
-    "source_repo_docs_commit": "28f4df73274010bf8525f08118c93415b138d59e",
-    "summary": "0.0.11-pre is a walking skeleton plus follow-up hardening release with app/CLI visibility fallback, MCP app-panel render metadata, LongWay checklist projection, subagent activity/model/task projection, diagnostic smoke routing, completed diagnostic fan-in closure, optional Tolaria mirrors, and branch consolidation recorded.",
+    "source_repo_docs_commit": "956f6d41e7fc1932980a87a034cee2f9bd3e7629",
+    "summary": "0.0.11-pre is a walking skeleton plus follow-up hardening release with near-native app artifact dashboard fallback, compact CLI LongWay status blocks, MCP app-panel render metadata, LongWay checklist projection, subagent activity/model/task projection, diagnostic smoke routing, completed diagnostic fan-in closure, optional Tolaria mirrors, and branch consolidation recorded.",
     "public_entrypoint": "$cap",
     "host_affordances": [
       "/plan",
@@ -30,6 +30,8 @@
       "ccc status --app-panel fallback",
       "ccc_render_app_panel MCP Apps render surface",
       "ccc status --app-panel --artifact fallback",
+      "workspace-level latest app-panel artifact fallback",
+      "compact CCC LongWay transcript status block",
       "subagent activity, task ownership, and configured model projection",
       "checklist-style LongWay row projection",
       "visibility diagnostic smoke routing",
@@ -37,16 +39,16 @@
       "completed diagnostic fan-in closes runs"
     ],
     "validation": [
-      "source repo main pushed at 28f4df7",
+      "source repo main pushed at 956f6d4",
       "cargo fmt --check passed",
       "cargo test -p ccc passed with 224 tests",
       "cargo build passed for darwin arm64, darwin x86_64, linux arm64, linux x86_64, and windows x86_64",
       "app-panel payload/text test proves subagent activity names child agent, role, configured model, variant, lane, task, and lifecycle status",
       "app-panel payload/text test proves checklist-style LongWay row fallback is rendered",
-      "app-panel artifact smoke created CCC_LONGWAY_PANEL.md and CCC_LONGWAY_PANEL.json",
+      "app-panel artifact smoke created run-local CCC_LONGWAY_PANEL.md/json and workspace-level CCC_LATEST_PANEL.md/json",
       "task-card fan-in resolve regression proves completed smoke runs close instead of staying active/await_fan_in",
       "branch cleanup leaves only main and origin/main",
-      "darwin arm64, darwin x86_64, linux arm64, linux x86_64, and windows x86_64 tarballs refreshed on 2026-05-04 from 28f4df7",
+      "darwin arm64, darwin x86_64, linux arm64, linux x86_64, and windows x86_64 tarballs refreshed on 2026-05-04 from 956f6d4",
       "macOS packaged binaries report 0.0.11-pre; Linux and Windows assets are package-verifiable on macOS but require native host validation"
     ],
     "deferred": [
