@@ -16,7 +16,7 @@
 여러분은 그저 하고자 하는 것 앞에 <code>$cap</code>만 붙이면 됩니다.<br>
 그러면 놀라운 일이 펼쳐질 거예요!</em></p>
 
-현재 공개 버전: `0.0.11-pre`.
+현재 공개 버전: `0.0.12-pre`.
 
 ## 설치
 
@@ -58,7 +58,7 @@ CCC에서 `$cap`은 진입점입니다. LongWay, task card, checklist, fan-in, s
 
 ## Plan And Goal 활용
 
-`0.0.11-pre`에서는 Codex host가 제공하는 planning/goal 기능을 `$cap`과 함께 보조적으로 사용할 수 있습니다.
+`0.0.12-pre`에서는 Codex host가 제공하는 planning/goal 기능을 `$cap`과 함께 보조적으로 사용할 수 있습니다.
 
 - 넓거나 위험하거나 애매한 작업은 `$cap` 전에 `/plan`을 사용해 요청을 먼저 정리하세요.
 - `/goal`은 host가 지원할 때 장기 목표를 기억시키는 힌트로 사용할 수 있습니다. 다만 CCC의 LongWay, checklist, fan-in, status가 실제 작업의 기준입니다.
@@ -69,7 +69,7 @@ CCC에서 `$cap`은 진입점입니다. LongWay, task card, checklist, fan-in, s
 ```text
 /plan
 /goal 릴리즈 문서를 사용자에게 보이는 수준으로 간결하게 유지한다
-$cap 릴리즈 README를 정리하고 0.0.11-pre 후속 작업을 문서에 기록해줘
+$cap 릴리즈 README를 정리하고 0.0.12-pre 후속 작업을 문서에 기록해줘
 ```
 
 ## 추천 역할 설정

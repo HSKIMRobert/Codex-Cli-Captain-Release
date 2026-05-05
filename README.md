@@ -16,7 +16,7 @@ Then how about using CCC?<br>
 Just put <code>$cap</code> in front of what you want to do.<br>
 Then something remarkable can unfold.</em></p>
 
-Current public release: `0.0.11-pre`.
+Current public release: `0.0.12-pre`.
 
 ## Install
 
@@ -58,7 +58,7 @@ CCC treats `$cap` as the entrypoint. It owns the LongWay, task cards, checklist,
 
 ## Using Plan And Goal
 
-`0.0.11-pre` can work with host planning and goal surfaces when your Codex path provides them:
+`0.0.12-pre` can work with host planning and goal surfaces when your Codex path provides them:
 
 - Use `/plan` before `$cap` for broad, risky, or ambiguous work. It helps shape the request before CCC creates or executes a LongWay.
 - Use `/goal` as an outer objective hint when your host supports it. CCC still treats its own LongWay, checklist, fan-in, and status as the source of truth.
@@ -69,7 +69,7 @@ Example:
 ```text
 /plan
 /goal Keep the release documentation user-facing and concise
-$cap Update the release README and record remaining 0.0.11-pre follow-up work
+$cap Update the release README and record remaining 0.0.12-pre follow-up work
 ```
 
 ## Recommended Role Defaults

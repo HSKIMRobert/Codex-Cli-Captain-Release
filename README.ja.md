@@ -16,7 +16,7 @@
 やりたいことの前に <code>$cap</code> を付けるだけです。<br>
 すると、ちょっと驚くことが起きるはずです。</em></p>
 
-現在の公開バージョン: `0.0.11-pre`.
+現在の公開バージョン: `0.0.12-pre`.
 
 ## インストール
 
@@ -58,7 +58,7 @@ CCC では `$cap` が entrypoint です。LongWay、task card、checklist、fan-
 
 ## Plan And Goal の使い方
 
-`0.0.11-pre` では、Codex host が提供する planning/goal surface を `$cap` と併用できます。
+`0.0.12-pre` では、Codex host が提供する planning/goal surface を `$cap` と併用できます。
 
 - 広い、危険、または曖昧な作業では、`$cap` の前に `/plan` を使って依頼を整理します。
 - `/goal` は host が対応している場合に、長期目標のヒントとして使えます。ただし実際の作業の基準は CCC の LongWay、checklist、fan-in、status です。
@@ -69,7 +69,7 @@ CCC では `$cap` が entrypoint です。LongWay、task card、checklist、fan-
 ```text
 /plan
 /goal リリース文書を利用者向けに簡潔に保つ
-$cap リリース README を整理し、0.0.11-pre の follow-up work を文書に記録して
+$cap リリース README を整理し、0.0.12-pre の follow-up work を文書に記録して
 ```
 
 ## 推奨ロール設定

@@ -1,7 +1,7 @@
 {
-  "generated_at": "2026-05-04T14:57:10Z",
+  "generated_at": "2026-05-05T06:37:00Z",
   "package_name": "ccc",
-  "package_version": "0.0.11-pre",
+  "package_version": "0.0.12-pre",
   "platform": "darwin-arm64",
   "supported_platforms": [
     "darwin-arm64",
@@ -13,8 +13,8 @@
   "public_entry_skill_name": "cap",
   "public_entry_label": "$cap",
   "release_card": {
-    "source_repo_docs_commit": "f8eeb7f254d29ce8728afbe594310fb0db452b99",
-    "summary": "0.0.11-pre is a walking skeleton plus follow-up hardening release with concise Codex App/CLI transcript fallback, MCP app-panel border/render metadata, near-native app artifact dashboard fallback, LongWay checklist and planned-row subagent/model/reasoning projection, compact subagent lifecycle events, diagnostic smoke routing, completed diagnostic fan-in closure, optional Tolaria mirrors, and branch consolidation recorded.",
+    "source_repo_docs_commit": "980ed01336c27066de0bec36206558d351b9138d",
+    "summary": "0.0.12-pre hardens CCC structured runtime flow with phase-aware routing, scheduler-owned planned-row materialization, document-root graph and memory resolution, optional SSL skill manifests, Sisyphus harness coverage, compact boxed LongWay progress output, planned-row agent/model/reasoning projection, and compact subagent lifecycle visibility for Codex App and CLI fallback surfaces.",
     "public_entrypoint": "$cap",
     "host_affordances": [
       "/plan",
@@ -25,46 +25,46 @@
       "EXECUTE_SEQUENCE",
       "pending LongWay approval",
       "checklist/status/fan-in truth",
-      "restart handoff",
-      "Codex app/CLI status payload",
-      "ccc status --app-panel fallback",
-      "ccc_render_app_panel MCP Apps render surface",
-      "ccc status --app-panel --artifact fallback",
+      "scheduler-owned planned-row materialization",
+      "phase-aware route validation",
+      "document-root target workspace resolution",
+      "repo/document graph and memory target selection",
+      "optional SSL skill manifest routing/risk evidence",
+      "Codex app/CLI boxed LongWay status fallback",
+      "progress-gauge checklist projection",
+      "planned-row subagent/model/reasoning projection",
+      "compact opened/running/completed/closed subagent lifecycle transcript events",
       "workspace-level latest app-panel artifact fallback",
-      "concise boxed CCC LongWay transcript status block",
-      "subagent activity, task ownership, and configured model projection",
-      "subagent next-action projection",
-      "checklist-style LongWay row projection",
-      "planned-row subagent/model/reasoning projection in transcript and Markdown artifacts",
-      "compact opened/running/completed/closed-style subagent lifecycle transcript events",
-      "PLAN_SEQUENCE uses the configured way/tactician model rather than the host conversation model",
-      "visibility diagnostic smoke routing",
-      "optional Tolaria graph and memory mirrors",
-      "completed diagnostic fan-in closes runs"
+      "Sisyphus harness coverage",
+      "restart handoff"
     ],
     "validation": [
-      "source repo main pushed at f8eeb7f",
-      "cargo fmt --check passed",
-      "cargo test -p ccc passed with 224 tests",
-      "release-target cargo build passed for darwin arm64, darwin x86_64, linux arm64, linux x86_64, and windows x86_64 using rustup cargo/rustc; Linux targets used Zig linker wrappers",
-      "app-panel payload/text test proves subagent activity names child agent, role, configured model, variant, lane, task, lifecycle status, and next action",
-      "app-panel payload/text test proves concise boxed CCC LongWay transcript fallback and planned-row subagent/model/reasoning fallback are rendered",
-      "PLAN_SEQUENCE regression proves the planning task uses way/tactician role_config_snapshot and runtime_dispatch model/variant",
-      "subagent-update text smoke proves compact lifecycle output omits noisy follow-up commands",
-      "MCP app-panel resource exposes text/html;profile=mcp-app and ui.prefersBorder metadata for hosts that render component resources",
-      "app-panel artifact smoke created run-local CCC_LONGWAY_PANEL.md/json and workspace-level CCC_LATEST_PANEL.md/json",
-      "extracted darwin arm64 tarball binary prints concise boxed CCC LongWay text with planned-row routing and compact subagent lifecycle text",
-      "task-card fan-in resolve regression proves completed smoke runs close instead of staying active/await_fan_in",
-      "branch cleanup leaves only main and origin/main",
-      "darwin arm64, darwin x86_64, linux arm64, linux x86_64, and windows x86_64 tarballs refreshed on 2026-05-04 from f8eeb7f",
-      "macOS packaged binaries report 0.0.11-pre; Linux and Windows assets are package-verifiable on macOS but require native host validation"
+      "source repo main prepared at 980ed01",
+      "cargo fmt --check -p ccc passed",
+      "cargo test -p ccc passed with 242 tests",
+      "Sisyphus diagram conformance test covers PLAN_SEQUENCE, approval, scheduler materialization, route, fan-in, app-panel artifacts, completion, terminal scheduler, and restart handoff",
+      "target workspace tests cover git roots, structured mentions, document roots, markdown/file paths with spaces, and ambiguous root confirmation",
+      "app-panel tests cover compact progress gauge, checklist, planned-row agent/model/reasoning projection, latest artifacts, and subagent lifecycle visibility",
+      "skill SSL manifest tests cover optional manifest parsing and non-blocking invalid/missing fallback",
+      "release-target cargo build passed for darwin arm64, darwin x86_64, linux arm64, linux x86_64, and windows x86_64 from source commit 980ed01",
+      "scripts/release/verify-release-asset-matrix.sh passed for 5 assets",
+      "extracted darwin arm64 asset reports 0.0.12-pre and renders the boxed CCC LongWay progress panel",
+      "PowerShell was unavailable on the maintainer macOS host, so Windows install smoke used static install.ps1 surface checks",
+      "Linux and Windows assets are package-verifiable on macOS but require native runtime validation on their target OSes"
     ],
     "deferred": [
-      "Loop 5 Intervention / Review-retry-replan-reclaim parity projection",
-      "schema contract promotion",
-      "setup_config config surface change",
-      "full runtime parity projection"
-    ]
+      "native Codex App right progress panel mounting remains host-owned",
+      "0.0.13 SSL-backed Skill Registry promotion decision after 0.0.12 evidence",
+      "full runtime parity projection",
+      "schema contract promotion"
+    ],
+    "asset_digests": {
+      "ccc-0.0.12-pre-darwin-arm64.tar.gz": "1d46c3ebb599deb1c41df147822cb7e7835c1f05a9a0dc41e22f63a82080a9a6",
+      "ccc-0.0.12-pre-darwin-x86_64.tar.gz": "e5420f89ad71957e8a50daf69756890d44672f103b081e07000eb4d791a297be",
+      "ccc-0.0.12-pre-linux-arm64.tar.gz": "8b1b6766334a8a13c389265fc36951d041dd781743bb113e6b3817a6a50bed8d",
+      "ccc-0.0.12-pre-linux-x86_64.tar.gz": "f7c0e055269d4da2fd9ab7a685e83cd981a019e18fb0e1f665089c30c7dd22fc",
+      "ccc-0.0.12-pre-windows-x86_64.tar.gz": "7c0ffe0865efb6dfbde8c3a6ae657279e064747a840a5fc6a3a4413ace558f45"
+    }
   },
   "managed_paths": [
     "README.md",
