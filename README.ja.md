@@ -58,30 +58,7 @@ $cap 認証フローをリファクタリングして、テストが通る状態
 
 CCC では `$cap` が entrypoint です。LongWay、task card、checklist、fan-in、status、restart handoff は CCC が管理します。
 
-## `v0.0.13-pre` の動作
-
-- `$cap` は public entrypoint です。
-- 利用者に見える lifecycle 変更は quiet な `ran` コマンドを優先します: `ccc start --quiet --json-file`、`ccc orchestrate --quiet --json-file`、`ccc subagent-update --quiet --json-file`、`ccc memory --quiet --json-file`、`ccc checklist --quiet --json-file`、`ccc status --quiet --json-file`、`ccc status --text --json-file`。
-- `ccc checklist` と `ccc status` は簡潔に保ちます。LongWay row は短い operator-facing summary です。
-- 設定済みの `ccc_*` custom agent が既定の specialist 対象です。`worker` や `explorer` のような generic label は、operator が明示的に override しない限り無効です。
-- `ccc memory` は opt-in で、既定では unconfigured です。
-- SSL Skill Registry は routing、planning、review 用の bounded evidence として提供され、persisted run state を置き換えません。
-- mutation 完了は specialist fan-in の後に行われ、review-sensitive 変更の最終 gate は arbiter review です。
-
-## Planning
-
-`$cap` が CCC の entrypoint です。Host planning surface は CCC orchestration path ではありません。
-
-- 広い、危険、または曖昧な作業では、`$cap` で入り、CCC が `PLAN_SEQUENCE` を作成して設定済みの Way agent に planning を任せます。
-- Host Plan Mode は operator が入力する内容を整理する助けにはなりますが、CCC が Way 内で background planning engine として trigger するものではありません。
-- CCC LongWay、task card、checklist、fan-in、status が実際の作業基準です。
-- 狭い作業では `$cap` だけで十分です。
-
-例:
-
-```text
-$cap リリース README 更新を計画し、blocking な Way 質問があれば先に聞き、LongWay 承認前にはファイルを変更しないで
-```
+作業範囲も一緒に書くと、`$cap` の依頼がより正確になります。たとえば `$cap README の古い案内だけを整理して` のように書けます。
 
 ## 推奨ロール設定
 

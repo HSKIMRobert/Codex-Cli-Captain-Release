@@ -58,30 +58,7 @@ $cap Refactor the auth flow and keep tests passing
 
 CCC treats `$cap` as the entrypoint. It owns the LongWay, task cards, checklist, fan-in, status, and restart handoff for the work.
 
-## v0.0.13-pre Behavior
-
-- `$cap` is the public entrypoint.
-- Operator-visible lifecycle changes should prefer quiet `ran` commands such as `ccc start --quiet --json-file`, `ccc orchestrate --quiet --json-file`, `ccc subagent-update --quiet --json-file`, `ccc memory --quiet --json-file`, `ccc checklist --quiet --json-file`, and `ccc status --quiet --json-file`; `ccc status --text --json-file` is the compact transcript path.
-- `ccc checklist` and `ccc status` should stay concise. LongWay rows are short operator-facing summaries.
-- Configured `ccc_*` custom agents are the default specialist targets. Generic `worker` and `explorer` labels are invalid unless the operator explicitly overrides them.
-- `ccc memory` is opt-in and unconfigured by default.
-- The SSL Skill Registry is available as bounded evidence for routing, planning, and review; it does not replace persisted run state.
-- Mutation completion waits for specialist fan-in, and arbiter review remains the final gate for review-sensitive changes.
-
-## Planning
-
-`$cap` is the CCC entrypoint. Host planning surfaces are not CCC orchestration paths:
-
-- Invoke `$cap` for broad, risky, or ambiguous work so CCC creates a `PLAN_SEQUENCE` and routes planning to the configured Way agent.
-- Host Plan Mode can help frame what you type, but CCC does not trigger it inside Way as a background planning engine.
-- CCC LongWay, task cards, checklist, fan-in, and status remain the source of truth.
-- For narrow work, `$cap` alone is enough.
-
-Example:
-
-```text
-$cap Plan the release README update, ask any blocking Way questions first, and wait for LongWay approval before changing files
-```
+Including the task scope makes `$cap` requests more accurate. For example: `$cap Update the README and remove stale release notes only`.
 
 ## Recommended Role Defaults
 
