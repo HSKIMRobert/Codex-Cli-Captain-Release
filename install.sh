@@ -87,6 +87,12 @@ EXTRACT_DIR="${TMP_DIR}/extract"
 TARGET_DIR="${INSTALL_ROOT}/current"
 TARGET_BIN="${BIN_DIR}/ccc"
 RELEASES_DIR="${INSTALL_ROOT}/releases"
+MARKETPLACE_NAME="ccc-local"
+MARKETPLACE_DIR="${INSTALL_ROOT}/plugin-marketplace"
+PLUGIN_DIR="${MARKETPLACE_DIR}/plugins/ccc"
+CODEX_CONFIG="${CODEX_HOME:-$HOME/.codex}/config.toml"
+PLUGIN_CACHE_DIR="${CODEX_HOME:-$HOME/.codex}/plugins/cache/${MARKETPLACE_NAME}/ccc/${VERSION#v}"
+LEGACY_CAP_SKILL_DIR="${CODEX_HOME:-$HOME/.codex}/skills/cap"
 
 cleanup() {
   rm -rf "$TMP_DIR"
@@ -102,6 +108,86 @@ prune_old_release_bundles() {
     fi
     rm -rf "$candidate"
   done
+}
+
+configure_codex_plugin() {
+  local tmp_config
+
+  rm -rf "$PLUGIN_DIR"
+  mkdir -p "$PLUGIN_DIR"
+  cp -R "${TARGET_DIR}/." "$PLUGIN_DIR/"
+  if [ -f "${PLUGIN_DIR}/share/skills/cap/SKILL.md" ]; then
+    rm -rf "${PLUGIN_DIR}/skills/cap"
+    mkdir -p "${PLUGIN_DIR}/skills/cap"
+    cp "${PLUGIN_DIR}/share/skills/cap/SKILL.md" "${PLUGIN_DIR}/skills/cap/SKILL.md"
+  fi
+
+  cat > "${PLUGIN_DIR}/.mcp.json" <<EOF
+{
+  "mcpServers": {
+    "ccc": {
+      "command": "${PLUGIN_CACHE_DIR}/bin/ccc",
+      "args": [
+        "mcp"
+      ]
+    }
+  }
+}
+EOF
+
+  rm -rf "$PLUGIN_CACHE_DIR"
+  mkdir -p "$PLUGIN_CACHE_DIR"
+  cp -R "${PLUGIN_DIR}/." "$PLUGIN_CACHE_DIR/"
+  ln -sfn "${PLUGIN_CACHE_DIR}/bin/ccc" "$TARGET_BIN"
+  rm -rf "$LEGACY_CAP_SKILL_DIR"
+
+  mkdir -p "${MARKETPLACE_DIR}/.agents/plugins"
+  cat > "${MARKETPLACE_DIR}/.agents/plugins/marketplace.json" <<EOF
+{
+  "name": "${MARKETPLACE_NAME}",
+  "interface": {
+    "displayName": "CCC local"
+  },
+  "plugins": [
+    {
+      "name": "ccc",
+      "source": {
+        "source": "local",
+        "path": "./plugins/ccc"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_INSTALL"
+      },
+      "category": "Engineering"
+    }
+  ]
+}
+EOF
+
+  mkdir -p "$(dirname "$CODEX_CONFIG")"
+  touch "$CODEX_CONFIG"
+  tmp_config="$(mktemp "${TMPDIR:-/tmp}/ccc-codex-config.XXXXXX")"
+
+  awk '
+    /^\[mcp_servers\.ccc(\.|])/ { skip = 1; next }
+    /^\[marketplaces\.ccc-local]/ { skip = 1; next }
+    /^\[plugins\."ccc@ccc-local"]/ { skip = 1; next }
+    /^\[/ { skip = 0 }
+    !skip { print }
+  ' "$CODEX_CONFIG" > "$tmp_config"
+
+  cat >> "$tmp_config" <<EOF
+
+[marketplaces.${MARKETPLACE_NAME}]
+source_type = "local"
+source = "${MARKETPLACE_DIR}"
+
+[plugins."ccc@${MARKETPLACE_NAME}"]
+enabled = true
+EOF
+
+  mv "$tmp_config" "$CODEX_CONFIG"
 }
 
 mkdir -p "$EXTRACT_DIR" "$BIN_DIR" "$INSTALL_ROOT" "$RELEASES_DIR"
@@ -137,10 +223,6 @@ fi
 ln -sfn "$BUNDLE_DIR" "$TARGET_DIR"
 ln -sfn "${TARGET_DIR}/bin/ccc" "$TARGET_BIN"
 
-echo "Refreshing Codex MCP registration..."
-codex mcp remove ccc >/dev/null 2>&1 || true
-codex mcp add ccc -- "${TARGET_DIR}/bin/ccc" mcp
-
 echo "Running setup..."
 "${TARGET_DIR}/bin/ccc" setup
 
@@ -148,12 +230,18 @@ echo
 echo "Running check-install..."
 "${TARGET_DIR}/bin/ccc" check-install
 
+echo
+echo "Refreshing Codex CCC plugin marketplace..."
+mkdir -p "${MARKETPLACE_DIR}/plugins"
+configure_codex_plugin
+
 prune_old_release_bundles
 
 echo
 echo "Install complete."
 echo "Installed root: ${TARGET_DIR}"
 echo "Binary link: ${TARGET_BIN}"
+echo "Plugin marketplace: ${MARKETPLACE_DIR}"
 echo "If ${BIN_DIR} is not on your PATH, add it before using ccc directly."
-echo "You must restart Codex CLI before using \$cap or relying on the new MCP registration."
-echo "After restarting Codex CLI, run: ccc check-install"
+echo "You must restart Codex CLI before using \$cap or relying on the new CCC plugin registration."
+echo "After restarting Codex CLI, run: codex mcp list"

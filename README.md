@@ -16,7 +16,7 @@ Then how about using CCC?<br>
 Just put <code>$cap</code> in front of what you want to do.<br>
 Then something remarkable can unfold.</em></p>
 
-This release is packaged for plugin distribution. The bundle includes the CCC plugin manifest, `.mcp.json`, and `skills/ccc/SKILL.md`. These files support install and discovery; the public operator entrypoint remains `$cap`.
+This release installs CCC through a local Codex plugin marketplace. The bundle includes the CCC plugin manifest, `.mcp.json`, and plugin-provided `$cap` skill; the installer enables the `ccc@ccc-local` plugin and removes the legacy direct `mcp_servers.ccc` registration plus any standalone `~/.codex/skills/cap` copy. The public operator entrypoint remains `$cap`.
 
 Current public release: `0.0.15-pre`.
 
@@ -33,7 +33,7 @@ curl -fsSL https://raw.githubusercontent.com/HoRi0506/Codex-Cli-Captain-Release/
 After installation finishes, fully exit Codex CLI.
 Start a new Codex CLI session.
 Then run:
-ccc check-install
+codex mcp list
 ```
 
 Windows PowerShell:
@@ -45,10 +45,18 @@ iwr -UseB https://raw.githubusercontent.com/HoRi0506/Codex-Cli-Captain-Release/m
 After installation finishes, fully exit Codex CLI.
 Start a new Codex CLI session.
 Then run:
-ccc check-install
+codex mcp list
 ```
 
-To update, run the same install command again, restart Codex CLI, then run `ccc check-install`.
+To update, run the same install command again, restart Codex CLI, then run `codex mcp list`. The installer refreshes the local `ccc-local` marketplace, enables `plugins."ccc@ccc-local"`, and removes the legacy direct `mcp_servers.ccc` block and standalone `$cap` skill so CCC is loaded through the plugin.
+
+Optional Rust LSP support is useful when working on CCC source or Rust-heavy repos:
+
+```bash
+rustup component add rust-analyzer
+```
+
+Stable `ccc_*` IDs remain the routing contract; callsigns are display-only. `ccc_tactician` is Executor, `ccc_scout` is Observer, `ccc_raider` is Marauder, `ccc_scribe` is Adjutant, `ccc_arbiter` is Arbiter, `ccc_sentinel` is Overseer, `ccc_companion_reader` is Probe, and `ccc_companion_operator` is SCV. The 0.0.15-pre metadata also advertises the oh-my-openagent-inspired workflow set: `github-triage`, `hyperplan`, `work-with-pr`, `pre-publish-review`, `git-master`, `review-work`, `remove-deadcode`, `get-unpublished-changes`, `ai-slop-remover`, and `rust-analyzer-lsp`.
 
 ## Recommended Role Defaults
 

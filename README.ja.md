@@ -16,7 +16,7 @@
 やりたいことの前に <code>$cap</code> を付けるだけです。<br>
 すると、ちょっと驚くことが起きるはずです。</em></p>
 
-このリリースはプラグイン配布向けにパッケージされています。パッケージには CCC plugin manifest、`.mcp.json`、`skills/ccc/SKILL.md` が含まれます。これらのファイルは install と discovery を支援するもので、公開 operator entrypoint は引き続き `$cap` です。
+このリリースはローカル Codex plugin marketplace 経由で CCC をインストールします。パッケージには CCC plugin manifest、`.mcp.json`、plugin 提供の `$cap` skill が含まれ、installer は `ccc@ccc-local` plugin を有効化し、従来の直接 `mcp_servers.ccc` 登録と standalone `~/.codex/skills/cap` copy を削除します。公開 operator entrypoint は引き続き `$cap` です。
 
 現在の公開バージョン: `0.0.15-pre`.
 
@@ -33,7 +33,7 @@ curl -fsSL https://raw.githubusercontent.com/HoRi0506/Codex-Cli-Captain-Release/
 After installation finishes, fully exit Codex CLI.
 Start a new Codex CLI session.
 Then run:
-ccc check-install
+codex mcp list
 ```
 
 Windows PowerShell:
@@ -45,10 +45,18 @@ iwr -UseB https://raw.githubusercontent.com/HoRi0506/Codex-Cli-Captain-Release/m
 After installation finishes, fully exit Codex CLI.
 Start a new Codex CLI session.
 Then run:
-ccc check-install
+codex mcp list
 ```
 
-更新する場合も同じインストールコマンドを再実行し、Codex CLI を再起動してから `ccc check-install` を実行してください。
+更新する場合も同じインストールコマンドを再実行し、Codex CLI を再起動してから `codex mcp list` を実行してください。Installer はローカル `ccc-local` marketplace を更新し、`plugins."ccc@ccc-local"` を有効化し、CCC が plugin として読み込まれるように従来の直接 `mcp_servers.ccc` block と standalone `$cap` skill を削除します。
+
+CCC source や Rust 中心の repo で作業する場合、任意で Rust LSP を入れると便利です。
+
+```bash
+rustup component add rust-analyzer
+```
+
+安定した `ccc_*` ID は引き続き routing contract で、callsign は display-only です。`ccc_tactician` は Executor、`ccc_scout` は Observer、`ccc_raider` は Marauder、`ccc_scribe` は Adjutant、`ccc_arbiter` は Arbiter、`ccc_sentinel` は Overseer、`ccc_companion_reader` は Probe、`ccc_companion_operator` は SCV です。0.0.15-pre metadata には oh-my-openagent に着想を得た workflow set も含まれます: `github-triage`, `hyperplan`, `work-with-pr`, `pre-publish-review`, `git-master`, `review-work`, `remove-deadcode`, `get-unpublished-changes`, `ai-slop-remover`, `rust-analyzer-lsp`.
 
 ## 推奨ロール設定
 

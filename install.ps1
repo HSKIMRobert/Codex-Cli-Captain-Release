@@ -77,6 +77,117 @@ $ExtractDir = Join-Path $TempRoot "extract"
 $ReleaseDir = Join-Path $InstallRoot "releases\$($Version.TrimStart('v'))-$ResolvedPlatform"
 $CurrentDir = Join-Path $InstallRoot "current"
 $TargetCmd = Join-Path $BinDir "ccc.cmd"
+$MarketplaceName = "ccc-local"
+$MarketplaceDir = Join-Path $InstallRoot "plugin-marketplace"
+$PluginDir = Join-Path $MarketplaceDir "plugins\ccc"
+$CodexHome = if ([string]::IsNullOrWhiteSpace($env:CODEX_HOME)) { Join-Path $env:USERPROFILE ".codex" } else { $env:CODEX_HOME }
+$CodexConfig = Join-Path $CodexHome "config.toml"
+$PluginCacheDir = Join-Path $CodexHome "plugins\cache\$MarketplaceName\ccc\$($Version.TrimStart('v'))"
+$LegacyCapSkillDir = Join-Path $CodexHome "skills\cap"
+
+function Set-CccPluginMarketplace {
+    param(
+        [string]$CurrentRoot,
+        [string]$CurrentExePath
+    )
+
+    if (Test-Path $PluginDir) {
+        Remove-Item -Recurse -Force $PluginDir
+    }
+    New-Item -ItemType Directory -Force -Path $PluginDir | Out-Null
+    Get-ChildItem -Force -Path $CurrentRoot | Copy-Item -Destination $PluginDir -Recurse -Force
+    $PackagedCapSkill = Join-Path $PluginDir "share\skills\cap\SKILL.md"
+    if (Test-Path $PackagedCapSkill) {
+        $PluginCapSkillDir = Join-Path $PluginDir "skills\cap"
+        if (Test-Path $PluginCapSkillDir) {
+            Remove-Item -Recurse -Force $PluginCapSkillDir
+        }
+        New-Item -ItemType Directory -Force -Path $PluginCapSkillDir | Out-Null
+        Copy-Item -Force $PackagedCapSkill (Join-Path $PluginCapSkillDir "SKILL.md")
+    }
+
+    if (Test-Path (Join-Path $PluginDir "bin\ccc.exe")) {
+        $PluginCacheExe = Join-Path $PluginCacheDir "bin\ccc.exe"
+    } else {
+        $PluginCacheExe = Join-Path $PluginCacheDir "bin\ccc"
+    }
+
+    $mcpJson = @{
+        mcpServers = @{
+            ccc = @{
+                command = $PluginCacheExe
+                args = @("mcp")
+            }
+        }
+    } | ConvertTo-Json -Depth 8
+    Set-Content -Encoding UTF8 -Path (Join-Path $PluginDir ".mcp.json") -Value $mcpJson
+
+    if (Test-Path $PluginCacheDir) {
+        Remove-Item -Recurse -Force $PluginCacheDir
+    }
+    New-Item -ItemType Directory -Force -Path $PluginCacheDir | Out-Null
+    Get-ChildItem -Force -Path $PluginDir | Copy-Item -Destination $PluginCacheDir -Recurse -Force
+    if (Test-Path $LegacyCapSkillDir) {
+        Remove-Item -Recurse -Force $LegacyCapSkillDir
+    }
+    "@echo off`r`n`"$PluginCacheExe`" %*`r`n" | Set-Content -Encoding ASCII -Path $TargetCmd
+
+    $marketplaceJson = @{
+        name = $MarketplaceName
+        interface = @{
+            displayName = "CCC local"
+        }
+        plugins = @(
+            @{
+                name = "ccc"
+                source = @{
+                    source = "local"
+                    path = "./plugins/ccc"
+                }
+                policy = @{
+                    installation = "AVAILABLE"
+                    authentication = "ON_INSTALL"
+                }
+                category = "Engineering"
+            }
+        )
+    } | ConvertTo-Json -Depth 8
+    $MarketplaceMetadataDir = Join-Path $MarketplaceDir ".agents\plugins"
+    New-Item -ItemType Directory -Force -Path $MarketplaceMetadataDir | Out-Null
+    Set-Content -Encoding UTF8 -Path (Join-Path $MarketplaceMetadataDir "marketplace.json") -Value $marketplaceJson
+
+    New-Item -ItemType Directory -Force -Path (Split-Path $CodexConfig) | Out-Null
+    if (-not (Test-Path $CodexConfig)) {
+        New-Item -ItemType File -Force -Path $CodexConfig | Out-Null
+    }
+
+    $lines = Get-Content -Path $CodexConfig
+    $filtered = New-Object System.Collections.Generic.List[string]
+    $skip = $false
+    foreach ($line in $lines) {
+        if ($line -match '^\[mcp_servers\.ccc(\.|])' -or
+            $line -match '^\[marketplaces\.ccc-local]' -or
+            $line -match '^\[plugins\."ccc@ccc-local"]') {
+            $skip = $true
+            continue
+        }
+        if ($line -match '^\[') {
+            $skip = $false
+        }
+        if (-not $skip) {
+            $filtered.Add($line)
+        }
+    }
+
+    $filtered.Add("")
+    $filtered.Add("[marketplaces.$MarketplaceName]")
+    $filtered.Add('source_type = "local"')
+    $filtered.Add("source = '$MarketplaceDir'")
+    $filtered.Add("")
+    $filtered.Add("[plugins.`"ccc@$MarketplaceName`"]")
+    $filtered.Add("enabled = true")
+    Set-Content -Encoding UTF8 -Path $CodexConfig -Value $filtered
+}
 
 try {
     New-Item -ItemType Directory -Force -Path $TempRoot, $ExtractDir, $InstallRoot, $BinDir | Out-Null
@@ -121,13 +232,6 @@ try {
 
     "@echo off`r`n`"$CurrentExe`" %*`r`n" | Set-Content -Encoding ASCII -Path $TargetCmd
 
-    Write-Output "Refreshing Codex MCP registration..."
-    try {
-        codex mcp remove ccc *> $null
-    } catch {
-    }
-    codex mcp add ccc -- $CurrentExe mcp
-
     Write-Output "Running setup..."
     & $CurrentExe setup
 
@@ -136,11 +240,16 @@ try {
     & $CurrentExe check-install
 
     Write-Output ""
+    Write-Output "Refreshing Codex CCC plugin marketplace..."
+    Set-CccPluginMarketplace -CurrentRoot $CurrentDir -CurrentExePath $CurrentExe
+
+    Write-Output ""
     Write-Output "Install complete."
     Write-Output "Installed root: $CurrentDir"
     Write-Output "Command shim: $TargetCmd"
-    Write-Output "Restart Codex CLI before using `$cap or relying on the new MCP registration."
-    Write-Output "After restarting Codex CLI, run: ccc check-install"
+    Write-Output "Plugin marketplace: $MarketplaceDir"
+    Write-Output "Restart Codex CLI before using `$cap or relying on the new CCC plugin registration."
+    Write-Output "After restarting Codex CLI, run: codex mcp list"
 } finally {
     if (Test-Path $TempRoot) {
         Remove-Item -Recurse -Force $TempRoot

@@ -16,7 +16,7 @@
 여러분은 그저 하고자 하는 것 앞에 <code>$cap</code>만 붙이면 됩니다.<br>
 그러면 놀라운 일이 펼쳐질 거예요!</em></p>
 
-이 릴리스는 플러그인 배포용으로 패키징되어 있습니다. 패키지에는 CCC plugin manifest, `.mcp.json`, `skills/ccc/SKILL.md`가 포함됩니다. 이 파일들은 install과 discovery를 지원하며, 공개 operator entrypoint는 여전히 `$cap`입니다.
+이 릴리스는 로컬 Codex plugin marketplace를 통해 CCC를 설치합니다. 패키지에는 CCC plugin manifest, `.mcp.json`, plugin 제공 `$cap` skill이 포함되며, installer는 `ccc@ccc-local` plugin을 활성화하고 기존 직접 `mcp_servers.ccc` 등록과 standalone `~/.codex/skills/cap` 복사본을 제거합니다. 공개 operator entrypoint는 여전히 `$cap`입니다.
 
 현재 공개 버전: `0.0.15-pre`.
 
@@ -33,7 +33,7 @@ curl -fsSL https://raw.githubusercontent.com/HoRi0506/Codex-Cli-Captain-Release/
 After installation finishes, fully exit Codex CLI.
 Start a new Codex CLI session.
 Then run:
-ccc check-install
+codex mcp list
 ```
 
 Windows PowerShell:
@@ -45,10 +45,18 @@ iwr -UseB https://raw.githubusercontent.com/HoRi0506/Codex-Cli-Captain-Release/m
 After installation finishes, fully exit Codex CLI.
 Start a new Codex CLI session.
 Then run:
-ccc check-install
+codex mcp list
 ```
 
-업데이트할 때도 같은 설치 명령을 다시 실행한 뒤 Codex CLI를 재시작하고 `ccc check-install`을 실행하세요.
+업데이트할 때도 같은 설치 명령을 다시 실행한 뒤 Codex CLI를 재시작하고 `codex mcp list`를 실행하세요. Installer는 로컬 `ccc-local` marketplace를 갱신하고 `plugins."ccc@ccc-local"`을 활성화하며, CCC가 plugin으로 로드되도록 기존 직접 `mcp_servers.ccc` 블록과 standalone `$cap` skill을 제거합니다.
+
+CCC source나 Rust 중심 repo에서 작업할 때는 선택적으로 Rust LSP를 설치하면 도움이 됩니다.
+
+```bash
+rustup component add rust-analyzer
+```
+
+안정적인 `ccc_*` ID는 계속 routing contract이고, callsign은 display-only입니다. `ccc_tactician`은 Executor, `ccc_scout`은 Observer, `ccc_raider`는 Marauder, `ccc_scribe`는 Adjutant, `ccc_arbiter`는 Arbiter, `ccc_sentinel`은 Overseer, `ccc_companion_reader`는 Probe, `ccc_companion_operator`는 SCV입니다. 0.0.15-pre metadata에는 oh-my-openagent에서 영감을 받은 workflow set도 포함됩니다: `github-triage`, `hyperplan`, `work-with-pr`, `pre-publish-review`, `git-master`, `review-work`, `remove-deadcode`, `get-unpublished-changes`, `ai-slop-remover`, `rust-analyzer-lsp`.
 
 ## 추천 역할 설정
 
