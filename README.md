@@ -16,7 +16,9 @@ Then how about using CCC?<br>
 Just put <code>$cap</code> in front of what you want to do.<br>
 Then something remarkable can unfold.</em></p>
 
-Current public release: `0.0.14-pre`.
+This release is packaged for plugin distribution. The bundle includes the CCC plugin manifest, `.mcp.json`, and `skills/ccc/SKILL.md`. `@cap` may appear as a secondary discovery hint in plugin install/discovery flows, but the public operator entrypoint remains `$cap`.
+
+Current public release: `0.0.15-pre`.
 
 Supported release targets are exactly `darwin-arm64`, `darwin-x86_64`, `linux-arm64`, `linux-x86_64`, and `windows-x86_64`. macOS targets are normally supported and expected to work. Linux and Windows targets are available, but may still have platform-specific issues.
 

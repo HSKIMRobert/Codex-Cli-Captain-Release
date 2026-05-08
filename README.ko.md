@@ -16,7 +16,9 @@
 여러분은 그저 하고자 하는 것 앞에 <code>$cap</code>만 붙이면 됩니다.<br>
 그러면 놀라운 일이 펼쳐질 거예요!</em></p>
 
-현재 공개 버전: `0.0.14-pre`.
+이 릴리스는 플러그인 배포용으로 패키징되어 있습니다. 패키지에는 CCC plugin manifest, `.mcp.json`, `skills/ccc/SKILL.md`가 포함됩니다. `@cap`는 플러그인 install/discovery 흐름에서 보조 탐색 힌트로 보일 수 있지만, 공개 operator entrypoint는 여전히 `$cap`입니다.
+
+현재 공개 버전: `0.0.15-pre`.
 
 지원 release target은 정확히 `darwin-arm64`, `darwin-x86_64`, `linux-arm64`, `linux-x86_64`, `windows-x86_64`입니다. macOS target은 일반적으로 지원되며 동작할 것으로 기대합니다. Linux와 Windows target도 제공하지만 platform-specific 문제가 남아 있을 수 있습니다.
 
