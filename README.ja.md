@@ -16,7 +16,7 @@
 やりたいことの前に <code>$cap</code> を付けるだけです。<br>
 すると、ちょっと驚くことが起きるはずです。</em></p>
 
-このリリースはプラグイン配布向けにパッケージされています。パッケージには CCC plugin manifest、`.mcp.json`、`skills/ccc/SKILL.md` が含まれます。`@cap` はプラグイン install/discovery の流れで補助的な探索ヒントとして現れることがありますが、公開 operator entrypoint は引き続き `$cap` です。
+このリリースはプラグイン配布向けにパッケージされています。パッケージには CCC plugin manifest、`.mcp.json`、`skills/ccc/SKILL.md` が含まれます。これらのファイルは install と discovery を支援するもので、公開 operator entrypoint は引き続き `$cap` です。
 
 現在の公開バージョン: `0.0.15-pre`.
 

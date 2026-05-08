@@ -16,7 +16,7 @@
 여러분은 그저 하고자 하는 것 앞에 <code>$cap</code>만 붙이면 됩니다.<br>
 그러면 놀라운 일이 펼쳐질 거예요!</em></p>
 
-이 릴리스는 플러그인 배포용으로 패키징되어 있습니다. 패키지에는 CCC plugin manifest, `.mcp.json`, `skills/ccc/SKILL.md`가 포함됩니다. `@cap`는 플러그인 install/discovery 흐름에서 보조 탐색 힌트로 보일 수 있지만, 공개 operator entrypoint는 여전히 `$cap`입니다.
+이 릴리스는 플러그인 배포용으로 패키징되어 있습니다. 패키지에는 CCC plugin manifest, `.mcp.json`, `skills/ccc/SKILL.md`가 포함됩니다. 이 파일들은 install과 discovery를 지원하며, 공개 operator entrypoint는 여전히 `$cap`입니다.
 
 현재 공개 버전: `0.0.15-pre`.
 

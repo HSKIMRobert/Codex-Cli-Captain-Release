@@ -16,7 +16,7 @@ Then how about using CCC?<br>
 Just put <code>$cap</code> in front of what you want to do.<br>
 Then something remarkable can unfold.</em></p>
 
-This release is packaged for plugin distribution. The bundle includes the CCC plugin manifest, `.mcp.json`, and `skills/ccc/SKILL.md`. `@cap` may appear as a secondary discovery hint in plugin install/discovery flows, but the public operator entrypoint remains `$cap`.
+This release is packaged for plugin distribution. The bundle includes the CCC plugin manifest, `.mcp.json`, and `skills/ccc/SKILL.md`. These files support install and discovery; the public operator entrypoint remains `$cap`.
 
 Current public release: `0.0.15-pre`.
 
