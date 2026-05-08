@@ -58,19 +58,21 @@ rustup component add rust-analyzer
 
 안정적인 `ccc_*` ID는 계속 routing contract이고, callsign은 display-only입니다. `ccc_tactician`은 Executor, `ccc_scout`은 Observer, `ccc_raider`는 Marauder, `ccc_scribe`는 Adjutant, `ccc_arbiter`는 Arbiter, `ccc_sentinel`은 Overseer, `ccc_companion_reader`는 Probe, `ccc_companion_operator`는 SCV입니다. 0.0.15-pre metadata에는 oh-my-openagent에서 영감을 받은 workflow set도 포함됩니다: `github-triage`, `hyperplan`, `work-with-pr`, `pre-publish-review`, `git-master`, `review-work`, `remove-deadcode`, `get-unpublished-changes`, `ai-slop-remover`, `rust-analyzer-lsp`.
 
+Host UI layer가 `Closed Carver [ccc_scout]` 같은 outer notification을 표시할 수도 있지만, 그 문구는 host-managed이며 CCC가 보장하는 출력이 아닙니다. CCC-controlled status/projection output은 `Observer(ccc_scout)`처럼 callsign과 stable ID를 함께 보여줍니다.
+
 ## 추천 역할 설정
 
 CCC를 자주 사용한다면 ChatGPT Pro $100 요금제를 시작점으로 권장합니다. `$cap` workflow는 captain과 specialist handoff를 반복하면서 Codex 사용량을 더 많이 쓸 수 있기 때문입니다. Reasoning은 사용자의 작업 스타일과 작업 위험도에 맞춰 조정하세요. 넓은 계획, 위험한 코드 변경, 리뷰에는 높은 reasoning을 유지하고, 좁고 반복적이거나 위험이 낮은 작업에는 낮춰도 됩니다.
 
-| CCC role | Agent | 추천 모델 | Reasoning | 용도 |
-| --- | --- | --- | --- | --- |
-| `orchestrator` | `captain` | `gpt-5.5` | `medium` | LongWay 관리와 최종 라우팅 판단 |
-| `way` | `tactician` | `gpt-5.5` | `high` | 계획 수립과 다음 작업 선택 |
-| `explorer` | `scout` | `gpt-5.4-mini` | `high` | 읽기 전용 repo 조사 |
-| `code specialist` | `raider` | `gpt-5.5` | `high` | 코드/config 수정과 복구 |
-| `documenter` | `scribe` | `gpt-5.4-mini` | `medium` | README, 릴리즈 노트, 사용자 문구 |
-| `verifier` | `arbiter` | `gpt-5.5` | `high` | 리뷰, 리스크, 회귀 확인 |
-| `companion_reader` | `companion_reader` | `gpt-5.4-mini` | `medium` | 저비용 filesystem/docs/web/git/gh 읽기 작업 |
-| `companion_operator` | `companion_operator` | `gpt-5.4-mini` | `medium` | 저비용 git/gh 변경 및 좁은 도구 실행 |
+| CCC role | Stable agent ID | Display callsign | 추천 모델 | Reasoning | 용도 |
+| --- | --- | --- | --- | --- | --- |
+| `orchestrator` | `captain` | `Captain` | `gpt-5.5` | `medium` | host-owned 라우팅 label, managed `ccc_*` specialist 아님 |
+| `way` | `ccc_tactician` | `Executor` | `gpt-5.5` | `high` | 계획 수립과 다음 작업 선택 |
+| `explorer` | `ccc_scout` | `Observer` | `gpt-5.4-mini` | `high` | 읽기 전용 repo 조사 |
+| `code specialist` | `ccc_raider` | `Marauder` | `gpt-5.5` | `high` | 코드/config 수정과 복구 |
+| `documenter` | `ccc_scribe` | `Adjutant` | `gpt-5.4-mini` | `medium` | README, 릴리즈 노트, 사용자 문구 |
+| `verifier` | `ccc_arbiter` | `Arbiter` | `gpt-5.5` | `high` | 리뷰, 리스크, 회귀 확인 |
+| `companion_reader` | `ccc_companion_reader` | `Probe` | `gpt-5.4-mini` | `medium` | 저비용 filesystem/docs/web/git/gh 읽기 작업 |
+| `companion_operator` | `ccc_companion_operator` | `SCV` | `gpt-5.4-mini` | `medium` | 저비용 git/gh 변경 및 좁은 도구 실행 |
 
 `gpt-5.5`는 ChatGPT 인증 Codex에서 고가치 역할에 권장되는 모델입니다. 현재 계정이나 실행 경로에서 아직 사용할 수 없다면 해당 역할은 rollout이 도달할 때까지 `gpt-5.4`를 사용합니다.

@@ -58,19 +58,21 @@ rustup component add rust-analyzer
 
 Stable `ccc_*` IDs remain the routing contract; callsigns are display-only. `ccc_tactician` is Executor, `ccc_scout` is Observer, `ccc_raider` is Marauder, `ccc_scribe` is Adjutant, `ccc_arbiter` is Arbiter, `ccc_sentinel` is Overseer, `ccc_companion_reader` is Probe, and `ccc_companion_operator` is SCV. The 0.0.15-pre metadata also advertises the oh-my-openagent-inspired workflow set: `github-triage`, `hyperplan`, `work-with-pr`, `pre-publish-review`, `git-master`, `review-work`, `remove-deadcode`, `get-unpublished-changes`, `ai-slop-remover`, and `rust-analyzer-lsp`.
 
+Host UI layers may still emit outer notifications such as `Closed Carver [ccc_scout]`; that wording is host-managed and not guaranteed by CCC. CCC-controlled status/projection output uses callsign-plus-stable-ID forms such as `Observer(ccc_scout)`.
+
 ## Recommended Role Defaults
 
 For regular CCC use, ChatGPT Pro $100 is the recommended starting plan because `$cap` workflows can spend more Codex usage through repeated captain and specialist handoffs. Adjust reasoning by your working style and task risk: keep higher reasoning for broad planning, risky code changes, or reviews, and lower it for narrow, repetitive, or low-risk tasks.
 
-| CCC role | Agent | Recommended model | Reasoning | Notes |
-| --- | --- | --- | --- | --- |
-| `orchestrator` | `captain` | `gpt-5.5` | `medium` | LongWay ownership and final routing judgment |
-| `way` | `tactician` | `gpt-5.5` | `high` | Planning and bounded next-move selection |
-| `explorer` | `scout` | `gpt-5.4-mini` | `high` | Read-only repo evidence |
-| `code specialist` | `raider` | `gpt-5.5` | `high` | Code/config mutation and repair |
-| `documenter` | `scribe` | `gpt-5.4-mini` | `medium` | README, release notes, and operator text |
-| `verifier` | `arbiter` | `gpt-5.5` | `high` | Review, risk, regression, and acceptance checks |
-| `companion_reader` | `companion_reader` | `gpt-5.4-mini` | `medium` | Low-cost filesystem/docs/web/git/gh read work |
-| `companion_operator` | `companion_operator` | `gpt-5.4-mini` | `medium` | Low-cost bounded git/gh mutation and narrow tool work |
+| CCC role | Stable agent ID | Display callsign | Recommended model | Reasoning | Notes |
+| --- | --- | --- | --- | --- | --- |
+| `orchestrator` | `captain` | `Captain` | `gpt-5.5` | `medium` | Host-owned routing label, not a managed `ccc_*` specialist |
+| `way` | `ccc_tactician` | `Executor` | `gpt-5.5` | `high` | Planning and bounded next-move selection |
+| `explorer` | `ccc_scout` | `Observer` | `gpt-5.4-mini` | `high` | Read-only repo evidence |
+| `code specialist` | `ccc_raider` | `Marauder` | `gpt-5.5` | `high` | Code/config mutation and repair |
+| `documenter` | `ccc_scribe` | `Adjutant` | `gpt-5.4-mini` | `medium` | README, release notes, and operator text |
+| `verifier` | `ccc_arbiter` | `Arbiter` | `gpt-5.5` | `high` | Review, risk, regression, and acceptance checks |
+| `companion_reader` | `ccc_companion_reader` | `Probe` | `gpt-5.4-mini` | `medium` | Low-cost filesystem/docs/web/git/gh read work |
+| `companion_operator` | `ccc_companion_operator` | `SCV` | `gpt-5.4-mini` | `medium` | Low-cost bounded git/gh mutation and narrow tool work |
 
 `gpt-5.5` is recommended for the high-value roles when Codex is signed in with ChatGPT. If it is unavailable in the current account or execution path, use `gpt-5.4` for those roles until rollout reaches that path.
