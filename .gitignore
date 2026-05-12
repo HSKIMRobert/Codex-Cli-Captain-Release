@@ -1,3 +1,10 @@
-.DS_Store
-*.tar.gz
+node_modules/
+dist/
+.ccc/
+.sisyphus/runs/
+.tmp/
+coverage/
 *.tgz
+docs/legacy/
+rust/target/
+target/

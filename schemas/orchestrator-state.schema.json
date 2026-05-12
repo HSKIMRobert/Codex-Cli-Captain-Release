@@ -1,0 +1,228 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://ccc.local/schemas/orchestrator-state.schema.json",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "run_id",
+    "task_card_id",
+    "execution_request",
+    "verification_request",
+    "orchestration_policy",
+    "current_decision",
+    "created_at",
+    "updated_at"
+  ],
+  "properties": {
+    "run_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "task_card_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "execution_request": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["prompt", "profile", "config_entries"],
+      "properties": {
+        "prompt": {
+          "type": "string",
+          "minLength": 1
+        },
+        "profile": {
+          "type": ["string", "null"],
+          "minLength": 1
+        },
+        "config_entries": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        }
+      }
+    },
+    "verification_request": {
+      "anyOf": [
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["prompt", "profile", "config_entries"],
+          "properties": {
+            "prompt": {
+              "type": "string",
+              "minLength": 1
+            },
+            "profile": {
+              "type": ["string", "null"],
+              "minLength": 1
+            },
+            "config_entries": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "minLength": 1
+              }
+            }
+          }
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "orchestration_policy": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "specialist_routing",
+        "parallelism",
+        "review",
+        "autonomous_research",
+        "git_mutation",
+        "pr_mutation"
+      ],
+      "properties": {
+        "specialist_routing": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["mode", "route_preference"],
+          "properties": {
+            "mode": {
+              "type": "string",
+              "enum": ["advisory_only"]
+            },
+            "route_preference": {
+              "type": "string",
+              "enum": ["none"]
+            }
+          }
+        },
+        "parallelism": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["mode", "max_active_tasks", "max_active_workers"],
+          "properties": {
+            "mode": {
+              "type": "string",
+              "enum": ["single_task_bounded_fan_out"]
+            },
+            "max_active_tasks": {
+              "type": "integer",
+              "const": 1
+            },
+            "max_active_workers": {
+              "type": "integer",
+              "minimum": 1
+            }
+          }
+        },
+        "review": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["mode", "max_review_passes", "max_active_reviewers"],
+          "properties": {
+            "mode": {
+              "type": "string",
+              "enum": ["explicit_only"]
+            },
+            "max_review_passes": {
+              "type": "integer",
+              "const": 1
+            },
+            "max_active_reviewers": {
+              "type": "integer",
+              "minimum": 1
+            }
+          }
+        },
+        "autonomous_research": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["mode"],
+          "properties": {
+            "mode": {
+              "type": "string",
+              "enum": ["disabled", "advisory_visibility_only"]
+            }
+          }
+        },
+        "git_mutation": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["mode"],
+          "properties": {
+            "mode": {
+              "type": "string",
+              "enum": ["deny"]
+            }
+          }
+        },
+        "pr_mutation": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["mode"],
+          "properties": {
+            "mode": {
+              "type": "string",
+              "enum": ["deny"]
+            }
+          }
+        }
+      }
+    },
+    "current_decision": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["next_step", "can_advance", "summary", "route_selection"],
+      "properties": {
+        "next_step": {
+          "type": "string",
+          "enum": [
+            "execute_task",
+            "verify_task",
+            "await_fan_in",
+            "await_verification",
+            "await_repair_decision",
+            "halt_completed",
+            "halt_failed",
+            "halt_cancelled",
+            "await_operator"
+          ]
+        },
+        "can_advance": {
+          "type": "boolean"
+        },
+        "summary": {
+          "type": "string",
+          "minLength": 1
+        },
+        "route_selection": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["route_id", "reason"],
+          "properties": {
+            "route_id": {
+              "type": "string",
+              "enum": ["explicit_fallback", "delegated_execute"]
+            },
+            "reason": {
+              "type": "string",
+              "minLength": 1
+            }
+          }
+        }
+      }
+    },
+    "created_at": {
+      "type": "string",
+      "minLength": 1
+    },
+    "updated_at": {
+      "type": "string",
+      "minLength": 1
+    }
+  }
+}

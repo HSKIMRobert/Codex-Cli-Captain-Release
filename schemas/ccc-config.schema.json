@@ -1,0 +1,849 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://ccc.local/schemas/ccc-config.schema.json",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["version", "agents", "output"],
+  "properties": {
+    "version": {
+      "const": 1
+    },
+    "generated_defaults": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["version", "policy"],
+      "properties": {
+        "version": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "policy": {
+          "type": "string",
+          "enum": ["ccc-managed-defaults"]
+        }
+      }
+    },
+    "entry_policy": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["mode"],
+      "properties": {
+        "mode": {
+          "type": "string",
+          "enum": ["explicit_only", "guided_explicit", "ccc_first_bounded", "codex_cli_ccc_first"]
+        }
+      }
+    },
+    "output": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["verbosity"],
+      "properties": {
+        "verbosity": {
+          "type": "string",
+          "enum": ["quiet", "default", "debug"]
+        },
+        "changed_max_chars": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "include_agent_loop_when_idle": {
+          "type": "boolean"
+        }
+      }
+    },
+    "features": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["graph_context", "goals", "prompt_refinement"],
+      "properties": {
+        "graph_context": {
+          "type": "boolean"
+        },
+        "goals": {
+          "type": "boolean"
+        },
+        "prompt_refinement": {
+          "type": "boolean"
+        }
+      }
+    },
+    "lsp": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["enabled", "runtime_execution", "capabilities", "language_servers"],
+      "properties": {
+        "enabled": {
+          "type": "boolean"
+        },
+        "runtime_execution": {
+          "type": "string",
+          "enum": ["deferred"]
+        },
+        "deferred_reason": {
+          "type": "string",
+          "minLength": 1
+        },
+        "capabilities": {
+          "$ref": "#/definitions/lspCapabilityList"
+        },
+        "language_servers": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["typescript_javascript", "rust"],
+          "properties": {
+            "typescript_javascript": {
+              "$ref": "#/definitions/lspLanguageServer"
+            },
+            "rust": {
+              "$ref": "#/definitions/lspLanguageServer"
+            }
+          }
+        }
+      }
+    },
+    "graph_context": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "enabled",
+        "provider",
+        "mode",
+        "canonical_backend",
+        "replace_legacy_ccc_graph_backend",
+        "allow_legacy_graph_backend_fallback",
+        "fallback_when_unavailable",
+        "report_path",
+        "graph_path",
+        "max_report_bytes",
+        "max_query_bytes",
+        "prefer_report_before_grep",
+        "allow_cli_query",
+        "allow_mcp_query",
+        "allow_rebuild",
+        "auto_install_external_dependency",
+        "source_of_truth",
+        "install",
+        "edges"
+      ],
+      "properties": {
+        "enabled": {
+          "type": "boolean"
+        },
+        "provider": {
+          "type": "string",
+          "enum": ["graphify"]
+        },
+        "mode": {
+          "type": "string",
+          "enum": ["read_only"]
+        },
+        "canonical_backend": {
+          "type": "string",
+          "enum": ["graphify"]
+        },
+        "replace_legacy_ccc_graph_backend": {
+          "type": "boolean"
+        },
+        "allow_legacy_graph_backend_fallback": {
+          "type": "boolean"
+        },
+        "fallback_when_unavailable": {
+          "type": "string",
+          "enum": ["scout_source_evidence"]
+        },
+        "report_path": {
+          "type": "string",
+          "minLength": 1
+        },
+        "graph_path": {
+          "type": "string",
+          "minLength": 1
+        },
+        "max_report_bytes": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "max_query_bytes": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "prefer_report_before_grep": {
+          "type": "boolean"
+        },
+        "allow_cli_query": {
+          "type": "boolean"
+        },
+        "allow_mcp_query": {
+          "type": "boolean"
+        },
+        "allow_rebuild": {
+          "type": "boolean"
+        },
+        "auto_install_external_dependency": {
+          "type": "boolean"
+        },
+        "source_of_truth": {
+          "type": "boolean"
+        },
+        "install": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "managed_by_ccc_setup",
+            "check_install_reports_readiness",
+            "require_graphify_cli_for_queries",
+            "allow_missing_provider_fallback"
+          ],
+          "properties": {
+            "managed_by_ccc_setup": {
+              "type": "boolean"
+            },
+            "check_install_reports_readiness": {
+              "type": "boolean"
+            },
+            "require_graphify_cli_for_queries": {
+              "type": "boolean"
+            },
+            "allow_missing_provider_fallback": {
+              "type": "boolean"
+            }
+          }
+        },
+        "edges": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "allow_extracted",
+            "allow_inferred",
+            "allow_ambiguous",
+            "require_source_check_for_mutation"
+          ],
+          "properties": {
+            "allow_extracted": {
+              "type": "boolean"
+            },
+            "allow_inferred": {
+              "type": "boolean"
+            },
+            "allow_ambiguous": {
+              "type": "boolean"
+            },
+            "require_source_check_for_mutation": {
+              "type": "boolean"
+            }
+          }
+        }
+      }
+    },
+    "goal_bridge": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "enabled",
+        "mode",
+        "brief_language",
+        "brief_max_lines",
+        "require_verifiable_stop",
+        "host_goal_state_is_truth",
+        "specialists"
+      ],
+      "properties": {
+        "enabled": {
+          "type": "boolean"
+        },
+        "mode": {
+          "type": "string",
+          "enum": ["captain_owned"]
+        },
+        "brief_language": {
+          "type": "string",
+          "enum": ["en"]
+        },
+        "brief_max_lines": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "require_verifiable_stop": {
+          "type": "boolean"
+        },
+        "host_goal_state_is_truth": {
+          "type": "boolean",
+          "const": false
+        },
+        "specialists": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "allow_specialist_goal_context",
+            "allow_specialist_set_goal",
+            "allow_specialist_clear_goal",
+            "allow_specialist_override_goal",
+            "max_subgoal_lines",
+            "require_captain_acceptance"
+          ],
+          "properties": {
+            "allow_specialist_goal_context": {
+              "type": "boolean"
+            },
+            "allow_specialist_set_goal": {
+              "type": "boolean",
+              "const": false
+            },
+            "allow_specialist_clear_goal": {
+              "type": "boolean",
+              "const": false
+            },
+            "allow_specialist_override_goal": {
+              "type": "boolean",
+              "const": false
+            },
+            "max_subgoal_lines": {
+              "type": "integer",
+              "minimum": 1
+            },
+            "require_captain_acceptance": {
+              "type": "boolean"
+            }
+          }
+        }
+      }
+    },
+    "runtime": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "preferred_specialist_execution_mode",
+        "fallback_specialist_execution_mode",
+        "worker_poll_interval_ms",
+        "worker_stuck_after_ms",
+        "worker_kill_grace_ms",
+        "worker_auto_reclaim_enabled",
+        "worker_max_retries_per_phase",
+        "worker_retry_backoff_ms",
+        "worker_prompt_scope_max_chars",
+        "worker_prompt_acceptance_max_chars",
+        "worker_prompt_task_max_chars",
+        "run_lock_stale_after_ms"
+      ],
+      "properties": {
+        "preferred_specialist_execution_mode": {
+          "type": "string",
+          "enum": ["codex_subagent", "codex_exec"]
+        },
+        "fallback_specialist_execution_mode": {
+          "type": "string",
+          "enum": ["codex_exec", "visible_degraded_host_fallback"]
+        },
+        "worker_poll_interval_ms": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "worker_stuck_after_ms": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "worker_kill_grace_ms": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "worker_auto_reclaim_enabled": {
+          "type": "boolean"
+        },
+        "worker_max_retries_per_phase": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "worker_retry_backoff_ms": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "worker_prompt_scope_max_chars": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "worker_prompt_acceptance_max_chars": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "worker_prompt_task_max_chars": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "run_lock_stale_after_ms": {
+          "type": "integer",
+          "minimum": 1
+        }
+      }
+    },
+    "archive_targets": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["notebooklm"],
+      "properties": {
+        "notebooklm": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "enabled",
+            "mode",
+            "auth_mode",
+            "auto_create_notebook",
+            "local_archive_root"
+          ],
+          "properties": {
+            "enabled": {
+              "type": "boolean"
+            },
+            "mode": {
+              "type": "string",
+              "enum": ["repo_workspace"]
+            },
+            "auth_mode": {
+              "type": "string",
+              "enum": ["browser"]
+            },
+            "repo_key": {
+              "type": ["string", "null"],
+              "minLength": 1
+            },
+            "auto_create_notebook": {
+              "type": "boolean"
+            },
+            "local_archive_root": {
+              "type": "string",
+              "minLength": 1
+            },
+            "notebook_url": {
+              "type": ["string", "null"],
+              "minLength": 1
+            },
+            "notebook_id": {
+              "type": ["string", "null"],
+              "minLength": 1
+            },
+            "secret_ref": {
+              "type": ["string", "null"],
+              "minLength": 1
+            }
+          }
+        }
+      }
+    },
+    "tool_routing": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["fallback_mode", "tools"],
+      "properties": {
+        "default_model": {
+          "type": ["string", "null"],
+          "minLength": 1
+        },
+        "default_variant": {
+          "type": ["string", "null"],
+          "enum": ["low", "medium", "high", "xhigh", null]
+        },
+        "fallback_mode": {
+          "type": "string",
+          "enum": ["visible_degraded_host_fallback", "deny_host_fallback"]
+        },
+        "tools": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["filesystem", "git", "context7", "fetch", "openaiDeveloperDocs"],
+          "properties": {
+            "filesystem": { "$ref": "#/definitions/toolRoutingPolicyEntry" },
+            "git": { "$ref": "#/definitions/toolRoutingPolicyEntry" },
+            "context7": { "$ref": "#/definitions/toolRoutingPolicyEntry" },
+            "fetch": { "$ref": "#/definitions/toolRoutingPolicyEntry" },
+            "openaiDeveloperDocs": { "$ref": "#/definitions/toolRoutingPolicyEntry" }
+          }
+        }
+      }
+    },
+    "routing": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["mode", "categories"],
+      "properties": {
+        "mode": {
+          "type": "string",
+          "enum": ["disabled", "category_shortlist"]
+        },
+        "categories": {
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/specialistRoutingCategory"
+          }
+        }
+      }
+    },
+    "agents": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["orchestrator", "way", "code specialist", "documenter", "verifier", "sentinel"],
+      "properties": {
+        "orchestrator": {
+          "allOf": [
+            {
+              "$ref": "#/definitions/agentConfig"
+            },
+            {
+              "type": "object",
+              "properties": {
+                "name": {
+                  "const": "captain"
+                }
+              }
+            }
+          ]
+        },
+        "way": {
+          "allOf": [
+            {
+              "$ref": "#/definitions/agentConfig"
+            },
+            {
+              "type": "object",
+              "properties": {
+                "name": {
+                  "const": "tactician"
+                }
+              }
+            }
+          ]
+        },
+        "explorer": {
+          "allOf": [
+            {
+              "$ref": "#/definitions/agentConfig"
+            },
+            {
+              "type": "object",
+              "properties": {
+                "name": {
+                  "const": "scout"
+                }
+              }
+            }
+          ]
+        },
+        "code specialist": {
+          "allOf": [
+            {
+              "$ref": "#/definitions/agentConfig"
+            },
+            {
+              "type": "object",
+              "properties": {
+                "name": {
+                  "const": "raider"
+                }
+              }
+            }
+          ]
+        },
+        "documenter": {
+          "allOf": [
+            {
+              "$ref": "#/definitions/agentConfig"
+            },
+            {
+              "type": "object",
+              "properties": {
+                "name": {
+                  "const": "scribe"
+                }
+              }
+            }
+          ]
+        },
+        "verifier": {
+          "allOf": [
+            {
+              "$ref": "#/definitions/agentConfig"
+            },
+            {
+              "type": "object",
+              "properties": {
+                "name": {
+                  "const": "arbiter"
+                }
+              }
+            }
+          ]
+        },
+        "sentinel": {
+          "allOf": [
+            {
+              "$ref": "#/definitions/agentConfig"
+            },
+            {
+              "type": "object",
+              "properties": {
+                "name": {
+                  "const": "sentinel"
+                }
+              }
+            }
+          ]
+        }
+      }
+    },
+    "companion_agents": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["companion_reader", "companion_operator"],
+      "properties": {
+        "companion_reader": {
+          "allOf": [
+            { "$ref": "#/definitions/agentConfig" },
+            {
+              "type": "object",
+              "properties": {
+                "name": {
+                  "const": "companion_reader"
+                }
+              }
+            }
+          ]
+        },
+        "companion_operator": {
+          "allOf": [
+            { "$ref": "#/definitions/agentConfig" },
+            {
+              "type": "object",
+              "properties": {
+                "name": {
+                  "const": "companion_operator"
+                }
+              }
+            }
+          ]
+        }
+      }
+    }
+  },
+  "definitions": {
+    "agentConfig": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["name", "fast_mode", "config_entries"],
+      "properties": {
+        "name": {
+          "type": "string",
+          "minLength": 1
+        },
+        "summary": {
+          "type": ["string", "null"],
+          "minLength": 1
+        },
+        "display_name": {
+          "type": ["string", "null"],
+          "minLength": 1
+        },
+        "callsign": {
+          "type": ["string", "null"],
+          "minLength": 1
+        },
+        "theme": {
+          "type": ["string", "null"],
+          "minLength": 1
+        },
+        "inspired_by": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {
+            "type": "string",
+            "enum": ["oh-my-openagent"]
+          }
+        },
+        "recommended_workflows": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {
+            "type": "string",
+            "enum": [
+              "github-triage",
+              "hyperplan",
+              "work-with-pr",
+              "pre-publish-review",
+              "git-master",
+              "review-work",
+              "remove-deadcode",
+              "get-unpublished-changes",
+              "ai-slop-remover",
+              "rust-analyzer-lsp",
+              "lsp-safe-refactor",
+              "release-note",
+              "readme-maintenance",
+              "changelog",
+              "publish",
+              "release-command-discipline",
+              "role-ownership",
+              "lane-conflict",
+              "fallback-classification",
+              "filesystem-evidence"
+            ]
+          }
+        },
+        "lsp_capabilities": {
+          "$ref": "#/definitions/lspCapabilityList"
+        },
+        "profile": {
+          "type": ["string", "null"],
+          "minLength": 1
+        },
+        "model": {
+          "type": ["string", "null"],
+          "minLength": 1
+        },
+        "variant": {
+          "type": ["string", "null"],
+          "enum": ["low", "medium", "high", "xhigh", null]
+        },
+        "fast_mode": {
+          "type": "boolean"
+        },
+        "config_entries": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        }
+      }
+    },
+    "lspCapabilityList": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": {
+        "type": "string",
+        "enum": [
+          "lsp_diagnostics",
+          "lsp_references",
+          "lsp_definition",
+          "lsp_prepare_rename",
+          "lsp_rename",
+          "rust-analyzer-lsp"
+        ]
+      }
+    },
+    "lspLanguageServer": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["command", "args", "package_hint", "file_extensions"],
+      "properties": {
+        "command": {
+          "type": "string",
+          "minLength": 1
+        },
+        "args": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "package_hint": {
+          "type": "string",
+          "minLength": 1
+        },
+        "file_extensions": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        }
+      }
+    },
+    "specialistRoutingCategory": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["agents"],
+      "properties": {
+        "keywords": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "intent_types": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "tool_signals": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "enum": ["filesystem", "git", "context7", "fetch", "openaiDeveloperDocs"]
+          }
+        },
+        "agents": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "string",
+            "enum": ["captain", "tactician", "scout", "raider", "scribe", "arbiter", "sentinel", "companion_reader", "companion_operator"]
+          }
+        }
+      }
+    },
+    "toolRoutingPolicyEntry": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["owner_role", "allowed_operations", "fallback_mode"],
+      "properties": {
+        "owner_role": {
+          "type": "string",
+          "enum": ["orchestrator", "way", "explorer", "code specialist", "documenter", "verifier"]
+        },
+        "model": {
+          "type": ["string", "null"],
+          "minLength": 1
+        },
+        "variant": {
+          "type": ["string", "null"],
+          "enum": ["low", "medium", "high", "xhigh", null]
+        },
+        "owner_companion_agent": {
+          "type": ["string", "null"],
+          "enum": ["companion_reader", "companion_operator", null]
+        },
+        "mutation_owner_role": {
+          "type": ["string", "null"],
+          "enum": ["orchestrator", "way", "explorer", "code specialist", "documenter", "verifier", null]
+        },
+        "mutation_model": {
+          "type": ["string", "null"],
+          "minLength": 1
+        },
+        "mutation_variant": {
+          "type": ["string", "null"],
+          "enum": ["low", "medium", "high", "xhigh", null]
+        },
+        "mutation_owner_companion_agent": {
+          "type": ["string", "null"],
+          "enum": ["companion_reader", "companion_operator", null]
+        },
+        "allowed_operations": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "enum": ["read", "mutation"]
+          },
+          "minItems": 1
+        },
+        "fallback_mode": {
+          "type": "string",
+          "enum": ["visible_degraded_host_fallback", "deny_host_fallback"]
+        }
+      }
+    }
+  }
+}

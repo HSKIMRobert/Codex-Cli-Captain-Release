@@ -1,0 +1,1316 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://ccc.local/schemas/task-card.schema.json",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "task_card_id",
+    "run_id",
+    "title",
+    "intent",
+    "scope",
+    "execution_prompt",
+    "way_attempt_id",
+    "workflow_skill_id",
+    "workflow_step_index",
+    "workflow_step_skill_id",
+    "workflow_next_step_skill_id",
+    "task_kind",
+    "acceptance_checks",
+    "review_of_task_card_ids",
+    "depends_on_task_card_ids",
+    "fan_in_from_task_card_ids",
+    "node_kind",
+    "status",
+    "owner_role",
+    "assigned_role",
+    "assigned_agent_id",
+    "sandbox_mode",
+    "sandbox_rationale",
+    "role_config_snapshot",
+    "model_tier_intent",
+    "review_policy",
+    "child_aggregation_contract",
+    "fan_in_barrier_semantics",
+    "orchestrator_review_gate",
+    "acceptance",
+    "input_handoff_id",
+    "output_handoff_id",
+    "verification_state",
+    "review_pass_count",
+    "latest_failure",
+    "latest_model_launch",
+    "ownership_chain",
+    "thread_ids",
+    "completed_by_agent_id",
+    "created_at",
+    "updated_at",
+    "completed_at"
+  ],
+  "properties": {
+    "task_card_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "run_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "title": {
+      "type": "string",
+      "minLength": 1
+    },
+    "intent": {
+      "type": "string",
+      "minLength": 1
+    },
+    "scope": {
+      "type": "string",
+      "minLength": 1
+    },
+    "execution_prompt": {
+      "type": "string",
+      "minLength": 1
+    },
+    "way_attempt_id": {
+      "type": ["string", "null"],
+      "minLength": 1
+    },
+    "workflow_skill_id": {
+      "type": ["string", "null"],
+      "minLength": 1
+    },
+    "workflow_step_index": {
+      "type": ["integer", "null"],
+      "minimum": 1
+    },
+    "workflow_step_skill_id": {
+      "type": ["string", "null"],
+      "minLength": 1
+    },
+    "workflow_next_step_skill_id": {
+      "type": ["string", "null"],
+      "minLength": 1
+    },
+    "task_kind": {
+      "type": "string",
+      "enum": ["execution", "review", "explore", "way"]
+    },
+    "acceptance_checks": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      }
+    },
+    "review_of_task_card_ids": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      },
+      "uniqueItems": true
+    },
+    "depends_on_task_card_ids": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      },
+      "uniqueItems": true
+    },
+    "fan_in_from_task_card_ids": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      },
+      "uniqueItems": true
+    },
+    "node_kind": {
+      "type": "string",
+      "enum": ["execution", "fan_in"]
+    },
+    "status": {
+      "type": "string",
+      "enum": ["queued", "active", "in_handoff", "blocked", "completed", "failed", "cancelled"]
+    },
+    "owner_role": {
+      "type": "string",
+      "enum": ["orchestrator", "way", "explorer", "code specialist", "documenter", "verifier"]
+    },
+    "assigned_role": {
+      "type": "string",
+      "enum": ["orchestrator", "way", "explorer", "code specialist", "documenter", "verifier"]
+    },
+    "assigned_agent_id": {
+      "enum": ["tactician", "scout", "raider", "scribe", "arbiter", null]
+    },
+    "sandbox_mode": {
+      "type": "string",
+      "enum": ["read-only", "workspace-write"]
+    },
+    "sandbox_rationale": {
+      "type": "string",
+      "minLength": 1
+    },
+    "role_config_snapshot": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["source", "role", "profile", "model", "variant", "fast_mode", "config_entries"],
+      "properties": {
+        "source": {
+          "const": "shared_role_config"
+        },
+        "role": {
+          "type": "string",
+          "enum": ["orchestrator", "way", "explorer", "code specialist", "documenter", "verifier"]
+        },
+        "profile": {
+          "type": ["string", "null"],
+          "minLength": 1
+        },
+        "model": {
+          "type": ["string", "null"],
+          "minLength": 1
+        },
+        "variant": {
+          "type": ["string", "null"],
+          "enum": ["low", "medium", "high", "xhigh", null]
+        },
+        "fast_mode": {
+          "type": "boolean"
+        },
+        "config_entries": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        }
+      }
+    },
+    "model_tier_intent": {
+      "type": "string",
+      "enum": ["low_cost", "standard", "high_tier"]
+    },
+    "child_aggregation_contract": {
+      "type": "string",
+      "enum": ["none", "explicit_fan_in_summary"]
+    },
+    "fan_in_barrier_semantics": {
+      "type": "string",
+      "enum": ["none", "explicit_wait_for_all_sources"]
+    },
+    "orchestrator_review_gate": {
+      "type": "string",
+      "enum": ["none", "after_child_completion"]
+    },
+    "acceptance": {
+      "type": "string",
+      "minLength": 1
+    },
+    "input_handoff_id": {
+      "type": ["string", "null"],
+      "minLength": 1
+    },
+    "output_handoff_id": {
+      "type": ["string", "null"],
+      "minLength": 1
+    },
+    "verification_state": {
+      "type": "string",
+      "enum": ["pending", "passed", "needs_work", "blocked"]
+    },
+    "review_pass_count": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "latest_failure": {
+      "anyOf": [
+        {
+          "$ref": "#/$defs/failureRecord"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "latest_model_launch": {
+      "anyOf": [
+        {
+          "$ref": "#/$defs/roleModelLaunchEvidence"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "routing_summary": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 240
+    },
+    "routing_trace": {
+      "type": "object"
+    },
+    "evidence_links": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1,
+        "maxLength": 160
+      }
+    },
+    "result_links": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1,
+        "maxLength": 160
+      }
+    },
+    "planned_longway_row": {
+      "$ref": "#/$defs/plannedLongwayRow"
+    },
+    "parallel_fanout": {
+      "anyOf": [
+        {
+          "$ref": "#/$defs/parallelFanout"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "review_policy": {
+      "anyOf": [
+        {
+          "$ref": "#/$defs/reviewPolicy"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "ccc_loop": {
+      "type": ["object", "null"],
+      "additionalProperties": true
+    },
+    "review_fan_in": {
+      "anyOf": [
+        {
+          "$ref": "#/$defs/reviewFanIn"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "captain_intervention": {
+      "anyOf": [
+        {
+          "$ref": "#/$defs/captainIntervention"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "captain_intervention_history": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/captainIntervention"
+      }
+    },
+    "sentinel_intervention": {
+      "anyOf": [
+        {
+          "$ref": "#/$defs/sentinelIntervention"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "sentinel_intervention_history": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/sentinelIntervention"
+      }
+    },
+    "captain_follow_up": {
+      "anyOf": [
+        {
+          "$ref": "#/$defs/captainPendingFollowUp"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "ownership_chain": {
+      "anyOf": [
+        {
+          "$ref": "#/$defs/ownershipChain"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "thread_ids": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      },
+      "uniqueItems": true
+    },
+    "completed_by_agent_id": {
+      "enum": ["tactician", "scout", "raider", "scribe", "arbiter", null]
+    },
+    "created_at": {
+      "type": "string",
+      "minLength": 1
+    },
+    "updated_at": {
+      "type": "string",
+      "minLength": 1
+    },
+    "completed_at": {
+      "type": ["string", "null"],
+      "minLength": 1
+    }
+  },
+  "$defs": {
+    "plannedLongwayRow": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "row_index",
+        "planned_role",
+        "planned_agent_id",
+        "materialized_at"
+      ],
+      "properties": {
+        "row_index": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "planned_role": {
+          "type": "string",
+          "minLength": 1
+        },
+        "planned_agent_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "materialized_at": {
+          "type": "string",
+          "minLength": 1
+        }
+      }
+    },
+    "reviewPolicy": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "decision",
+        "state",
+        "risk",
+        "required",
+        "recommended_reviewers",
+        "reviewer_cap",
+        "active_reviewers",
+        "reason_code",
+        "summary",
+        "recorded_at"
+      ],
+      "properties": {
+        "decision": {
+          "type": "string",
+          "enum": ["skip", "recommend_single", "require", "suppress_for_resource_limit", "suppress_for_runtime_pressure"]
+        },
+        "state": {
+          "type": "string",
+          "enum": ["skipped", "recommended", "required", "running", "passed", "needs_work", "blocked", "stalled", "reclaimed", "suppressed"]
+        },
+        "risk": {
+          "type": "string",
+          "enum": ["low", "moderate", "high"]
+        },
+        "required": {
+          "type": "boolean"
+        },
+        "recommended_reviewers": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "reviewer_cap": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "active_reviewers": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "reason_code": {
+          "type": "string",
+          "minLength": 1
+        },
+        "summary": {
+          "type": "string",
+          "minLength": 1
+        },
+        "resource_pressure": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/reviewResourcePressure"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "recorded_at": {
+          "type": ["string", "null"],
+          "minLength": 1
+        },
+        "updated_at": {
+          "type": ["string", "null"],
+          "minLength": 1
+        }
+      }
+    },
+    "reviewResourcePressure": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "source",
+        "high_pressure",
+        "pressure_reason",
+        "stale_worker_count",
+        "timed_out_worker_count",
+        "reclaim_needed_worker_count",
+        "active_run_count",
+        "token_total",
+        "token_soft_limit"
+      ],
+      "properties": {
+        "source": {
+          "type": "string",
+          "minLength": 1
+        },
+        "high_pressure": {
+          "type": "boolean"
+        },
+        "pressure_reason": {
+          "type": ["string", "null"],
+          "minLength": 1
+        },
+        "stale_worker_count": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "timed_out_worker_count": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "reclaim_needed_worker_count": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "active_run_count": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "token_total": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "token_soft_limit": {
+          "type": ["integer", "null"],
+          "minimum": 1
+        }
+      }
+    },
+    "reviewFanIn": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "outcome",
+        "summary",
+        "status",
+        "evidence_paths",
+        "next_action",
+        "open_questions",
+        "confidence",
+        "reviewed_task_card_ids",
+        "unresolved_findings",
+        "unresolved_finding_count",
+        "captain_next_decision",
+        "authority",
+        "recorded_at"
+      ],
+      "properties": {
+        "outcome": {
+          "type": "string",
+          "enum": ["passed", "needs_work", "blocked", "stalled", "reclaimed"]
+        },
+        "summary": {
+          "type": ["string", "null"],
+          "minLength": 1
+        },
+        "status": {
+          "type": ["string", "null"],
+          "minLength": 1
+        },
+        "evidence_paths": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "next_action": {
+          "type": "string",
+          "minLength": 1
+        },
+        "open_questions": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "confidence": {
+          "type": ["string", "null"],
+          "minLength": 1
+        },
+        "reviewed_task_card_ids": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          },
+          "uniqueItems": true
+        },
+        "unresolved_findings": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "unresolved_finding_count": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "captain_next_decision": {
+          "type": "string",
+          "minLength": 1
+        },
+        "authority": {
+          "const": "captain_decides_after_review"
+        },
+        "recorded_at": {
+          "type": "string",
+          "minLength": 1
+        }
+      }
+    },
+    "captainIntervention": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "classification",
+        "rationale",
+        "chosen_next_action",
+        "budget_snapshot",
+        "next_action_blocked",
+        "stale_output_policy",
+        "stale_output_summary",
+        "evidence_paths",
+        "open_questions",
+        "authority",
+        "recorded_at"
+      ],
+      "properties": {
+        "classification": {
+          "type": "string",
+          "enum": ["clarification_only", "bounded_scope_amendment", "direction_or_risk_correction"]
+        },
+        "rationale": {
+          "type": "string",
+          "minLength": 1
+        },
+        "chosen_next_action": {
+          "type": "string",
+          "enum": ["amend_same_worker", "reclaim", "reassign", "close", "clarify", "no_action"]
+        },
+        "budget_snapshot": {
+          "type": ["object", "null"],
+          "additionalProperties": true
+        },
+        "next_action_blocked": {
+          "type": "boolean"
+        },
+        "next_action_block_reason": {
+          "type": ["string", "null"],
+          "enum": ["retry_budget_exhausted", "reassign_budget_exhausted", "budget_exhausted", "retry_budget_unavailable", "reassign_budget_unavailable", "reassign_target_missing", null]
+        },
+        "pending_follow_up": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/captainPendingFollowUp"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "stale_output_policy": {
+          "type": ["string", "null"],
+          "minLength": 1
+        },
+        "stale_output_summary": {
+          "type": ["string", "null"],
+          "minLength": 1
+        },
+        "summary": {
+          "type": ["string", "null"],
+          "minLength": 1
+        },
+        "subagent_status": {
+          "type": ["string", "null"],
+          "minLength": 1
+        },
+        "evidence_paths": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "open_questions": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "authority": {
+          "const": "captain_decides_intervention"
+        },
+        "recorded_at": {
+          "type": "string",
+          "minLength": 1
+        }
+      }
+    },
+    "sentinelIntervention": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "classification",
+        "rationale",
+        "next_action",
+        "summary",
+        "source",
+        "child_agent_id",
+        "subagent_status",
+        "evidence_paths",
+        "open_questions",
+        "policy_drift",
+        "authority",
+        "recorded_at"
+      ],
+      "properties": {
+        "classification": {
+          "type": "string",
+          "enum": ["observe", "warn", "enforce"]
+        },
+        "rationale": {
+          "type": "string",
+          "minLength": 1
+        },
+        "next_action": {
+          "type": "string",
+          "minLength": 1
+        },
+        "summary": {
+          "type": "string",
+          "minLength": 1
+        },
+        "source": {
+          "type": "string",
+          "enum": ["sentinel_subagent", "policy_drift_guardrail"]
+        },
+        "child_agent_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "subagent_status": {
+          "type": ["string", "null"],
+          "minLength": 1
+        },
+        "evidence_paths": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "open_questions": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "policy_drift": {
+          "type": "object",
+          "additionalProperties": true
+        },
+        "authority": {
+          "const": "sentinel_guardrail"
+        },
+        "recorded_at": {
+          "type": "string",
+          "minLength": 1
+        }
+      }
+    },
+    "captainPendingFollowUp": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "status",
+        "action",
+        "source_task_card_id",
+        "assigned_role",
+        "assigned_agent_id",
+        "lane_id",
+        "scope",
+        "prompt",
+        "budget_key",
+        "budget_snapshot",
+        "dedupe_key",
+        "queued_at",
+        "authority"
+      ],
+      "properties": {
+        "status": {
+          "type": "string",
+          "enum": ["queued", "consumed"]
+        },
+        "action": {
+          "type": "string",
+          "enum": ["amend_same_worker", "reassign"]
+        },
+        "source_task_card_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "assigned_role": {
+          "type": "string",
+          "minLength": 1
+        },
+        "assigned_agent_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "lane_id": {
+          "type": ["string", "null"],
+          "minLength": 1
+        },
+        "scope": {
+          "type": ["string", "null"],
+          "minLength": 1
+        },
+        "prompt": {
+          "type": "string",
+          "minLength": 1
+        },
+        "budget_key": {
+          "type": "string",
+          "enum": ["retry", "reassign"]
+        },
+        "budget_snapshot": {
+          "type": ["object", "null"],
+          "additionalProperties": true
+        },
+        "dedupe_key": {
+          "type": "string",
+          "minLength": 1
+        },
+        "queued_at": {
+          "type": "string",
+          "minLength": 1
+        },
+        "consumed_at": {
+          "type": ["string", "null"],
+          "minLength": 1
+        },
+        "consumed_task_card_id": {
+          "type": ["string", "null"],
+          "minLength": 1
+        },
+        "authority": {
+          "const": "captain_owned_follow_up"
+        }
+      }
+    },
+    "failureRecord": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["stage", "reason", "summary", "recorded_at"],
+      "properties": {
+        "stage": {
+          "type": "string",
+          "enum": ["way", "handoff", "execution", "verification", "compatibility"]
+        },
+        "reason": {
+          "type": "string",
+          "enum": [
+            "surface_mismatch",
+            "invalid_output",
+            "timeout",
+            "cancelled",
+            "blocked_dependency",
+            "verification_failed",
+            "unknown"
+          ]
+        },
+        "summary": {
+          "type": "string",
+          "minLength": 1
+        },
+        "recorded_at": {
+          "type": "string",
+          "minLength": 1
+        }
+      }
+    },
+    "fanInCompact": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["summary", "status", "evidence_paths", "next_action", "open_questions", "confidence"],
+      "properties": {
+        "summary": {
+          "type": ["string", "null"],
+          "minLength": 1
+        },
+        "status": {
+          "type": ["string", "null"],
+          "minLength": 1
+        },
+        "evidence_paths": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "next_action": {
+          "type": ["string", "null"],
+          "minLength": 1
+        },
+        "open_questions": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "confidence": {
+          "type": ["string", "null"],
+          "minLength": 1
+        },
+        "recorded_at": {
+          "type": ["string", "null"],
+          "minLength": 1
+        }
+      }
+    },
+    "parallelFanoutLane": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["lane_id", "required", "scope", "lifecycle", "fan_in"],
+      "properties": {
+        "lane_id": {
+          "type": "string",
+          "enum": ["raider-a", "raider-b", "raider-c", "raider-d"]
+        },
+        "required": {
+          "type": "boolean"
+        },
+        "scope": {
+          "type": ["string", "null"],
+          "minLength": 1
+        },
+        "lifecycle": {
+          "type": ["object", "null"],
+          "additionalProperties": true
+        },
+        "fan_in": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/fanInCompact"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        }
+      }
+    },
+    "parallelFanout": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["mode", "required_lane_ids", "lanes", "aggregate", "updated_at"],
+      "properties": {
+        "mode": {
+          "type": "string",
+          "enum": ["parallel", "sequential"]
+        },
+        "requested_parallel": {
+          "type": "boolean"
+        },
+        "selection_basis": {
+          "type": ["string", "null"],
+          "minLength": 1
+        },
+        "default_lane_count": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "max_lane_count": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "required_lane_ids": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "enum": ["raider-a", "raider-b", "raider-c", "raider-d"]
+          },
+          "minItems": 1,
+          "maxItems": 4,
+          "uniqueItems": true
+        },
+        "all_lane_ids": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "enum": ["raider-a", "raider-b", "raider-c", "raider-d"]
+          },
+          "uniqueItems": true
+        },
+        "disjoint_scope_required": {
+          "type": "boolean"
+        },
+        "disjoint_scope_verified": {
+          "type": "boolean"
+        },
+        "summary": {
+          "type": ["string", "null"],
+          "minLength": 1
+        },
+        "lanes": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/parallelFanoutLane"
+          },
+          "maxItems": 4
+        },
+        "aggregate": {
+          "type": "object",
+          "additionalProperties": true
+        },
+        "recorded_at": {
+          "type": ["string", "null"],
+          "minLength": 1
+        },
+        "updated_at": {
+          "type": "string",
+          "minLength": 1
+        }
+      }
+    },
+    "ownershipChain": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "state",
+        "assigned_role",
+        "assigned_agent_id",
+        "selected_agent_id",
+        "worker_count",
+        "launched_worker_id",
+        "observed_worker_id",
+        "observed_evidence_state",
+        "observed_model",
+        "observed_variant",
+        "observed_source",
+        "observed_confidence",
+        "reviewer_count",
+        "reviewer_agent_id",
+        "reviewer_link_state",
+        "captain_agent_id",
+        "execution_owner_mode",
+        "fallback_reason",
+        "summary",
+        "recorded_at"
+      ],
+      "properties": {
+        "state": {
+          "type": "string",
+          "enum": ["assigned_only", "planned_only", "launched", "observed", "review_linked", "captain_read_only_fallback", "host_session_fallback", "partial", "missing"]
+        },
+        "assigned_role": {
+          "type": "string",
+          "enum": ["orchestrator", "way", "explorer", "code specialist", "documenter", "verifier"]
+        },
+        "assigned_agent_id": {
+          "type": ["string", "null"],
+          "minLength": 1
+        },
+        "selected_agent_id": {
+          "type": ["string", "null"],
+          "minLength": 1
+        },
+        "worker_count": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "launched_worker_id": {
+          "type": ["string", "null"],
+          "minLength": 1
+        },
+        "observed_worker_id": {
+          "type": ["string", "null"],
+          "minLength": 1
+        },
+        "observed_evidence_state": {
+          "type": ["string", "null"],
+          "enum": ["not_started", "observed", "unavailable", null]
+        },
+        "observed_model": {
+          "type": ["string", "null"],
+          "minLength": 1
+        },
+        "observed_variant": {
+          "type": ["string", "null"],
+          "enum": ["low", "medium", "high", "xhigh", null]
+        },
+        "observed_source": {
+          "type": ["string", "null"],
+          "enum": ["codex_state_db", "provider_surface", null]
+        },
+        "observed_confidence": {
+          "type": ["string", "null"],
+          "enum": ["best_effort_local", "provider_confirmed", null]
+        },
+        "reviewer_count": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "reviewer_agent_id": {
+          "type": ["string", "null"],
+          "minLength": 1
+        },
+        "reviewer_link_state": {
+          "type": "string",
+          "enum": ["actual", "inferred", "missing"]
+        },
+        "captain_agent_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "execution_owner_mode": {
+          "type": "string",
+          "enum": ["ccc_worker", "host_session_fallback"]
+        },
+        "fallback_reason": {
+          "type": ["string", "null"],
+          "minLength": 1
+        },
+        "summary": {
+          "type": "string",
+          "minLength": 1
+        },
+        "recorded_at": {
+          "type": "string",
+          "minLength": 1
+        }
+      }
+    },
+    "roleModelLaunchEvidence": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "role",
+        "request_kind",
+        "launch_source",
+        "codex_path",
+        "configured_profile",
+        "configured_model",
+        "configured_variant",
+        "configured_fast_mode",
+        "dispatched_profile",
+        "dispatched_model",
+        "dispatched_variant",
+        "dispatched_fast_mode",
+        "dispatched_config_entries",
+        "actual_profile",
+        "actual_model",
+        "actual_variant",
+        "actual_fast_mode",
+        "actual_config_entries",
+        "observed_profile",
+        "observed_model",
+        "observed_variant",
+        "observed_source",
+        "observed_confidence",
+        "observed_capability",
+        "observation_status",
+        "observation_match_state",
+        "observation_unavailable_reason",
+        "observation_mismatch_summary",
+        "match_state",
+        "mismatch_summary",
+        "recorded_at"
+      ],
+      "properties": {
+        "role": {
+          "type": "string",
+          "enum": ["orchestrator", "way", "explorer", "code specialist", "documenter", "verifier"]
+        },
+        "request_kind": {
+          "type": "string",
+          "enum": ["execution", "verification", "way", "advisory"]
+        },
+        "launch_source": {
+          "const": "ccc_spawn"
+        },
+        "codex_path": {
+          "type": "string",
+          "minLength": 1
+        },
+        "configured_profile": {
+          "type": ["string", "null"],
+          "minLength": 1
+        },
+        "configured_model": {
+          "type": ["string", "null"],
+          "minLength": 1
+        },
+        "configured_variant": {
+          "type": ["string", "null"],
+          "enum": ["low", "medium", "high", "xhigh", null]
+        },
+        "configured_fast_mode": {
+          "type": "boolean"
+        },
+        "dispatched_profile": {
+          "type": ["string", "null"],
+          "minLength": 1
+        },
+        "dispatched_model": {
+          "type": ["string", "null"],
+          "minLength": 1
+        },
+        "dispatched_variant": {
+          "type": ["string", "null"],
+          "enum": ["low", "medium", "high", "xhigh", null]
+        },
+        "dispatched_fast_mode": {
+          "type": "boolean"
+        },
+        "dispatched_config_entries": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "actual_profile": {
+          "type": ["string", "null"],
+          "minLength": 1
+        },
+        "actual_model": {
+          "type": ["string", "null"],
+          "minLength": 1
+        },
+        "actual_variant": {
+          "type": ["string", "null"],
+          "enum": ["low", "medium", "high", "xhigh", null]
+        },
+        "actual_fast_mode": {
+          "type": "boolean"
+        },
+        "actual_config_entries": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "observed_profile": {
+          "type": ["string", "null"],
+          "minLength": 1
+        },
+        "observed_model": {
+          "type": ["string", "null"],
+          "minLength": 1
+        },
+        "observed_variant": {
+          "type": ["string", "null"],
+          "enum": ["low", "medium", "high", "xhigh", null]
+        },
+        "observed_source": {
+          "type": ["string", "null"],
+          "enum": ["codex_state_db", "provider_surface", null]
+        },
+        "observed_confidence": {
+          "type": ["string", "null"],
+          "enum": ["best_effort_local", "provider_confirmed", null]
+        },
+        "observed_capability": {
+          "type": "string",
+          "enum": ["thread_observable", "launch_request_only", "unsupported"]
+        },
+        "observation_status": {
+          "type": "string",
+          "enum": ["not_started", "observed", "unavailable"]
+        },
+        "observation_match_state": {
+          "type": "string",
+          "enum": ["not_started", "matched", "mismatch", "unavailable"]
+        },
+        "observation_unavailable_reason": {
+          "type": ["string", "null"],
+          "enum": ["unsupported", "no_thread_id", "temporary_probe_failure", "environment_limited", "surface_mismatch", null]
+        },
+        "observation_mismatch_summary": {
+          "type": ["string", "null"],
+          "minLength": 1
+        },
+        "match_state": {
+          "type": "string",
+          "enum": ["verified_match", "mismatch"]
+        },
+        "mismatch_summary": {
+          "type": ["string", "null"],
+          "minLength": 1
+        },
+        "recorded_at": {
+          "type": "string",
+          "minLength": 1
+        }
+      }
+    }
+  }
+}

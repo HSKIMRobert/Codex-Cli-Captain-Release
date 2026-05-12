@@ -1,0 +1,45 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://ccc.local/schemas/orchestrator-decision.schema.json",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["next_step", "can_advance", "summary", "route_selection"],
+  "properties": {
+    "next_step": {
+      "type": "string",
+      "enum": [
+        "execute_task",
+        "verify_task",
+        "await_fan_in",
+        "await_verification",
+        "await_repair_decision",
+        "halt_completed",
+        "halt_failed",
+        "halt_cancelled",
+        "await_operator"
+      ]
+    },
+    "can_advance": {
+      "type": "boolean"
+    },
+    "summary": {
+      "type": "string",
+      "minLength": 1
+    },
+    "route_selection": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["route_id", "reason"],
+      "properties": {
+        "route_id": {
+          "type": "string",
+          "enum": ["explicit_fallback", "delegated_execute"]
+        },
+        "reason": {
+          "type": "string",
+          "minLength": 1
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,50 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://ccc.local/schemas/handoff.schema.json",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "handoff_id",
+    "run_id",
+    "task_card_id",
+    "from_role",
+    "to_role",
+    "outcome",
+    "summary",
+    "created_at"
+  ],
+  "properties": {
+    "handoff_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "run_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "task_card_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "from_role": {
+      "type": "string",
+      "enum": ["orchestrator", "way", "explorer", "code specialist", "documenter", "verifier"]
+    },
+    "to_role": {
+      "type": "string",
+      "enum": ["orchestrator", "way", "explorer", "code specialist", "documenter", "verifier"]
+    },
+    "outcome": {
+      "type": "string",
+      "enum": ["accepted"]
+    },
+    "summary": {
+      "type": "string",
+      "minLength": 1
+    },
+    "created_at": {
+      "type": "string",
+      "minLength": 1
+    }
+  }
+}

@@ -1,0 +1,73 @@
+{
+  "skill_id": "ccc_companion_reader",
+  "version": "0.1",
+  "display_name": "Probe",
+  "callsign": "Probe",
+  "theme": "starcraft_display_callsign",
+  "inspired_by": [
+    "oh-my-openagent"
+  ],
+  "recommended_workflows": [
+    "github-triage",
+    "filesystem-evidence",
+    "get-unpublished-changes"
+  ],
+  "lsp_capabilities": [
+    "lsp_diagnostics",
+    "lsp_references",
+    "lsp_definition"
+  ],
+  "scheduling": {
+    "role_family": "bounded_read_only_operator",
+    "display_agent_id": "ccc_companion_reader",
+    "preferred_model_family": "mini",
+    "preferred_reasoning": "medium",
+    "intent_signatures": [
+      "inspect files",
+      "read git state",
+      "gather command output",
+      "collect evidence"
+    ],
+    "expected_inputs": [
+      "task_card",
+      "commands",
+      "target_paths",
+      "evidence_questions"
+    ],
+    "expected_outputs": [
+      "command_results",
+      "evidence_paths",
+      "summary",
+      "open_questions"
+    ],
+    "mutation_allowed": false
+  },
+  "structural": {
+    "scenes": [
+      {
+        "id": "run_read_only_commands",
+        "description": "Run bounded read-only shell or git inspection commands."
+      },
+      {
+        "id": "capture_evidence",
+        "description": "Collect exact paths, command results, and uncertainty."
+      },
+      {
+        "id": "return_operator_summary",
+        "description": "Return concise evidence without making workspace changes."
+      }
+    ]
+  },
+  "logical": {
+    "actions": [
+      {
+        "action": "run_read_only_command",
+        "resource": "local_workspace",
+        "side_effect": "local_process",
+        "risk": "low"
+      }
+    ],
+    "requires_operator_approval": false,
+    "external_side_effects": false
+  }
+}

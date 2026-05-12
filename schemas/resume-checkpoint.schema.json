@@ -1,0 +1,382 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://ccc.local/schemas/resume-checkpoint.schema.json",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "version",
+    "run_id",
+    "updated_at",
+    "status",
+    "stage",
+    "active_task_card",
+    "decision",
+    "progress",
+    "continuity",
+    "hot_artifacts",
+    "on_demand_artifacts"
+  ],
+  "properties": {
+    "version": {
+      "type": "integer",
+      "const": 1
+    },
+    "run_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "updated_at": {
+      "type": "string",
+      "minLength": 1
+    },
+    "status": {
+      "type": "string",
+      "enum": ["queued", "active", "blocked", "completed", "failed", "cancelled"]
+    },
+    "stage": {
+      "type": "string",
+      "enum": ["way", "handoff", "execution", "verification", "compatibility"]
+    },
+    "active_task_card": {
+      "type": "object",
+      "additionalProperties": false,
+        "required": ["task_card_id", "title", "owner_role", "assigned_role", "verification_state"],
+        "properties": {
+        "task_card_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "title": {
+          "type": "string",
+          "minLength": 1
+        },
+        "owner_role": {
+          "type": "string",
+          "enum": ["orchestrator", "way", "explorer", "code specialist", "documenter", "verifier"]
+        },
+          "assigned_role": {
+            "type": "string",
+            "enum": ["orchestrator", "way", "explorer", "code specialist", "documenter", "verifier"]
+          },
+          "model_tier_intent": {
+            "type": "string",
+            "enum": ["low_cost", "standard", "high_tier"]
+          },
+          "child_aggregation_contract": {
+            "type": "string",
+            "enum": ["none", "explicit_fan_in_summary"]
+          },
+          "fan_in_barrier_semantics": {
+            "type": "string",
+            "enum": ["none", "explicit_wait_for_all_sources"]
+          },
+          "orchestrator_review_gate": {
+            "type": "string",
+            "enum": ["none", "after_child_completion"]
+          },
+          "verification_state": {
+            "type": "string",
+            "enum": ["pending", "passed", "needs_work", "blocked"]
+          },
+          "review_policy": {
+            "anyOf": [
+              {
+                "$ref": "#/$defs/reviewPolicy"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          }
+      }
+    },
+    "decision": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["next_step", "can_advance", "summary"],
+      "properties": {
+        "next_step": {
+          "type": "string",
+          "enum": [
+            "execute_task",
+            "verify_task",
+            "await_fan_in",
+            "await_verification",
+            "await_repair_decision",
+            "halt_completed",
+            "halt_failed",
+            "halt_cancelled",
+            "await_operator"
+          ]
+        },
+        "can_advance": {
+          "type": "boolean"
+        },
+        "summary": {
+          "type": "string",
+          "minLength": 1
+        }
+      }
+    },
+    "progress": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["completed", "in_progress", "remaining", "resume_from", "latest_verified_checkpoint"],
+      "properties": {
+        "completed": {
+          "type": "string",
+          "minLength": 1
+        },
+        "in_progress": {
+          "type": "string",
+          "minLength": 1
+        },
+        "remaining": {
+          "type": "string",
+          "minLength": 1
+        },
+        "resume_from": {
+          "type": "string",
+          "minLength": 1
+        },
+        "latest_verified_checkpoint": {
+          "type": "string",
+          "minLength": 1
+        }
+      }
+    },
+    "continuity": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "summary",
+        "way_attempt_id",
+        "review_pass_count",
+        "latest_handoff_summary",
+        "latest_verified_checkpoint_summary"
+      ],
+      "properties": {
+        "summary": {
+          "type": "string",
+          "minLength": 1
+        },
+        "way_attempt_id": {
+          "type": ["string", "null"],
+          "minLength": 1
+        },
+        "review_pass_count": {
+          "type": ["integer", "null"],
+          "minimum": 0
+        },
+        "latest_handoff_summary": {
+          "type": ["string", "null"],
+          "minLength": 1
+        },
+        "latest_verified_checkpoint_summary": {
+          "type": ["string", "null"],
+          "minLength": 1
+        }
+      }
+    },
+    "hot_artifacts": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "run_file",
+        "visibility_file",
+        "orchestrator_state_file",
+        "active_task_card_file",
+        "progress_markdown_file"
+      ],
+      "properties": {
+        "run_file": {
+          "type": "string",
+          "minLength": 1
+        },
+        "visibility_file": {
+          "type": "string",
+          "minLength": 1
+        },
+        "orchestrator_state_file": {
+          "type": "string",
+          "minLength": 1
+        },
+        "active_task_card_file": {
+          "type": "string",
+          "minLength": 1
+        },
+        "progress_markdown_file": {
+          "type": "string",
+          "minLength": 1
+        }
+      }
+    },
+    "on_demand_artifacts": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["latest_orchestration_attempt_file", "latest_planner_attempt_dir", "delegations_dir", "raw_events_dir"],
+      "properties": {
+        "latest_orchestration_attempt_file": {
+          "type": ["string", "null"],
+          "minLength": 1
+        },
+        "latest_planner_attempt_dir": {
+          "type": ["string", "null"],
+          "minLength": 1
+        },
+        "delegations_dir": {
+          "type": "string",
+          "minLength": 1
+        },
+        "raw_events_dir": {
+          "type": "string",
+          "minLength": 1
+        }
+      }
+    },
+    "task_card_index": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "task_card_id",
+          "title",
+          "status",
+          "owner_role",
+          "assigned_role",
+          "model_tier_intent",
+          "child_aggregation_contract",
+          "fan_in_barrier_semantics",
+          "orchestrator_review_gate",
+          "verification_state",
+          "task_kind",
+          "node_kind",
+          "depends_on_task_card_ids",
+          "fan_in_from_task_card_ids"
+        ],
+        "properties": {
+          "task_card_id": { "type": "string", "minLength": 1 },
+          "title": { "type": "string", "minLength": 1 },
+          "status": {
+            "type": "string",
+            "enum": ["queued", "active", "completed", "blocked", "failed", "cancelled"]
+          },
+          "owner_role": {
+            "type": "string",
+            "enum": ["orchestrator", "way", "explorer", "code specialist", "documenter", "verifier"]
+          },
+          "assigned_role": {
+            "type": "string",
+            "enum": ["orchestrator", "way", "explorer", "code specialist", "documenter", "verifier"]
+          },
+          "model_tier_intent": {
+            "type": "string",
+            "enum": ["low_cost", "standard", "high_tier"]
+          },
+          "child_aggregation_contract": {
+            "type": "string",
+            "enum": ["none", "explicit_fan_in_summary"]
+          },
+          "fan_in_barrier_semantics": {
+            "type": "string",
+            "enum": ["none", "explicit_wait_for_all_sources"]
+          },
+          "orchestrator_review_gate": {
+            "type": "string",
+            "enum": ["none", "after_child_completion"]
+          },
+          "verification_state": {
+            "type": "string",
+            "enum": ["pending", "passed", "needs_work", "blocked"]
+          },
+          "review_policy": {
+            "anyOf": [
+              {
+                "$ref": "#/$defs/reviewPolicy"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "task_kind": {
+            "type": "string",
+            "enum": ["execution", "review", "explore", "way"]
+          },
+          "node_kind": {
+            "type": "string",
+            "enum": ["execution", "fan_in"]
+          },
+          "depends_on_task_card_ids": {
+            "type": "array",
+            "items": { "type": "string", "minLength": 1 }
+          },
+          "fan_in_from_task_card_ids": {
+            "type": "array",
+            "items": { "type": "string", "minLength": 1 }
+          }
+        }
+      }
+    }
+  },
+  "$defs": {
+    "reviewPolicy": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "decision",
+        "state",
+        "risk",
+        "required",
+        "recommended_reviewers",
+        "reviewer_cap",
+        "active_reviewers",
+        "reason_code",
+        "summary",
+        "recorded_at"
+      ],
+      "properties": {
+        "decision": {
+          "type": "string",
+          "enum": ["skip", "recommend_single", "require", "suppress_for_resource_limit"]
+        },
+        "state": {
+          "type": "string",
+          "enum": ["skipped", "recommended", "required", "running", "passed", "needs_work", "blocked", "reclaimed", "suppressed"]
+        },
+        "risk": {
+          "type": "string",
+          "enum": ["low", "moderate", "high"]
+        },
+        "required": {
+          "type": "boolean"
+        },
+        "recommended_reviewers": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "reviewer_cap": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "active_reviewers": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "reason_code": {
+          "type": "string",
+          "minLength": 1
+        },
+        "summary": {
+          "type": "string",
+          "minLength": 1
+        },
+        "recorded_at": {
+          "type": ["string", "null"],
+          "minLength": 1
+        }
+      }
+    }
+  }
+}

@@ -49,6 +49,21 @@ function Resolve-CccPlatform {
     }
 }
 
+function Remove-StalePluginCacheVersions {
+    param(
+        [string]$CacheRoot,
+        [string]$ActiveVersion
+    )
+
+    if (-not (Test-Path $CacheRoot)) {
+        return
+    }
+
+    Get-ChildItem -Force -Path $CacheRoot |
+        Where-Object { $_.PSIsContainer -and $_.Name -ne $ActiveVersion } |
+        Remove-Item -Recurse -Force
+}
+
 $ResolvedPlatform = Resolve-CccPlatform -Override $Platform
 if (-not $ResolvedPlatform.StartsWith("windows-")) {
     throw "install.ps1 performs native Windows installs only. Resolved platform: $ResolvedPlatform"
@@ -87,8 +102,7 @@ $LegacyCapSkillDir = Join-Path $CodexHome "skills\cap"
 
 function Set-CccPluginMarketplace {
     param(
-        [string]$CurrentRoot,
-        [string]$CurrentExePath
+        [string]$CurrentRoot
     )
 
     if (Test-Path $PluginDir) {
@@ -127,10 +141,10 @@ function Set-CccPluginMarketplace {
     }
     New-Item -ItemType Directory -Force -Path $PluginCacheDir | Out-Null
     Get-ChildItem -Force -Path $PluginDir | Copy-Item -Destination $PluginCacheDir -Recurse -Force
+    Remove-StalePluginCacheVersions -CacheRoot (Split-Path $PluginCacheDir -Parent) -ActiveVersion (Split-Path $PluginCacheDir -Leaf)
     if (Test-Path $LegacyCapSkillDir) {
         Remove-Item -Recurse -Force $LegacyCapSkillDir
     }
-    "@echo off`r`n`"$PluginCacheExe`" %*`r`n" | Set-Content -Encoding ASCII -Path $TargetCmd
 
     $marketplaceJson = @{
         name = $MarketplaceName
@@ -212,12 +226,25 @@ try {
         throw "The downloaded bundle contains an empty ccc binary."
     }
 
+    $ReleaseExe = $CccBinary
+
     if (Test-Path $ReleaseDir) {
         Remove-Item -Recurse -Force $ReleaseDir
     }
     New-Item -ItemType Directory -Force -Path (Split-Path $ReleaseDir) | Out-Null
     New-Item -ItemType Directory -Force -Path $ReleaseDir | Out-Null
     Copy-Item -Recurse -Force (Join-Path $ExtractDir "*") $ReleaseDir
+
+    Write-Output "Running setup..."
+    & $ReleaseExe setup
+
+    Write-Output ""
+    Write-Output "Running check-install..."
+    & $ReleaseExe check-install
+
+    Write-Output ""
+    Write-Output "Refreshing Codex CCC plugin marketplace..."
+    Set-CccPluginMarketplace -CurrentRoot $ReleaseDir
 
     if (Test-Path $CurrentDir) {
         Remove-Item -Recurse -Force $CurrentDir
@@ -231,17 +258,6 @@ try {
     }
 
     "@echo off`r`n`"$CurrentExe`" %*`r`n" | Set-Content -Encoding ASCII -Path $TargetCmd
-
-    Write-Output "Running setup..."
-    & $CurrentExe setup
-
-    Write-Output ""
-    Write-Output "Running check-install..."
-    & $CurrentExe check-install
-
-    Write-Output ""
-    Write-Output "Refreshing Codex CCC plugin marketplace..."
-    Set-CccPluginMarketplace -CurrentRoot $CurrentDir -CurrentExePath $CurrentExe
 
     Write-Output ""
     Write-Output "Install complete."

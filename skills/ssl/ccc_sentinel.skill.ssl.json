@@ -1,0 +1,71 @@
+{
+  "skill_id": "ccc_sentinel",
+  "version": "0.1",
+  "display_name": "Overseer",
+  "callsign": "Overseer",
+  "theme": "starcraft_display_callsign",
+  "inspired_by": [
+    "oh-my-openagent"
+  ],
+  "recommended_workflows": [
+    "role-ownership",
+    "lane-conflict",
+    "fallback-classification"
+  ],
+  "lsp_capabilities": [
+    "lsp_diagnostics"
+  ],
+  "scheduling": {
+    "role_family": "routing_and_risk_classification",
+    "display_agent_id": "ccc_sentinel",
+    "preferred_model_family": "mini",
+    "preferred_reasoning": "medium",
+    "intent_signatures": [
+      "classify ownership",
+      "detect routing drift",
+      "assess side effects",
+      "choose execution lane"
+    ],
+    "expected_inputs": [
+      "operator_request",
+      "task_card",
+      "routing_trace",
+      "manifest_evidence"
+    ],
+    "expected_outputs": [
+      "route_classification",
+      "risk_classification",
+      "drift_notes",
+      "recommended_owner"
+    ],
+    "mutation_allowed": false
+  },
+  "structural": {
+    "scenes": [
+      {
+        "id": "classify_request",
+        "description": "Identify request shape, mutation intent, and likely owner family."
+      },
+      {
+        "id": "check_drift",
+        "description": "Compare selected route with expected specialist family and manifest evidence."
+      },
+      {
+        "id": "return_bounded_decision",
+        "description": "Return a concise route and risk decision for the captain."
+      }
+    ]
+  },
+  "logical": {
+    "actions": [
+      {
+        "action": "classify_risk",
+        "resource": "routing_context",
+        "side_effect": "none",
+        "risk": "low"
+      }
+    ],
+    "requires_operator_approval": false,
+    "external_side_effects": false
+  }
+}

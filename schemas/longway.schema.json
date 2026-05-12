@@ -1,0 +1,432 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://ccc.local/schemas/longway.schema.json",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "version",
+    "run_id",
+    "requester_session_id",
+    "lifecycle_state",
+    "created_at",
+    "updated_at",
+    "settled_at",
+    "checkpoint_id",
+    "active_phase_id",
+    "active_phase_name",
+    "phases"
+  ],
+  "properties": {
+    "version": {
+      "type": "integer",
+      "const": 1
+    },
+    "run_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "requester_session_id": {
+      "type": ["string", "null"],
+      "minLength": 1
+    },
+    "lifecycle_state": {
+      "type": "string",
+      "enum": ["queued", "active", "blocked", "completed", "failed", "cancelled"]
+    },
+    "created_at": {
+      "type": "string",
+      "minLength": 1
+    },
+    "updated_at": {
+      "type": "string",
+      "minLength": 1
+    },
+    "settled_at": {
+      "type": ["string", "null"],
+      "minLength": 1
+    },
+    "checkpoint_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "active_phase_id": {
+      "type": ["string", "null"],
+      "minLength": 1
+    },
+    "active_phase_name": {
+      "type": ["string", "null"],
+      "enum": ["way", "inspect", "gate", "ownership_check", "document", "mutate", "verify", "fan_in", "synthesize", "archive", "custom", null]
+    },
+    "phases": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/phase"
+      }
+    },
+    "planned_rows": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/plannedRow"
+      }
+    },
+    "ccc_loop": {
+      "type": ["object", "null"],
+      "additionalProperties": true
+    }
+  },
+  "$defs": {
+    "status": {
+      "type": "string",
+      "enum": ["pending", "in_progress", "blocked", "await_fan_in", "completed", "cancelled"]
+    },
+    "executionAdapter": {
+      "type": "string",
+      "enum": ["codex_native_agent", "ccc_mcp_worker", "degraded_host_fallback"]
+    },
+    "launchProof": {
+      "type": "string",
+      "enum": ["codex_native_spawned", "ccc_worker_visible", "degraded_with_reason"]
+    },
+    "eventKind": {
+      "type": "string",
+      "enum": [
+        "phase_selected",
+        "launch_requested",
+        "launch_confirmed",
+        "waiting",
+        "await_fan_in",
+        "completed",
+        "blocked",
+        "degraded"
+      ]
+    },
+    "phaseEvent": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["event_id", "kind", "recorded_at", "actor", "summary", "proof_ref"],
+      "properties": {
+        "event_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "kind": {
+          "$ref": "#/$defs/eventKind"
+        },
+        "recorded_at": {
+          "type": "string",
+          "minLength": 1
+        },
+        "actor": {
+          "type": "string",
+          "minLength": 1
+        },
+        "summary": {
+          "type": "string",
+          "minLength": 1
+        },
+        "proof_ref": {
+          "type": ["string", "null"],
+          "minLength": 1
+        }
+      }
+    },
+    "taskItem": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "task_item_id",
+        "task_card_id",
+        "title",
+        "status",
+        "owner_agent",
+        "execution_adapter",
+        "launch_proof",
+        "execution_owner",
+        "codex_ui_trace_owner",
+        "evidence_links",
+        "result_links",
+        "updated_at",
+        "started_at",
+        "finished_at"
+      ],
+      "properties": {
+        "task_item_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "task_card_id": {
+          "type": ["string", "null"],
+          "minLength": 1
+        },
+        "title": {
+          "type": "string",
+          "minLength": 1
+        },
+        "status": {
+          "$ref": "#/$defs/status"
+        },
+        "owner_agent": {
+          "type": "string",
+          "minLength": 1
+        },
+        "execution_adapter": {
+          "anyOf": [
+            { "$ref": "#/$defs/executionAdapter" },
+            { "type": "null" }
+          ]
+        },
+        "launch_proof": {
+          "anyOf": [
+            { "$ref": "#/$defs/launchProof" },
+            { "type": "null" }
+          ]
+        },
+        "execution_owner": {
+          "type": ["string", "null"],
+          "enum": ["host_session", "ccc_worker", null]
+        },
+        "codex_ui_trace_owner": {
+          "type": ["string", "null"],
+          "enum": ["host_session", null]
+        },
+        "evidence_links": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "result_links": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "updated_at": {
+          "type": "string",
+          "minLength": 1
+        },
+        "started_at": {
+          "type": ["string", "null"],
+          "minLength": 1
+        },
+        "finished_at": {
+          "type": ["string", "null"],
+          "minLength": 1
+        }
+      }
+    },
+    "phase": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "phase_id",
+        "phase_name",
+        "task_card_id",
+        "status",
+        "owner_agent",
+        "task_items",
+        "evidence_links",
+        "result_links",
+        "checkpoint_id",
+        "updated_at",
+        "started_at",
+        "finished_at",
+        "next_phase_candidates",
+        "execution_adapter",
+        "launch_proof",
+        "execution_owner",
+        "codex_ui_trace_owner",
+        "phase_events"
+      ],
+      "properties": {
+        "phase_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "phase_name": {
+          "type": "string",
+          "enum": ["way", "inspect", "gate", "ownership_check", "document", "mutate", "verify", "fan_in", "synthesize", "archive", "custom"]
+        },
+        "task_card_id": {
+          "type": ["string", "null"],
+          "minLength": 1
+        },
+        "status": {
+          "$ref": "#/$defs/status"
+        },
+        "owner_agent": {
+          "type": "string",
+          "minLength": 1
+        },
+        "task_items": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/taskItem"
+          }
+        },
+        "evidence_links": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "result_links": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "checkpoint_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "updated_at": {
+          "type": "string",
+          "minLength": 1
+        },
+        "started_at": {
+          "type": ["string", "null"],
+          "minLength": 1
+        },
+        "finished_at": {
+          "type": ["string", "null"],
+          "minLength": 1
+        },
+        "next_phase_candidates": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "execution_adapter": {
+          "anyOf": [
+            { "$ref": "#/$defs/executionAdapter" },
+            { "type": "null" }
+          ]
+        },
+        "launch_proof": {
+          "anyOf": [
+            { "$ref": "#/$defs/launchProof" },
+            { "type": "null" }
+          ]
+        },
+        "execution_owner": {
+          "type": ["string", "null"],
+          "enum": ["host_session", "ccc_worker", null]
+        },
+        "codex_ui_trace_owner": {
+          "type": ["string", "null"],
+          "enum": ["host_session", null]
+        },
+        "phase_events": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/phaseEvent"
+          }
+        }
+      }
+    },
+    "plannedRow": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "title",
+        "planned_role",
+        "planned_agent_id",
+        "scope",
+        "acceptance",
+        "status"
+      ],
+      "properties": {
+        "title": {
+          "type": "string",
+          "minLength": 1
+        },
+        "planned_role": {
+          "type": "string",
+          "minLength": 1
+        },
+        "planned_agent_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "scope": {
+          "type": "string",
+          "minLength": 1
+        },
+        "acceptance": {
+          "type": "string",
+          "minLength": 1
+        },
+        "status": {
+          "type": "string",
+          "enum": ["planned", "ready", "blocked", "materialized", "skipped", "cancelled"]
+        },
+        "task_card_id": {
+          "type": ["string", "null"],
+          "minLength": 1
+        },
+        "materialized_at": {
+          "type": "string",
+          "minLength": 1
+        },
+        "updated_at": {
+          "type": "string",
+          "minLength": 1
+        },
+        "evidence_links": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "result_links": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "routing_summary": {
+          "type": "string",
+          "minLength": 1
+        },
+        "routing_trace": {
+          "type": "object"
+        },
+        "planning_detail": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "lifecycle": {
+              "type": "string",
+              "enum": ["planned", "ready", "blocked", "materialized", "skipped", "cancelled"]
+            },
+            "scope": {
+              "type": "string",
+              "minLength": 1
+            },
+            "acceptance": {
+              "type": "string",
+              "minLength": 1
+            },
+            "routing": {
+              "type": "string",
+              "minLength": 1
+            },
+            "evidence_count": {
+              "type": "integer",
+              "minimum": 1
+            }
+          }
+        }
+      }
+    }
+  }
+}

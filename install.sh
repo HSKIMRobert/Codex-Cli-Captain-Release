@@ -99,11 +99,16 @@ cleanup() {
 }
 trap cleanup EXIT
 
-prune_old_release_bundles() {
+prune_old_plugin_cache_versions() {
   local candidate
+  local cache_root="${CODEX_HOME:-$HOME/.codex}/plugins/cache/${MARKETPLACE_NAME}/ccc"
 
-  for candidate in "${RELEASES_DIR}"/*-"${OS}"-"${ARCH}"; do
-    if [ ! -d "$candidate" ] || [ "$candidate" = "$BUNDLE_DIR" ]; then
+  if [ ! -d "$cache_root" ]; then
+    return 0
+  fi
+
+  for candidate in "$cache_root"/*; do
+    if [ ! -d "$candidate" ] || [ "${candidate##*/}" = "${VERSION#v}" ]; then
       continue
     fi
     rm -rf "$candidate"
@@ -111,11 +116,12 @@ prune_old_release_bundles() {
 }
 
 configure_codex_plugin() {
+  local source_root="$1"
   local tmp_config
 
   rm -rf "$PLUGIN_DIR"
   mkdir -p "$PLUGIN_DIR"
-  cp -R "${TARGET_DIR}/." "$PLUGIN_DIR/"
+  cp -R "${source_root}/." "$PLUGIN_DIR/"
   if [ -f "${PLUGIN_DIR}/share/skills/cap/SKILL.md" ]; then
     rm -rf "${PLUGIN_DIR}/skills/cap"
     mkdir -p "${PLUGIN_DIR}/skills/cap"
@@ -138,7 +144,7 @@ EOF
   rm -rf "$PLUGIN_CACHE_DIR"
   mkdir -p "$PLUGIN_CACHE_DIR"
   cp -R "${PLUGIN_DIR}/." "$PLUGIN_CACHE_DIR/"
-  ln -sfn "${PLUGIN_CACHE_DIR}/bin/ccc" "$TARGET_BIN"
+  prune_old_plugin_cache_versions
   rm -rf "$LEGACY_CAP_SKILL_DIR"
 
   mkdir -p "${MARKETPLACE_DIR}/.agents/plugins"
@@ -217,25 +223,23 @@ cp -R "${EXTRACT_DIR}/." "$STAGED_BUNDLE_DIR/"
 rm -rf "$BUNDLE_DIR"
 mv "$STAGED_BUNDLE_DIR" "$BUNDLE_DIR"
 
+echo "Running setup..."
+"${BUNDLE_DIR}/bin/ccc" setup
+
+echo
+echo "Running check-install..."
+"${BUNDLE_DIR}/bin/ccc" check-install
+
+echo
+echo "Refreshing Codex CCC plugin marketplace..."
+mkdir -p "${MARKETPLACE_DIR}/plugins"
+configure_codex_plugin "$BUNDLE_DIR"
+
 if [ -e "$TARGET_DIR" ] && [ ! -L "$TARGET_DIR" ]; then
   rm -rf "$TARGET_DIR"
 fi
 ln -sfn "$BUNDLE_DIR" "$TARGET_DIR"
 ln -sfn "${TARGET_DIR}/bin/ccc" "$TARGET_BIN"
-
-echo "Running setup..."
-"${TARGET_DIR}/bin/ccc" setup
-
-echo
-echo "Running check-install..."
-"${TARGET_DIR}/bin/ccc" check-install
-
-echo
-echo "Refreshing Codex CCC plugin marketplace..."
-mkdir -p "${MARKETPLACE_DIR}/plugins"
-configure_codex_plugin
-
-prune_old_release_bundles
 
 echo
 echo "Install complete."

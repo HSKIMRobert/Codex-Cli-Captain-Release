@@ -1,0 +1,389 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://ccc.local/schemas/orchestration-attempt.schema.json",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "run_id",
+    "attempt_id",
+    "entrypoint",
+    "started_at",
+    "completed_at",
+    "steps",
+    "stop"
+  ],
+  "properties": {
+    "run_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "attempt_id": {
+      "type": "string",
+      "pattern": "^attempt-[0-9]{4,}$"
+    },
+    "entrypoint": {
+      "type": "string",
+      "enum": ["continue", "ccc_orchestrate", "always_on_companion"]
+    },
+    "started_at": {
+      "type": "string",
+      "minLength": 1
+    },
+    "completed_at": {
+      "type": ["string", "null"],
+      "minLength": 1
+    },
+    "steps": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/orchestrationStep"
+      }
+    },
+    "stop": {
+      "anyOf": [
+        {
+          "$ref": "#/$defs/orchestrationStop"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    }
+  },
+  "$defs": {
+    "snapshot": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "task_card_id",
+        "status",
+        "stage",
+        "verification_state",
+        "next_step",
+        "can_advance",
+        "thread_id",
+        "routing_summary",
+        "routing_trace",
+        "review_summary",
+        "review_trace"
+      ],
+      "properties": {
+        "task_card_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "status": {
+          "type": "string",
+          "enum": ["queued", "active", "blocked", "completed", "failed", "cancelled"]
+        },
+        "stage": {
+          "type": "string",
+          "enum": ["way", "handoff", "execution", "verification", "compatibility"]
+        },
+        "verification_state": {
+          "type": "string",
+          "enum": ["pending", "passed", "needs_work", "blocked"]
+        },
+        "next_step": {
+          "type": "string",
+          "enum": [
+            "execute_task",
+            "verify_task",
+            "await_fan_in",
+            "await_verification",
+            "await_repair_decision",
+            "halt_completed",
+            "halt_failed",
+            "halt_cancelled",
+            "await_operator"
+          ]
+        },
+        "can_advance": {
+          "type": "boolean"
+        },
+        "thread_id": {
+          "type": ["string", "null"],
+          "minLength": 1
+        },
+        "routing_summary": {
+          "type": "string",
+          "minLength": 1
+        },
+        "routing_trace": {
+          "$ref": "#/$defs/routingTrace"
+        },
+        "review_summary": {
+          "type": "string",
+          "minLength": 1
+        },
+        "review_trace": {
+          "$ref": "#/$defs/reviewTrace"
+        },
+        "reducer_next_action": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/reducerNextAction"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        }
+      }
+    },
+    "reducerNextAction": {
+      "type": "object",
+      "additionalProperties": true,
+      "required": ["type"],
+      "properties": {
+        "type": {
+          "type": "string",
+          "enum": [
+            "launch_worker",
+            "wait_for_fan_in",
+            "aggregate_fan_in",
+            "advance_phase",
+            "request_captain_judgment",
+            "settle_run",
+            "export_archive",
+            "manual_hold"
+          ]
+        }
+      }
+    },
+    "routingTrace": {
+      "type": "object",
+      "additionalProperties": false,
+        "required": [
+          "specialist_routing_mode",
+          "route_preference",
+          "parallelism_mode",
+          "route_target_role",
+          "route_target_roster_name",
+          "route_target_step",
+          "selected_route",
+          "selected_route_reason",
+          "recommended_category",
+          "recommended_skills",
+          "workload_class",
+          "path_weight",
+          "execution_path",
+          "model_tier_budget",
+          "reasoning_effort_budget",
+          "review_requirement",
+          "budget_reason",
+          "advisory_only",
+          "execution_unchanged"
+        ],
+      "properties": {
+        "specialist_routing_mode": {
+          "type": "string",
+          "enum": ["advisory_only"]
+        },
+        "route_preference": {
+          "type": "string",
+          "enum": ["none"]
+        },
+        "parallelism_mode": {
+          "type": "string",
+          "enum": ["single_task_bounded_fan_out"]
+        },
+        "route_target_role": {
+          "type": ["string", "null"],
+          "enum": ["way", "explorer", "code specialist", "documenter", "verifier", null]
+        },
+        "route_target_roster_name": {
+          "type": ["string", "null"],
+          "minLength": 1
+        },
+        "route_target_step": {
+          "type": ["string", "null"],
+          "enum": ["execute_task", "verify_task", null]
+        },
+        "selected_route": {
+          "type": "string",
+          "enum": ["explicit_fallback", "delegated_execute"]
+        },
+        "selected_route_reason": {
+          "type": "string",
+          "minLength": 1
+        },
+        "recommended_category": {
+          "type": ["string", "null"],
+          "enum": [
+            "quick",
+            "deep",
+            "visual-engineering",
+            "writing",
+            "unspecified-low",
+            "unspecified-high",
+            null
+          ]
+        },
+        "recommended_skills": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "enum": ["frontend-ui-ux", "playwright"]
+          },
+          "uniqueItems": true
+        },
+        "workload_class": {
+          "type": "string",
+          "enum": [
+            "trivial_local",
+            "scoped_way",
+            "bounded_survey",
+            "scoped_mutation",
+            "risky_review",
+            "drift_check",
+            "manual_boundary",
+            "terminal"
+          ]
+        },
+        "path_weight": {
+          "type": "string",
+          "enum": ["light", "medium", "heavy"]
+        },
+        "execution_path": {
+          "type": "string",
+          "enum": ["local", "delegated", "delegated_plus_review", "manual_boundary", "terminal"]
+        },
+        "model_tier_budget": {
+          "type": "string",
+          "enum": ["low_cost", "standard", "high_tier", "none"]
+        },
+        "reasoning_effort_budget": {
+          "type": "string",
+          "enum": ["low", "medium", "high", "xhigh", "none"]
+        },
+        "review_requirement": {
+          "type": "string",
+          "enum": ["none", "conditional", "required"]
+        },
+        "budget_reason": {
+          "type": "string",
+          "minLength": 1
+        },
+        "advisory_only": {
+          "type": "boolean"
+        },
+        "execution_unchanged": {
+          "type": "boolean"
+        }
+      }
+    },
+    "reviewTrace": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "review_mode",
+        "max_review_passes",
+        "max_active_reviewers",
+        "review_pass_count",
+        "review_round",
+        "remaining_review_passes",
+        "review_outcome",
+        "reviewer_count",
+        "reviewer_swarm_state",
+        "review_path",
+        "explicit_operator_control",
+        "bounded_recheck_available"
+      ],
+      "properties": {
+        "review_mode": {
+          "type": "string",
+          "enum": ["explicit_only"]
+        },
+        "max_review_passes": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "max_active_reviewers": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "review_pass_count": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "review_round": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "remaining_review_passes": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "review_outcome": {
+          "type": "string",
+          "enum": ["pass", "repair", "hold", "pending"]
+        },
+        "reviewer_count": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "reviewer_swarm_state": {
+          "type": "string",
+          "enum": ["not_requested", "pending", "passed", "needs_work", "blocked", "manual_hold"]
+        },
+        "review_path": {
+          "type": "string",
+          "minLength": 1
+        },
+        "explicit_operator_control": {
+          "type": "boolean",
+          "const": true
+        },
+        "bounded_recheck_available": {
+          "type": "boolean"
+        }
+      }
+    },
+    "orchestrationStep": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["step_number", "command", "before", "after"],
+      "properties": {
+        "step_number": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "command": {
+          "type": "string",
+          "enum": ["advance", "verify", "retry", "replan", "resolve"]
+        },
+        "before": {
+          "$ref": "#/$defs/snapshot"
+        },
+        "after": {
+          "$ref": "#/$defs/snapshot"
+        }
+      }
+    },
+    "orchestrationStop": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["reason", "snapshot"],
+      "properties": {
+        "reason": {
+          "type": "string",
+          "enum": [
+            "await_fan_in",
+            "await_verification",
+            "await_repair_decision",
+            "await_operator",
+            "halt_completed",
+            "halt_failed",
+            "halt_cancelled",
+            "task_boundary_reached",
+            "max_steps_reached"
+          ]
+        },
+        "snapshot": {
+          "$ref": "#/$defs/snapshot"
+        }
+      }
+    }
+  }
+}
