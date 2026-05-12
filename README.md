@@ -46,7 +46,7 @@ Then run:
 ccc check-install
 ```
 
-To update, run the same install command again, fully restart Codex CLI, then run `ccc check-install`. The installer stages the new bundle before switching the active path, preserves previous release bundles for rollback, refreshes CCC-managed plugin and `$cap` files, and only cleans CCC-managed stale cache/version entries plus the legacy `skills/cap` copy. Non-CCC Codex config is preserved.
+To update, run the same install command again, fully restart Codex CLI, then run `ccc check-install`. The installer stages the new bundle before switching the active path, preserves previous release bundles for rollback, refreshes CCC-managed plugin and `$cap` files, and only cleans CCC-managed stale cache/version entries plus the legacy packaged cap copy. Non-CCC Codex config is preserved.
 
 Release installers are pinned to `v0.0.15-pre` by default. Set `CCC_VERSION` only when you intentionally want a different release.
 
@@ -86,26 +86,10 @@ For regular CCC use, ChatGPT Pro $100 is the recommended starting plan because `
 | `way` | `ccc_tactician` | `Executor` | `gpt-5.5` | `high` | Planning and bounded next-move selection |
 | `explorer` | `ccc_scout` | `Observer` | `gpt-5.4-mini` | `high` | Read-only repo evidence |
 | `code specialist` | `ccc_raider` | `Marauder` | `gpt-5.5` | `high` | Code/config mutation and repair |
-| `documenter` | `ccc_scribe` | `Adjutant` | `gpt-5.4-mini` | `medium` | README, release notes, and operator text |
+| `documenter` | `ccc_scribe` | `Adjutant` | `gpt-5.4-mini` | `medium` | README and operator text |
 | `verifier` | `ccc_arbiter` | `Arbiter` | `gpt-5.5` | `high` | Captain-mediated review, risk, regression, and acceptance checks |
 | `sentinel` | `ccc_sentinel` | `Overseer` | `gpt-5.4-mini` | `high` | Run-scoped guardrail classification and status visibility |
 | `companion_reader` | `ccc_companion_reader` | `Probe` | `gpt-5.4-mini` | `medium` | Low-cost filesystem/docs/web/git/gh read work |
 | `companion_operator` | `ccc_companion_operator` | `SCV` | `gpt-5.4-mini` | `medium` | Low-cost bounded git/gh mutation and narrow tool work |
 
 Stable `ccc_*` IDs are routing truth. StarCraft callsigns are display-only.
-
-## 0.0.15-pre Notes
-
-- `$cap` remains the only public CCC entrypoint.
-- Configured `ccc_*` custom agents are the specialist path while available. Generic `worker` and `explorer` labels are stale unless an explicit override or fallback is recorded.
-- `ccc_promptsmith`/Ghost is documented as internal prompt-refinement guidance only; it does not replace captain.
-- `ccc_sentinel`/Overseer is a run-scoped internal guardrail layer, not an always-running public skill or command.
-- Goal Bridge and Graphify-backed graph context are internal, opt-in, and default-off.
-- `ccc graph` and `ccc_code_graph` remain CCC-owned graph-facing surfaces; no new public graph command is added.
-- Graphify output, when enabled and ready, is read-only evidence. Persisted LongWay, task cards, fan-in, review decisions, fallback records, and verification capsules remain authoritative.
-- Runtime LSP execution is deferred in `0.0.15-pre`; CCC does not start language servers yet.
-
-## Release Note
-
-- [`docs/release/notes/v0.0.15-pre.md`](./docs/release/notes/v0.0.15-pre.md): current public release card body
-- [`docs/release/notes/v0.0.14-pre.md`](./docs/release/notes/v0.0.14-pre.md): previous pre-release note

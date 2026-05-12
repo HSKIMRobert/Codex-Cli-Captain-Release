@@ -46,7 +46,7 @@ Then run:
 ccc check-install
 ```
 
-更新する場合も同じインストールコマンドを再実行し、Codex CLI を完全に再起動してから `ccc check-install` を実行してください。installer は新しい bundle を active path に切り替える前に stage し、以前の release bundle を rollback 用に保持し、CCC-managed plugin と `$cap` ファイルを更新します。stale cache/version entry と legacy `skills/cap` のコピーのうち CCC が管理するものだけを整理し、non-CCC Codex config は保持します。
+更新する場合も同じインストールコマンドを再実行し、Codex CLI を完全に再起動してから `ccc check-install` を実行してください。installer は新しい bundle を active path に切り替える前に stage し、以前の release bundle を rollback 用に保持し、CCC-managed plugin と `$cap` ファイルを更新します。stale cache/version entry と legacy packaged cap copy のうち CCC が管理するものだけを整理し、non-CCC Codex config は保持します。
 
 release installer は既定で `v0.0.15-pre` に固定されています。`CCC_VERSION` は意図的に別の release を入れる場合だけ設定してください。
 
@@ -86,26 +86,10 @@ ccc check-install
 | `way` | `ccc_tactician` | `Executor` | `gpt-5.5` | `high` | 計画と bounded next-move の選択 |
 | `explorer` | `ccc_scout` | `Observer` | `gpt-5.4-mini` | `high` | read-only repo evidence |
 | `code specialist` | `ccc_raider` | `Marauder` | `gpt-5.5` | `high` | code/config mutation と repair |
-| `documenter` | `ccc_scribe` | `Adjutant` | `gpt-5.4-mini` | `medium` | README、release note、operator text |
+| `documenter` | `ccc_scribe` | `Adjutant` | `gpt-5.4-mini` | `medium` | README と operator text |
 | `verifier` | `ccc_arbiter` | `Arbiter` | `gpt-5.5` | `high` | captain-mediated review、risk、regression、acceptance check |
 | `sentinel` | `ccc_sentinel` | `Overseer` | `gpt-5.4-mini` | `high` | run-scoped guardrail classification と status visibility |
 | `companion_reader` | `ccc_companion_reader` | `Probe` | `gpt-5.4-mini` | `medium` | 低コストの filesystem/docs/web/git/gh 読み取り作業 |
 | `companion_operator` | `ccc_companion_operator` | `SCV` | `gpt-5.4-mini` | `medium` | 低コストの git/gh mutation と狭い tool 作業 |
 
 Stable `ccc_*` ID が routing truth です。StarCraft callsign は display-only です。
-
-## 0.0.15-pre メモ
-
-- `$cap` は引き続き唯一の public CCC entrypoint です。
-- 設定済みの `ccc_*` custom agent が利用可能な specialist path です。generic な `worker`、`explorer` label は明示的な override または fallback 記録がなければ stale です。
-- `ccc_promptsmith`/Ghost は internal prompt-refinement guidance としてのみ文書化され、captain を置き換えません。
-- `ccc_sentinel`/Overseer は run-scoped internal guardrail layer であり、always-running public skill や command ではありません。
-- Goal Bridge と Graphify-backed graph context は internal、opt-in、default-off です。
-- `ccc graph` と `ccc_code_graph` は CCC-owned graph-facing surface のままで、新しい public graph command は追加されません。
-- Graphify output は、有効で準備済みの場合でも read-only evidence です。Persisted LongWay、task cards、fan-in、review decisions、fallback records、verification capsules が引き続き authoritative です。
-- `0.0.15-pre` では runtime LSP execution は deferred で、CCC は language server を起動しません。
-
-## リリースノート
-
-- [`docs/release/notes/v0.0.15-pre.md`](./docs/release/notes/v0.0.15-pre.md): 現在の public release card body
-- [`docs/release/notes/v0.0.14-pre.md`](./docs/release/notes/v0.0.14-pre.md): 前の pre-release note

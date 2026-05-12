@@ -46,7 +46,7 @@ Then run:
 ccc check-install
 ```
 
-업데이트할 때도 같은 설치 명령을 다시 실행하고, Codex CLI를 완전히 재시작한 뒤 `ccc check-install`을 실행하세요. installer는 새 bundle을 active path로 바꾸기 전에 stage하고, 이전 release bundle을 rollback용으로 보존하며, CCC-managed plugin 및 `$cap` 파일을 갱신합니다. stale cache/version entry와 legacy `skills/cap` 복사본 중 CCC가 관리하는 항목만 정리하고, non-CCC Codex config는 보존합니다.
+업데이트할 때도 같은 설치 명령을 다시 실행하고, Codex CLI를 완전히 재시작한 뒤 `ccc check-install`을 실행하세요. installer는 새 bundle을 active path로 바꾸기 전에 stage하고, 이전 release bundle을 rollback용으로 보존하며, CCC-managed plugin 및 `$cap` 파일을 갱신합니다. stale cache/version entry와 legacy packaged cap copy 중 CCC가 관리하는 항목만 정리하고, non-CCC Codex config는 보존합니다.
 
 release installer는 기본적으로 `v0.0.15-pre`에 고정되어 있습니다. `CCC_VERSION`은 의도적으로 다른 release를 설치할 때만 설정하세요.
 
@@ -86,26 +86,10 @@ ccc check-install
 | `way` | `ccc_tactician` | `Executor` | `gpt-5.5` | `high` | 계획 수립과 bounded next-move 선택 |
 | `explorer` | `ccc_scout` | `Observer` | `gpt-5.4-mini` | `high` | read-only repo evidence |
 | `code specialist` | `ccc_raider` | `Marauder` | `gpt-5.5` | `high` | code/config mutation과 repair |
-| `documenter` | `ccc_scribe` | `Adjutant` | `gpt-5.4-mini` | `medium` | README, release note, operator text |
+| `documenter` | `ccc_scribe` | `Adjutant` | `gpt-5.4-mini` | `medium` | README 및 operator text |
 | `verifier` | `ccc_arbiter` | `Arbiter` | `gpt-5.5` | `high` | captain-mediated review, risk, regression, acceptance check |
 | `sentinel` | `ccc_sentinel` | `Overseer` | `gpt-5.4-mini` | `high` | run-scoped guardrail classification과 status visibility |
 | `companion_reader` | `ccc_companion_reader` | `Probe` | `gpt-5.4-mini` | `medium` | 저비용 filesystem/docs/web/git/gh 읽기 작업 |
 | `companion_operator` | `ccc_companion_operator` | `SCV` | `gpt-5.4-mini` | `medium` | 저비용 git/gh mutation과 좁은 tool 작업 |
 
 Stable `ccc_*` ID가 routing truth입니다. StarCraft callsign은 display-only입니다.
-
-## 0.0.15-pre 메모
-
-- `$cap`은 계속 유일한 public CCC entrypoint입니다.
-- 설정된 `ccc_*` custom agent가 사용 가능한 specialist path입니다. generic `worker`, `explorer` label은 명시 override나 fallback 기록이 없으면 stale입니다.
-- `ccc_promptsmith`/Ghost는 internal prompt-refinement guidance로만 문서화되며 captain을 대체하지 않습니다.
-- `ccc_sentinel`/Overseer는 run-scoped internal guardrail layer이며 always-running public skill 또는 command가 아닙니다.
-- Goal Bridge와 Graphify-backed graph context는 internal, opt-in, default-off입니다.
-- `ccc graph`와 `ccc_code_graph`는 CCC-owned graph-facing surface로 남고, 새 public graph command는 추가되지 않습니다.
-- Graphify output은 활성화되고 준비된 경우에도 read-only evidence입니다. Persisted LongWay, task cards, fan-in, review decisions, fallback records, verification capsules가 계속 authoritative입니다.
-- `0.0.15-pre`에서는 runtime LSP execution이 deferred이며 CCC는 language server를 시작하지 않습니다.
-
-## 릴리스 노트
-
-- [`docs/release/notes/v0.0.15-pre.md`](./docs/release/notes/v0.0.15-pre.md): 현재 public release card body
-- [`docs/release/notes/v0.0.14-pre.md`](./docs/release/notes/v0.0.14-pre.md): 이전 pre-release note
