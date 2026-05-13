@@ -95,6 +95,9 @@ PLUGIN_CACHE_DIR="${CODEX_HOME:-$HOME/.codex}/plugins/cache/${MARKETPLACE_NAME}/
 LEGACY_CAP_SKILL_DIR="${CODEX_HOME:-$HOME/.codex}/skills/cap"
 
 cleanup() {
+  if [ -n "${STAGED_BUNDLE_DIR:-}" ] && [ -d "$STAGED_BUNDLE_DIR" ]; then
+    rm -rf "$STAGED_BUNDLE_DIR"
+  fi
   rm -rf "$TMP_DIR"
 }
 trap cleanup EXIT
