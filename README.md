@@ -46,6 +46,16 @@ ccc setup
 
 Then fully restart Codex CLI and run `ccc check-install`.
 
+If a previous release-bundle install left `~/.local/bin/ccc` earlier than
+`~/.cargo/bin` in `PATH`, your shell can keep running the legacy binary after
+Cargo install. `ccc setup` and `ccc check-install` report the shell-resolved
+`ccc`, the Cargo candidate at `~/.cargo/bin/ccc`, the current executable, and
+whether `~/.local/bin/ccc` is shadowing Cargo. When shadowing is reported, run
+`~/.cargo/bin/ccc setup`, put `~/.cargo/bin` earlier in `PATH`, or remove or
+demote the legacy `~/.local/bin/ccc` after reviewing cleanup. Release-bundle
+rollback paths under `~/.local/share/ccc` stay preserved by default unless you
+explicitly prune them.
+
 To uninstall the Cargo-installed binary:
 
 ```text
