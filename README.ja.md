@@ -16,11 +16,30 @@
 やりたいことの前に <code>$cap</code> を付けるだけです。<br>
 そこから面白いことが起こるかもしれません。</em></p>
 
-現在の公開リリース: `0.0.15-pre`.
+現在の公開リリース: `0.0.1`.
 
 CCC は Codex CLI のための captain-first orchestration layer です。`$cap` だけを public entrypoint として維持し、LongWay/task-card/fan-in state を保存し、specialist 作業を設定済みの `ccc_*` agent にルーティングしてから captain review に戻します。
 
 ## インストールまたは更新
+
+基本のインストール経路:
+
+```text
+Cargo で Codex-Cli-Captain をインストールします:
+cargo install codex-cli-captain
+
+インストールが終わったら次を実行します:
+ccc setup
+
+その後、Codex CLI を完全に終了します。
+新しい Codex CLI セッションを開始します。
+その後、次を実行します:
+ccc check-install
+```
+
+Windows PowerShell も同じ Cargo ベースの経路を使います。
+
+レガシー release-bundle fallback のみ:
 
 macOS または Linux:
 
@@ -48,7 +67,7 @@ ccc check-install
 
 更新する場合も同じインストールコマンドを再実行し、Codex CLI を完全に再起動してから `ccc check-install` を実行してください。installer は新しい bundle を active path に切り替える前に stage し、以前の release bundle を rollback 用に保持し、CCC-managed plugin と `$cap` ファイルを更新します。stale cache/version entry と legacy packaged cap copy のうち CCC が管理するものだけを整理し、non-CCC Codex config は保持します。
 
-release installer は既定で `v0.0.15-pre` に固定されています。`CCC_VERSION` は意図的に別の release を入れる場合だけ設定してください。
+release installer は既定で `v0.0.1` に固定されています。`CCC_VERSION` は意図的に別の release を入れる場合だけ設定してください。
 
 ## 基本的な使い方
 
