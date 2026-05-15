@@ -69,9 +69,29 @@ If you build from a local checkout, treat that as maintainer/local-development f
 The release bundle also carries the CCC plugin packaging needed for install and discovery. `$cap` stays the public operator entrypoint.
 
 `ccc setup` only installs or refreshes hook assets when the installed Codex
-surface can load them safely. When hooks are unavailable, disabled, untrusted,
-or unsupported, CCC keeps the CLI/MCP/status/fan-in fallback active and
-visible.
+surface can load them safely. Codex plugin hooks are opt-in because the
+feature is under development, and hook commands require a `/hooks` review in
+Codex CLI. To enable them:
+
+1. edit `~/.codex/config.toml`
+2. set `[features] plugin_hooks = true`
+3. restart Codex CLI
+4. open `/hooks` and approve the five CCC hooks: `PermissionRequest`,
+   `PostToolUse`, `SessionStart`, `UserPromptSubmit`, and `Stop`
+5. run `ccc check-install`
+
+If you want to suppress the unstable-features warning after opting in, you can
+also set `suppress_unstable_features_warning = true` at the top level. That
+suppresses only the warning; it does not skip hook review or change hook
+behavior. The warning appears again on each fresh Codex CLI startup when the
+global config still has `plugin_hooks = true`. When hooks are unavailable,
+disabled, untrusted, or unsupported, CCC keeps the CLI/MCP/status/fan-in
+fallback active and visible, and `ccc check-install` stays on
+`runtime=ccc_fallback` instead of `runtime=hooks_first`.
+
+A Stop-hook warning after a turn is normal when the CCC Stop hook returns
+`status=clear`. Codex may label that message as a warning even though CCC did
+not block or escalate.
 
 ## Reapply Config Changes
 
@@ -90,6 +110,7 @@ ccc check-install
 ## Hooks Readiness
 
 `ccc check-install` reports whether hooks are available and whether CCC is
-using hooks-first or the CCC fallback path. Use that output together with the
-restart guidance to confirm the runtime path without exposing internal routing
-details.
+using hooks-first or the CCC fallback path. After the opt-in and `/hooks`
+review are complete, expect `runtime=hooks_first`; otherwise expect
+`runtime=ccc_fallback`. Use that output together with the restart guidance to
+confirm the runtime path without exposing internal routing details.

@@ -105,6 +105,16 @@ ccc check-install
 
 `ccc setup`은 사용자가 바꾼 값을 보존하면서 빠진 generated default를 채우고, MCP registration, packaged `$cap` skill, CCC-managed custom agent를 다시 동기화합니다.
 
+Codex plugin hooks는 opt-in입니다. CCC는 under-development인 `plugin_hooks` feature를 자동으로 켜지 않으며, hook command를 실행하려면 Codex CLI에서 `/hooks` review를 먼저 통과해야 합니다. 켜는 순서는 다음과 같습니다.
+
+1. `~/.codex/config.toml`을 수정합니다
+2. `[features] plugin_hooks = true`를 설정합니다
+3. Codex CLI를 재시작합니다
+4. `/hooks`를 열고 `PermissionRequest`, `PostToolUse`, `SessionStart`, `UserPromptSubmit`, `Stop`의 5개 CCC hook을 승인합니다
+5. `ccc check-install`을 실행합니다
+
+opt-in 후 unstable feature warning을 숨기고 싶다면 top-level에 `suppress_unstable_features_warning = true`를 추가할 수 있습니다. 이것은 warning만 숨기며, hook review나 hook 동작은 바꾸지 않습니다. global config에 `plugin_hooks = true`가 남아 있는 한, 새로운 Codex CLI 시작마다 warning이 다시 표시됩니다. hooks가 활성화되지 않았거나 review되지 않았다면 `ccc check-install`은 `runtime=hooks_first`가 아니라 `ccc_fallback`을 유지합니다.
+
 `ccc setup`은 대상 Codex surface가 안전하게 읽을 수 있을 때만 hook
 asset을 설치하거나 갱신합니다. hooks를 사용할 수 없거나, 비활성화되어
 있거나, 신뢰되지 않거나, 지원되지 않으면 CCC는 CLI/MCP/status/fan-in
@@ -113,9 +123,11 @@ fallback을 계속 유지합니다.
 ## Hooks 준비 상태
 
 `ccc check-install`은 hooks를 사용할 수 있는지와 현재 세션이
-hooks-first인지 CCC fallback인지 알려 줍니다. 이 출력과 restart 안내를
-함께 사용하면 내부 routing 세부사항을 드러내지 않고도 실행 경로를
-확인할 수 있습니다.
+hooks-first인지 CCC fallback인지 알려 줍니다. 위의 opt-in과 `/hooks`
+review를 끝냈다면 `runtime=hooks_first`를 기대하면 되고, 그렇지 않으면
+`runtime=ccc_fallback`이 유지됩니다. 이 출력과 restart 안내를 함께 사용
+하면 내부 routing 세부사항을 드러내지 않고도 실행 경로를 확인할 수
+있습니다.
 
 ## 공개 동작
 
