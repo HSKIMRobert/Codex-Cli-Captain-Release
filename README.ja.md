@@ -16,9 +16,9 @@
 やりたいことの前に <code>$cap</code> を付けるだけです。<br>
 そこから面白いことが起こるかもしれません。</em></p>
 
-現在の公開リリース: `0.0.2`.
+現在の公開リリース: `0.0.3`.
 
-CCC は Codex CLI のための captain-first orchestration layer です。`$cap` だけを public entrypoint として維持し、LongWay/task-card/fan-in state を保存し、specialist 作業を設定済みの `ccc_*` agent にルーティングしてから captain review に戻します。
+CCC は Codex CLI のための captain-first orchestration layer です。`$cap` だけを public entrypoint として維持し、LongWay/task-card/fan-in state を保存し、specialist 作業を managed agent にルーティングしてから captain review に戻します。
 
 ## インストール、更新、削除
 
@@ -71,7 +71,7 @@ ccc check-install
 
 更新する場合も `cargo install codex-cli-captain --force` を再実行してから `ccc setup` を実行してください。その後 Codex CLI を完全に再起動し、`ccc check-install` を実行してください。installer は新しい bundle を active path に切り替える前に stage し、以前の release bundle を rollback 用に保持し、CCC-managed plugin と `$cap` ファイルを更新します。stale cache/version entry と legacy packaged cap copy のうち CCC が管理するものだけを整理し、non-CCC Codex config は保持します。
 
-release installer は既定で `v0.0.2` に固定されています。`CCC_VERSION` は意図的に別の release を入れる場合だけ設定してください。
+release-bundle fallback installer は、`v0.0.3` fallback bundle asset が publish および検証されるまでは既定で `v0.0.2` に固定されています。Cargo が `0.0.3` の基本インストール経路です。`CCC_VERSION` は意図的に別の release-bundle fallback を入れる場合だけ設定してください。
 
 ## 基本的な使い方
 
@@ -99,20 +99,9 @@ ccc check-install
 
 `ccc setup` はユーザーが変更した値を保持しつつ、不足している generated default を補完し、MCP registration、packaged `$cap` skill、CCC-managed custom agent を再同期します。
 
-## 推奨ロール設定
+## 公開される動作
 
-通常の CCC 利用では ChatGPT Pro $100 プランを開始点として推奨します。`$cap` workflow は captain と specialist の handoff を繰り返すため、Codex 使用量が増える可能性があります。
-
-| CCC role | Stable agent ID | Display callsign | 推奨モデル | Reasoning | 説明 |
-| --- | --- | --- | --- | --- | --- |
-| `orchestrator` | `captain` | `Captain` | `gpt-5.5` | `medium` | host-owned routing label であり managed `ccc_*` specialist ではありません |
-| `way` | `ccc_tactician` | `Executor` | `gpt-5.5` | `high` | 計画と bounded next-move の選択 |
-| `explorer` | `ccc_scout` | `Observer` | `gpt-5.4-mini` | `high` | read-only repo evidence |
-| `code specialist` | `ccc_raider` | `Marauder` | `gpt-5.5` | `high` | code/config mutation と repair |
-| `documenter` | `ccc_scribe` | `Adjutant` | `gpt-5.4-mini` | `medium` | README と operator text |
-| `verifier` | `ccc_arbiter` | `Arbiter` | `gpt-5.5` | `high` | captain-mediated review、risk、regression、acceptance check |
-| `sentinel` | `ccc_sentinel` | `Overseer` | `gpt-5.4-mini` | `high` | run-scoped guardrail classification と status visibility |
-| `companion_reader` | `ccc_companion_reader` | `Probe` | `gpt-5.4-mini` | `medium` | 低コストの filesystem/docs/web/git/gh 読み取り作業 |
-| `companion_operator` | `ccc_companion_operator` | `SCV` | `gpt-5.4-mini` | `medium` | 低コストの git/gh mutation と狭い tool 作業 |
-
-Stable `ccc_*` ID が routing truth です。StarCraft callsign は display-only です。
+- `$cap` が公開 entrypoint です。
+- CCC は計画、変更、レビュー、fan-in のために内部 managed role を使います。内部 routing の詳細は runtime state と release-work docs に置き、public README には列挙しません。
+- `ccc setup` は現在の binary と `ccc-config.toml` から packaged `$cap` skill、MCP registration、plugin cache、managed agent を更新します。
+- `ccc check-install` は active binary、Cargo candidate、plugin/cache discovery、packaged `$cap` skill、stale path、restart の必要性を報告します。

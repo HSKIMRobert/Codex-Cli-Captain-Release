@@ -16,9 +16,9 @@ Then how about using CCC?<br>
 Just put <code>$cap</code> in front of what you want to do.<br>
 Then something remarkable can unfold.</em></p>
 
-Current public release: `0.0.2`.
+Current public release: `0.0.3`.
 
-CCC is a captain-first orchestration layer for Codex CLI. It keeps `$cap` as the only public entrypoint, persists LongWay/task-card/fan-in state, and routes specialist work through configured `ccc_*` agents before captain review.
+CCC is a captain-first orchestration layer for Codex CLI. It keeps `$cap` as the only public entrypoint, persists LongWay/task-card/fan-in state, and routes specialist work through managed agents before captain review.
 
 ## Install, Update, Uninstall
 
@@ -94,7 +94,10 @@ ccc check-install
 
 To update, rerun `cargo install codex-cli-captain --force` and then `ccc setup`, fully restart Codex CLI, and run `ccc check-install`. Use the legacy release-bundle installer only when you intentionally want the packaged `install.sh`/`install.ps1` fallback. The bundle installer stages the new bundle before switching the active path, preserves previous release bundles for rollback, refreshes CCC-managed plugin and `$cap` files, and only cleans CCC-managed stale cache/version entries plus the legacy packaged cap copy. Non-CCC Codex config is preserved. `cargo publish` is maintainer-only release work that needs the release token and approval outside this end-user README.
 
-Release installers are pinned to `v0.0.2` by default. Set `CCC_VERSION` only when you intentionally want a different release.
+Release-bundle fallback installers remain pinned to `v0.0.2` by default until
+the `v0.0.3` fallback bundle assets are published and validated. Cargo is the
+primary `0.0.3` install path. Set `CCC_VERSION` only when you intentionally want
+a different release-bundle fallback.
 
 ## Basic Use
 
@@ -122,20 +125,14 @@ ccc check-install
 
 `ccc setup` preserves user-customized values while backfilling missing generated defaults and refreshing MCP registration, the packaged `$cap` skill, and CCC-managed custom agents.
 
-## Recommended Role Defaults
+## Public Behavior
 
-For regular CCC use, ChatGPT Pro $100 is the recommended starting plan because `$cap` workflows can spend more Codex usage through repeated captain and specialist handoffs.
-
-| CCC role | Stable agent ID | Display callsign | Recommended model | Reasoning | Notes |
-| --- | --- | --- | --- | --- | --- |
-| `orchestrator` | `captain` | `Captain` | `gpt-5.5` | `medium` | Host-owned routing label, not a managed `ccc_*` specialist |
-| `way` | `ccc_tactician` | `Executor` | `gpt-5.5` | `high` | Planning and bounded next-move selection |
-| `explorer` | `ccc_scout` | `Observer` | `gpt-5.4-mini` | `high` | Read-only repo evidence |
-| `code specialist` | `ccc_raider` | `Marauder` | `gpt-5.5` | `high` | Code/config mutation and repair |
-| `documenter` | `ccc_scribe` | `Adjutant` | `gpt-5.4-mini` | `medium` | README and operator text |
-| `verifier` | `ccc_arbiter` | `Arbiter` | `gpt-5.5` | `high` | Captain-mediated review, risk, regression, and acceptance checks |
-| `sentinel` | `ccc_sentinel` | `Overseer` | `gpt-5.4-mini` | `high` | Run-scoped guardrail classification and status visibility |
-| `companion_reader` | `ccc_companion_reader` | `Probe` | `gpt-5.4-mini` | `medium` | Low-cost filesystem/docs/web/git/gh read work |
-| `companion_operator` | `ccc_companion_operator` | `SCV` | `gpt-5.4-mini` | `medium` | Low-cost bounded git/gh mutation and narrow tool work |
-
-Stable `ccc_*` IDs are routing truth. StarCraft callsigns are display-only.
+- `$cap` is the public entrypoint.
+- CCC uses managed roles for planning, mutation, review, and fan-in behind the
+  scenes. Internal routing details stay in runtime state and release-work docs,
+  not in the public README.
+- `ccc setup` refreshes the packaged `$cap` skill, MCP registration, plugin
+  cache, and managed agents from the current binary and `ccc-config.toml`.
+- `ccc check-install` reports the active binary, Cargo candidate, plugin/cache
+  discovery, packaged `$cap` skill, stale paths, and whether a restart is still
+  required.

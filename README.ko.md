@@ -16,9 +16,9 @@
 원하는 작업 앞에 <code>$cap</code>만 붙이면 됩니다.<br>
 그러면 꽤 놀라운 일이 펼쳐질 수 있습니다.</em></p>
 
-현재 공개 릴리스: `0.0.2`.
+현재 공개 릴리스: `0.0.3`.
 
-CCC는 Codex CLI를 위한 captain-first orchestration layer입니다. `$cap`만 public entrypoint로 유지하고, LongWay/task-card/fan-in 상태를 저장하며, specialist 작업을 설정된 `ccc_*` agent로 라우팅한 뒤 captain review로 합칩니다.
+CCC는 Codex CLI를 위한 captain-first orchestration layer입니다. `$cap`만 public entrypoint로 유지하고, LongWay/task-card/fan-in 상태를 저장하며, specialist 작업을 managed agent로 라우팅한 뒤 captain review로 합칩니다.
 
 ## 설치, 업데이트, 삭제
 
@@ -71,7 +71,7 @@ ccc check-install
 
 업데이트할 때도 `cargo install codex-cli-captain --force`를 다시 실행한 뒤 `ccc setup`을 실행하세요. 그 다음 Codex CLI를 완전히 재시작하고 `ccc check-install`을 실행하세요. installer는 새 bundle을 active path로 바꾸기 전에 stage하고, 이전 release bundle을 rollback용으로 보존하며, CCC-managed plugin 및 `$cap` 파일을 갱신합니다. stale cache/version entry와 legacy packaged cap copy 중 CCC가 관리하는 항목만 정리하고, non-CCC Codex config는 보존합니다.
 
-release installer는 기본적으로 `v0.0.2`에 고정되어 있습니다. `CCC_VERSION`은 의도적으로 다른 release를 설치할 때만 설정하세요.
+release-bundle fallback installer는 `v0.0.3` fallback bundle asset이 publish 및 검증되기 전까지 기본적으로 `v0.0.2`에 고정되어 있습니다. Cargo가 `0.0.3`의 기본 설치 경로입니다. `CCC_VERSION`은 의도적으로 다른 release-bundle fallback을 설치할 때만 설정하세요.
 
 ## 기본 사용
 
@@ -99,20 +99,9 @@ ccc check-install
 
 `ccc setup`은 사용자가 바꾼 값을 보존하면서 빠진 generated default를 채우고, MCP registration, packaged `$cap` skill, CCC-managed custom agent를 다시 동기화합니다.
 
-## 추천 역할 설정
+## 공개 동작
 
-일반적인 CCC 사용에는 ChatGPT Pro $100 플랜을 시작점으로 권장합니다. `$cap` workflow는 captain과 specialist handoff를 반복하면서 Codex 사용량을 더 쓸 수 있기 때문입니다.
-
-| CCC role | Stable agent ID | Display callsign | 추천 모델 | Reasoning | 설명 |
-| --- | --- | --- | --- | --- | --- |
-| `orchestrator` | `captain` | `Captain` | `gpt-5.5` | `medium` | host-owned routing label이며 managed `ccc_*` specialist가 아님 |
-| `way` | `ccc_tactician` | `Executor` | `gpt-5.5` | `high` | 계획 수립과 bounded next-move 선택 |
-| `explorer` | `ccc_scout` | `Observer` | `gpt-5.4-mini` | `high` | read-only repo evidence |
-| `code specialist` | `ccc_raider` | `Marauder` | `gpt-5.5` | `high` | code/config mutation과 repair |
-| `documenter` | `ccc_scribe` | `Adjutant` | `gpt-5.4-mini` | `medium` | README 및 operator text |
-| `verifier` | `ccc_arbiter` | `Arbiter` | `gpt-5.5` | `high` | captain-mediated review, risk, regression, acceptance check |
-| `sentinel` | `ccc_sentinel` | `Overseer` | `gpt-5.4-mini` | `high` | run-scoped guardrail classification과 status visibility |
-| `companion_reader` | `ccc_companion_reader` | `Probe` | `gpt-5.4-mini` | `medium` | 저비용 filesystem/docs/web/git/gh 읽기 작업 |
-| `companion_operator` | `ccc_companion_operator` | `SCV` | `gpt-5.4-mini` | `medium` | 저비용 git/gh mutation과 좁은 tool 작업 |
-
-Stable `ccc_*` ID가 routing truth입니다. StarCraft callsign은 display-only입니다.
+- `$cap`이 공개 entrypoint입니다.
+- CCC는 계획, 수정, 검토, fan-in을 위해 내부 managed role을 사용합니다. 내부 routing 세부사항은 runtime state와 release-work docs에 두고 public README에는 나열하지 않습니다.
+- `ccc setup`은 현재 binary와 `ccc-config.toml`을 기준으로 packaged `$cap` skill, MCP registration, plugin cache, managed agent를 갱신합니다.
+- `ccc check-install`은 active binary, Cargo candidate, plugin/cache discovery, packaged `$cap` skill, stale path, restart 필요 여부를 보고합니다.
