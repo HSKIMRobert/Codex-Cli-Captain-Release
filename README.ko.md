@@ -16,7 +16,7 @@
 원하는 작업 앞에 <code>$cap</code>만 붙이면 됩니다.<br>
 그러면 꽤 놀라운 일이 펼쳐질 수 있습니다.</em></p>
 
-공개 릴리스 준비 상태: `0.0.4`.
+공개 릴리스 준비 상태: `0.0.6`.
 
 CCC는 Codex CLI를 위한 captain-first orchestration layer입니다. `$cap`만 public entrypoint로 유지하고, LongWay/task-card/fan-in 상태를 저장하며, specialist 작업을 managed agent로 라우팅한 뒤 captain review로 합칩니다.
 
@@ -77,7 +77,7 @@ ccc check-install
 
 업데이트할 때도 `cargo install codex-cli-captain --force`를 다시 실행한 뒤 `ccc setup`을 실행하세요. 그 다음 Codex CLI를 완전히 재시작하고 `ccc check-install`을 실행하세요. installer는 새 bundle을 active path로 바꾸기 전에 stage하고, 이전 release bundle을 rollback용으로 보존하며, CCC-managed plugin 및 `$cap` 파일을 갱신합니다. stale cache/version entry와 legacy packaged cap copy 중 CCC가 관리하는 항목만 정리하고, non-CCC Codex config는 보존합니다.
 
-release-bundle fallback installer는 `v0.0.4` fallback bundle asset이 publish 및 검증되기 전까지 기본적으로 `v0.0.3`에 고정되어 있습니다. Cargo가 `0.0.4`의 기본 설치 경로입니다. `CCC_VERSION`은 의도적으로 다른 release-bundle fallback을 설치할 때만 설정하세요.
+release-bundle fallback installer는 기본적으로 `v0.0.5`에 고정되어 있으며, `v0.0.6` fallback bundle asset이 publish 및 검증될 때까지 유지됩니다. Cargo가 `0.0.6`의 기본 설치 경로입니다. `CCC_VERSION`은 의도적으로 다른 release-bundle fallback을 설치할 때만 설정하세요.
 
 ## 기본 사용
 
