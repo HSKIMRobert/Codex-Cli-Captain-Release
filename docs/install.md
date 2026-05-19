@@ -42,7 +42,7 @@ Windows PowerShell uses the same primary Cargo path.
 
 Legacy `install.sh`/`install.ps1` release-bundle fallback:
 
-1. download the pinned `v0.0.7` fallback bundle from the release repository, or run the matching installer script
+1. download the pinned `v0.0.7` fallback bundle from the release page, or run the matching installer release asset
 2. unpack the archive if you downloaded it directly
 3. run `./bin/ccc setup`
 4. fully exit Codex CLI
@@ -66,7 +66,7 @@ For updates, repeat `cargo install codex-cli-captain --force`, then `ccc setup`,
 
 If you build from a local checkout, treat that as maintainer/local-development fallback only, not as the public install flow.
 
-The release bundle also carries the CCC plugin packaging needed for install and discovery. `$cap` stays the public operator entrypoint.
+The release bundle also carries the CCC plugin packaging needed for install and discovery. `$cap` stays the public operator entrypoint. Generated `ccc-*.tar.gz`, `install.sh`, and `install.ps1` files are release assets only; this repo ignores them so they do not get committed by accident.
 
 `ccc setup` only installs or refreshes hook assets when the installed Codex
 surface can load them safely. Codex plugin hooks are opt-in because the

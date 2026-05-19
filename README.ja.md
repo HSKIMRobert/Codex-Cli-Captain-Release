@@ -55,7 +55,7 @@ macOS または Linux:
 
 ```text
 Install Codex-Cli-Captain from https://github.com/HoRi0506/Codex-Cli-Captain-Release by running:
-curl -fsSL https://raw.githubusercontent.com/HoRi0506/Codex-Cli-Captain-Release/main/install.sh | bash
+curl -fsSL https://github.com/HoRi0506/Codex-Cli-Captain-Release/releases/download/v0.0.7/install.sh | bash
 
 After installation finishes, fully exit Codex CLI.
 Start a new Codex CLI session.
@@ -67,7 +67,7 @@ Windows PowerShell:
 
 ```text
 Install Codex-Cli-Captain from https://github.com/HoRi0506/Codex-Cli-Captain-Release by running:
-iwr -UseB https://raw.githubusercontent.com/HoRi0506/Codex-Cli-Captain-Release/main/install.ps1 | iex
+iwr -UseB https://github.com/HoRi0506/Codex-Cli-Captain-Release/releases/download/v0.0.7/install.ps1 | iex
 
 After installation finishes, fully exit Codex CLI.
 Start a new Codex CLI session.
@@ -77,7 +77,7 @@ ccc check-install
 
 更新する場合も `cargo install codex-cli-captain --force` を再実行してから `ccc setup` を実行してください。その後 Codex CLI を完全に再起動し、`ccc check-install` を実行してください。installer は新しい bundle を active path に切り替える前に stage し、以前の release bundle を rollback 用に保持し、CCC-managed plugin と `$cap` ファイルを更新します。stale cache/version entry と legacy packaged cap copy のうち CCC が管理するものだけを整理し、non-CCC Codex config は保持します。
 
-release-bundle fallback installer は `v0.0.7` 基準で、対応する検証済み bundle asset と一緒に publish されます。Cargo が `0.0.7` の基本インストール経路です。`CCC_VERSION` は意図的に別の release-bundle fallback を入れる場合だけ設定してください。
+release-bundle fallback installer は `v0.0.7` 基準で、対応する検証済み bundle asset と一緒に release asset として publish されます。Cargo が `0.0.7` の基本インストール経路です。`CCC_VERSION` は意図的に別の release-bundle fallback を入れる場合だけ設定してください。
 
 ## 基本的な使い方
 

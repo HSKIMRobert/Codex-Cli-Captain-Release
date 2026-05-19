@@ -5,6 +5,9 @@ dist/
 .tmp/
 coverage/
 *.tgz
+ccc-*.tar.gz
+/install.sh
+/install.ps1
 docs/legacy/
 rust/target/
 target/

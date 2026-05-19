@@ -76,7 +76,7 @@ macOS or Linux:
 
 ```text
 Install Codex-Cli-Captain from https://github.com/HoRi0506/Codex-Cli-Captain-Release by running:
-curl -fsSL https://raw.githubusercontent.com/HoRi0506/Codex-Cli-Captain-Release/main/install.sh | bash
+curl -fsSL https://github.com/HoRi0506/Codex-Cli-Captain-Release/releases/download/v0.0.7/install.sh | bash
 
 After installation finishes, fully exit Codex CLI.
 Start a new Codex CLI session.
@@ -88,7 +88,7 @@ Windows PowerShell:
 
 ```text
 Install Codex-Cli-Captain from https://github.com/HoRi0506/Codex-Cli-Captain-Release by running:
-iwr -UseB https://raw.githubusercontent.com/HoRi0506/Codex-Cli-Captain-Release/main/install.ps1 | iex
+iwr -UseB https://github.com/HoRi0506/Codex-Cli-Captain-Release/releases/download/v0.0.7/install.ps1 | iex
 
 After installation finishes, fully exit Codex CLI.
 Start a new Codex CLI session.
@@ -96,9 +96,9 @@ Then run:
 ccc check-install
 ```
 
-To update, rerun `cargo install codex-cli-captain --force` and then `ccc setup`, fully restart Codex CLI, and run `ccc check-install`. Use the legacy release-bundle installer only when you intentionally want the packaged `install.sh`/`install.ps1` fallback. The bundle installer stages the new bundle before switching the active path, preserves previous release bundles for rollback, refreshes CCC-managed plugin and `$cap` files, and only cleans CCC-managed stale cache/version entries plus the legacy packaged cap copy. Non-CCC Codex config is preserved. `cargo publish` is maintainer-only release work that needs the release token and approval outside this end-user README.
+To update, rerun `cargo install codex-cli-captain --force` and then `ccc setup`, fully restart Codex CLI, and run `ccc check-install`. Use the legacy release-bundle installer only when you intentionally want the packaged `install.sh`/`install.ps1` release-asset fallback. The bundle installer stages the new bundle before switching the active path, preserves previous release bundles for rollback, refreshes CCC-managed plugin and `$cap` files, and only cleans CCC-managed stale cache/version entries plus the legacy packaged cap copy. Non-CCC Codex config is preserved. `cargo publish` is maintainer-only release work that needs the release token and approval outside this end-user README.
 
-Release-bundle fallback installers target `v0.0.7` and are published with
+Release-bundle fallback installers target `v0.0.7` and are published as release assets alongside
 matching validated bundle assets. Cargo remains the primary `0.0.7` install
 path. Set `CCC_VERSION` only when you intentionally want a different
 release-bundle fallback.

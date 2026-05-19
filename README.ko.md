@@ -55,7 +55,7 @@ macOS 또는 Linux:
 
 ```text
 Install Codex-Cli-Captain from https://github.com/HoRi0506/Codex-Cli-Captain-Release by running:
-curl -fsSL https://raw.githubusercontent.com/HoRi0506/Codex-Cli-Captain-Release/main/install.sh | bash
+curl -fsSL https://github.com/HoRi0506/Codex-Cli-Captain-Release/releases/download/v0.0.7/install.sh | bash
 
 After installation finishes, fully exit Codex CLI.
 Start a new Codex CLI session.
@@ -67,7 +67,7 @@ Windows PowerShell:
 
 ```text
 Install Codex-Cli-Captain from https://github.com/HoRi0506/Codex-Cli-Captain-Release by running:
-iwr -UseB https://raw.githubusercontent.com/HoRi0506/Codex-Cli-Captain-Release/main/install.ps1 | iex
+iwr -UseB https://github.com/HoRi0506/Codex-Cli-Captain-Release/releases/download/v0.0.7/install.ps1 | iex
 
 After installation finishes, fully exit Codex CLI.
 Start a new Codex CLI session.
@@ -77,7 +77,7 @@ ccc check-install
 
 업데이트할 때도 `cargo install codex-cli-captain --force`를 다시 실행한 뒤 `ccc setup`을 실행하세요. 그 다음 Codex CLI를 완전히 재시작하고 `ccc check-install`을 실행하세요. installer는 새 bundle을 active path로 바꾸기 전에 stage하고, 이전 release bundle을 rollback용으로 보존하며, CCC-managed plugin 및 `$cap` 파일을 갱신합니다. stale cache/version entry와 legacy packaged cap copy 중 CCC가 관리하는 항목만 정리하고, non-CCC Codex config는 보존합니다.
 
-release-bundle fallback installer는 `v0.0.7` 기준이며, 매칭되는 검증 완료 bundle asset과 함께 publish됩니다. Cargo가 `0.0.7`의 기본 설치 경로입니다. `CCC_VERSION`은 의도적으로 다른 release-bundle fallback을 설치할 때만 설정하세요.
+release-bundle fallback installer는 `v0.0.7` 기준이며, 매칭되는 검증 완료 bundle asset과 함께 release asset으로 publish됩니다. Cargo가 `0.0.7`의 기본 설치 경로입니다. `CCC_VERSION`은 의도적으로 다른 release-bundle fallback을 설치할 때만 설정하세요.
 
 ## 기본 사용
 
