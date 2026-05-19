@@ -2,7 +2,7 @@
 set -euo pipefail
 
 REPO="HoRi0506/Codex-Cli-Captain-Release"
-VERSION="${CCC_VERSION:-v0.0.3}"
+VERSION="${CCC_VERSION:-v0.0.7}"
 INSTALL_ROOT="${CCC_INSTALL_ROOT:-$HOME/.local/share/ccc}"
 BIN_DIR="${CCC_BIN_DIR:-$HOME/.local/bin}"
 PLATFORM_OVERRIDE="${CCC_PLATFORM:-}"

@@ -16,7 +16,7 @@ Then how about using CCC?<br>
 Just put <code>$cap</code> in front of what you want to do.<br>
 Then something remarkable can unfold.</em></p>
 
-Release readiness: `0.0.6`.
+Current release: `0.0.7`.
 
 CCC is a captain-first orchestration layer for Codex CLI. It keeps `$cap` as the only public entrypoint, persists LongWay/task-card/fan-in state, and routes specialist work through managed agents before captain review.
 
@@ -98,10 +98,10 @@ ccc check-install
 
 To update, rerun `cargo install codex-cli-captain --force` and then `ccc setup`, fully restart Codex CLI, and run `ccc check-install`. Use the legacy release-bundle installer only when you intentionally want the packaged `install.sh`/`install.ps1` fallback. The bundle installer stages the new bundle before switching the active path, preserves previous release bundles for rollback, refreshes CCC-managed plugin and `$cap` files, and only cleans CCC-managed stale cache/version entries plus the legacy packaged cap copy. Non-CCC Codex config is preserved. `cargo publish` is maintainer-only release work that needs the release token and approval outside this end-user README.
 
-Release-bundle fallback installers remain pinned to `v0.0.5` by default until
-the `v0.0.6` fallback bundle assets are published and validated. Cargo is the
-primary `0.0.6` install path. Set `CCC_VERSION` only when you intentionally want
-a different release-bundle fallback.
+Release-bundle fallback installers target `v0.0.7` and are published with
+matching validated bundle assets. Cargo remains the primary `0.0.7` install
+path. Set `CCC_VERSION` only when you intentionally want a different
+release-bundle fallback.
 
 ## Basic Use
 
