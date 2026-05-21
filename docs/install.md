@@ -1,6 +1,6 @@
 # Install & Update Codex-Cli-Captain
 
-Use this guide for the Cargo-first `0.0.8` install surface.
+Use this guide for the Cargo-first `0.0.9` install surface.
 
 ## Install & Update
 
@@ -62,7 +62,7 @@ Then fully exit Codex CLI, start a new Codex CLI session, and run:
 ./target/debug/ccc check-install
 ```
 
-For updates, repeat `cargo install codex-cli-captain --force`, then `ccc setup`, restart Codex CLI, and run `ccc check-install`. `CCC_VERSION` remains the explicit override for the legacy bundle fallback, and the public installers target `v0.0.8` with matching validated fallback bundle assets. `ccc setup` refreshes MCP registration, the packaged `$cap` skill, and CCC-managed custom agents from the current binary and `ccc-config.toml`; restart Codex CLI before checking the refreshed install.
+For updates, repeat `cargo install codex-cli-captain --force`, then `ccc setup`, restart Codex CLI, and run `ccc check-install`. `CCC_VERSION` remains the explicit override for the legacy bundle fallback, and the public installers target `v0.0.8` with matching validated fallback bundle assets. Cargo is the primary `0.0.9` install path. `ccc setup` refreshes MCP registration, the packaged `$cap` skill, and CCC-managed custom agents from the current binary and `ccc-config.toml`; restart Codex CLI before checking the refreshed install.
 
 If you build from a local checkout, treat that as maintainer/local-development fallback only, not as the public install flow.
 
