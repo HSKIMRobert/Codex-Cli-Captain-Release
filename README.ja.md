@@ -10,14 +10,14 @@
   <img src="./docs/assets/ccc-banner.png" alt="CCC Codex-Cli-Captain banner" width="100%">
 </p>
 
-<p align="center"><em>Codex CLI や Codex App の作業を、ひとつの接頭辞で最後まで進められます。<br>
+<p align="center"><em>Codex CLI の作業を、ひとつの接頭辞で最後まで進められます。<br>
 やりたい作業の前に <code>$cap</code> を付けるだけで CCC が管理します。</em></p>
 
-CCC は、Codex CLI と Codex App に対応した Rust ベースの orchestration layer です。`$cap` を public entrypoint として保ち、内部の作業フローを管理して、大きなタスクでも手動の切り替えを減らします。
+CCC は、Codex CLI 向けに作られた Rust ベースの orchestration layer です。`$cap` を public entrypoint として保ち、内部の作業フローを管理して、大きなタスクでも手動の切り替えを減らします。
 
 ## いつ使うか
 
-計画、編集、レビュー、再起動後の引き継ぎが必要な作業など、Codex に最初から最後まで任せたいときに使います。
+最初から最後まで Codex に任せたいときに使います。計画、編集、レビュー、再起動後の引き継ぎのように、複数の手順をひとつの流れにまとめたい作業に向いています。
 
 ## インストール、更新、削除
 
@@ -65,14 +65,15 @@ iwr -UseB https://github.com/HoRi0506/Codex-Cli-Captain-Release/releases/downloa
 
 ## その他の設定
 
-`~/.config/ccc/ccc-config.toml` で CCC role の model、reasoning tier、fast-mode を変更できます。変更後は `ccc setup` を実行し、Codex CLI を再起動してから `ccc check-install` を確認します。
-
-Codex plugin hooks は opt-in です。使う場合は `~/.codex/config.toml` で `[features] plugin_hooks = true` を設定し、Codex CLI を再起動して `/hooks` review で CCC hook を承認し、その後 `ccc check-install` を実行します。
+| 設定 | 場所 | メモ |
+| --- | --- | --- |
+| CCC role model, reasoning tier, fast-mode | `~/.config/ccc/ccc-config.toml` | 変更後は `ccc setup` を実行し、Codex CLI を再起動してから `ccc check-install` を確認します。 |
+| Codex plugin hooks | `~/.codex/config.toml` | `[features] plugin_hooks = true` を設定し、Codex CLI を再起動して `/hooks` review で CCC hook を承認し、その後 `ccc check-install` を実行します。 |
 
 ## 対応 OS
 
-CCC は macOS、Windows、Linux を対象にしていますが、環境によっては Windows と Linux が正常に動かない場合があります。インストール後に `ccc check-install` で確認してください。
-
-## 0.0.11 メモ
-
-`0.0.11` は Odyssey transition baseline です。現在の CCC インストール導線を整理した版で、release-bundle fallback の利用は引き続き可能なまま、以後の Odyssey 作業は次の段階に続きます。
+| OS | 状態 | 注意 |
+| --- | --- | --- |
+| macOS | 対応 | インストール後に `ccc check-install` で確認してください。 |
+| Windows | 原則対応 | 環境によっては正常に動かない場合があるため、インストール後に確認してください。 |
+| Linux | 原則対応 | 環境によっては正常に動かない場合があるため、インストール後に確認してください。 |

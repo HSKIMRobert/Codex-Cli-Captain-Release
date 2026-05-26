@@ -10,14 +10,14 @@
   <img src="./docs/assets/ccc-banner.png" alt="CCC Codex-Cli-Captain banner" width="100%">
 </p>
 
-<p align="center"><em>Run Codex CLI or Codex App work end-to-end with one command prefix.<br>
+<p align="center"><em>Run Codex CLI work end-to-end with one command prefix.<br>
 Add <code>$cap</code> before the task you want CCC to manage.</em></p>
 
-CCC is a Rust-based orchestration layer for Codex CLI and Codex App compatibility. It keeps `$cap` as the public entrypoint, manages task flow behind the scenes, and helps you run larger work with fewer manual handoffs.
+CCC is a Rust-based orchestration layer built for Codex CLI. It keeps `$cap` as the public entrypoint, manages task flow behind the scenes, and helps you carry larger tasks through with fewer manual handoffs.
 
 ## When To Use It
 
-Use CCC when you want Codex to handle a task from start to finish, especially when the work needs planning, edits, review, or a restart-safe handoff.
+Use CCC when you want Codex to handle a task from start to finish. It is a good fit for work that needs planning, edits, review, or a restart-safe handoff, especially when you want to keep the flow in one place instead of juggling steps manually.
 
 ## Install, Update, Uninstall
 
@@ -65,14 +65,15 @@ iwr -UseB https://github.com/HoRi0506/Codex-Cli-Captain-Release/releases/downloa
 
 ## Other Settings
 
-Edit `~/.config/ccc/ccc-config.toml` to change CCC role models, reasoning tier, and fast-mode settings. After editing, run `ccc setup`, restart Codex CLI, and run `ccc check-install`.
-
-Codex plugin hooks are opt-in. If you enable them, edit `~/.codex/config.toml`, set `[features] plugin_hooks = true`, restart Codex CLI, review `/hooks`, approve the CCC hooks, and then run `ccc check-install`.
+| Setting | Location | Notes |
+| --- | --- | --- |
+| CCC role model, reasoning tier, fast-mode | `~/.config/ccc/ccc-config.toml` | Edit the file, then run `ccc setup`, restart Codex CLI, and run `ccc check-install`. |
+| Codex plugin hooks | `~/.codex/config.toml` | Set `[features] plugin_hooks = true`, restart Codex CLI, review `/hooks`, approve the CCC hooks, and then run `ccc check-install`. |
 
 ## Supported OS
 
-CCC supports macOS, Windows, and Linux in principle. In some environments, Windows and Linux may not work normally, so verify with `ccc check-install` after installation.
-
-## 0.0.11 Note
-
-`0.0.11` is the Odyssey transition baseline. It adds the current CCC install flow and keeps later Odyssey work for follow-up, with release-bundle fallback support still available.
+| OS | Status | Caveat |
+| --- | --- | --- |
+| macOS | Supported | Verify with `ccc check-install` after installation. |
+| Windows | Supported in principle | Some environments may not work normally, so verify after installation. |
+| Linux | Supported in principle | Some environments may not work normally, so verify after installation. |

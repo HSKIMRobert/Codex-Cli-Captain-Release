@@ -1,6 +1,6 @@
 # Install, Update, and Uninstall
 
-This guide matches the `0.0.11` public install flow.
+This guide matches the current public install flow.
 
 ## Install
 

@@ -10,14 +10,14 @@
   <img src="./docs/assets/ccc-banner.png" alt="CCC Codex-Cli-Captain banner" width="100%">
 </p>
 
-<p align="center"><em>한 번의 접두어로 Codex CLI나 Codex App 작업을 끝까지 굴려 보세요.<br>
+<p align="center"><em>한 번의 접두어로 Codex CLI 작업을 끝까지 굴려 보세요.<br>
 원하는 작업 앞에 <code>$cap</code>만 붙이면 CCC가 관리합니다.</em></p>
 
-CCC는 Codex CLI와 Codex App 호환을 위한 Rust 기반 orchestration layer입니다. `$cap`을 공개 entrypoint로 유지하고, 내부 작업 흐름을 관리해서 더 큰 작업도 손이 덜 가게 이어갈 수 있게 돕습니다.
+CCC는 Codex CLI를 위해 만든 Rust 기반 orchestration layer입니다. `$cap`을 공개 entrypoint로 유지하고, 내부 작업 흐름을 관리해서 더 큰 작업도 손이 덜 가게 이어갈 수 있게 돕습니다.
 
 ## 언제 쓰나
 
-기획, 편집, 검토, 재시작 후 인계가 필요한 작업처럼 처음부터 끝까지 Codex가 맡아 처리하길 원할 때 CCC를 사용합니다.
+처음부터 끝까지 Codex가 맡아 처리하길 원할 때 CCC를 사용합니다. 기획, 편집, 검토, 재시작 후 인계처럼 여러 단계를 한 흐름으로 묶고 싶을 때 특히 잘 맞습니다.
 
 ## 설치, 업데이트, 삭제
 
@@ -65,14 +65,15 @@ iwr -UseB https://github.com/HoRi0506/Codex-Cli-Captain-Release/releases/downloa
 
 ## 기타 설정
 
-`~/.config/ccc/ccc-config.toml`에서 CCC role의 model, reasoning tier, fast-mode 설정을 바꿀 수 있습니다. 수정 후 `ccc setup`을 실행하고, Codex CLI를 재시작한 뒤 `ccc check-install`로 확인합니다.
-
-Codex plugin hooks는 opt-in입니다. 사용하려면 `~/.codex/config.toml`에서 `[features] plugin_hooks = true`를 설정하고, Codex CLI를 재시작한 뒤 `/hooks` review에서 CCC hook을 승인하고 `ccc check-install`을 실행합니다.
+| 설정 | 위치 | 메모 |
+| --- | --- | --- |
+| CCC role model, reasoning tier, fast-mode | `~/.config/ccc/ccc-config.toml` | 수정 후 `ccc setup`을 실행하고, Codex CLI를 재시작한 뒤 `ccc check-install`로 확인합니다. |
+| Codex plugin hooks | `~/.codex/config.toml` | `[features] plugin_hooks = true`를 설정하고, Codex CLI를 재시작한 뒤 `/hooks` review에서 CCC hook을 승인하고 `ccc check-install`을 실행합니다. |
 
 ## 지원 OS
 
-CCC는 macOS, Windows, Linux를 대상으로 하지만, 일부 환경에서는 Windows와 Linux가 정상 동작하지 않을 수 있습니다. 설치 후 `ccc check-install`로 확인하세요.
-
-## 0.0.11 메모
-
-`0.0.11`은 Odyssey transition baseline입니다. 현재 CCC 설치 흐름을 정리한 버전이며, release-bundle fallback 지원은 유지한 채 이후 Odyssey 작업은 다음 단계로 이어집니다.
+| OS | 상태 | 주의 |
+| --- | --- | --- |
+| macOS | 지원 | 설치 후 `ccc check-install`로 확인하세요. |
+| Windows | 원칙적으로 지원 | 일부 환경에서는 정상 동작하지 않을 수 있으니 설치 후 확인하세요. |
+| Linux | 원칙적으로 지원 | 일부 환경에서는 정상 동작하지 않을 수 있으니 설치 후 확인하세요. |
