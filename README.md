@@ -10,176 +10,69 @@
   <img src="./docs/assets/ccc-banner.png" alt="CCC Codex-Cli-Captain banner" width="100%">
 </p>
 
-<p align="center"><em>Want to run Codex CLI or Codex App end-to-end?<br>
-Worried about running the whole thing on high-end models?<br>
-Then how about using CCC?<br>
-Just put <code>$cap</code> in front of what you want to do.<br>
-Then something remarkable can unfold.</em></p>
+<p align="center"><em>Run Codex CLI or Codex App work end-to-end with one command prefix.<br>
+Add <code>$cap</code> before the task you want CCC to manage.</em></p>
 
-Current release: `0.0.11`.
+CCC is a Rust-based orchestration layer for Codex CLI and Codex App compatibility. It keeps `$cap` as the public entrypoint, manages task flow behind the scenes, and helps you run larger work with fewer manual handoffs.
 
-CCC is a captain-first orchestration layer for Codex CLI. It keeps `$cap` as the only public entrypoint, persists LongWay/task-card/fan-in state, and routes specialist work through managed agents before captain review.
+## When To Use It
 
-## What CCC Adds
-
-- `$cap` is the public way to start CCC-managed work in Codex.
-- LongWay/task-card state, checklist/projection output, fan-in, recovery, and
-  status are persisted so long tasks can be resumed and reviewed.
-- Managed roles such as planning, source editing, documentation, review,
-  sentinel checks, Ghost watchdog, and companion validation keep work separated
-  instead of leaving every step to one Captain response.
-- Compact status, projection, and app-panel output show operator-facing state
-  such as evidence paths, smoke evidence, mission fields, memory/hooks/LSP
-  readiness, Graphify fallback, and Ghost dispatch proof.
-- `0.0.11` is an Odyssey transition baseline. It includes mission-field status
-  surfaces and runtime proof, while deeper Graphify source-truth closure,
-  release/package provenance automation, hazard normalization, maintainability
-  modularization, and workflow packaging audit continue as follow-up work.
+Use CCC when you want Codex to handle a task from start to finish, especially when the work needs planning, edits, review, or a restart-safe handoff.
 
 ## Install, Update, Uninstall
 
 Primary install path:
 
 ```text
-Install Codex-Cli-Captain with Cargo:
 cargo install codex-cli-captain
-
-After installation finishes, run:
 ccc setup
+```
 
-Then fully exit Codex CLI.
-Start a new Codex CLI session.
-Then run:
+Then fully exit Codex CLI, start a new session, and run:
+
+```text
 ccc check-install
 ```
 
-To update an existing Cargo install, rerun:
+To update an existing Cargo install:
 
 ```text
 cargo install codex-cli-captain --force
 ccc setup
 ```
 
-Then fully restart Codex CLI and run `ccc check-install`.
+Then restart Codex CLI and run `ccc check-install`.
 
-If a previous release-bundle install left `~/.local/bin/ccc` earlier than
-`~/.cargo/bin` in `PATH`, your shell can keep running the legacy binary after
-Cargo install. `ccc setup` and `ccc check-install` report the shell-resolved
-`ccc`, the Cargo candidate at `~/.cargo/bin/ccc`, the current executable, and
-whether `~/.local/bin/ccc` is shadowing Cargo. `ccc check-install` also
-reports hooks readiness, the selected runtime path, and the public config
-shape: top-level `version`, `entry_policy.mode`, visible agent entries
-(`name`/`model`/`variant`/`fast_mode`), `agents.ghost`, and visible LSP plus
-`graph_context`/Graphify defaults. When shadowing is reported, run
-`~/.cargo/bin/ccc setup`, put `~/.cargo/bin` earlier in `PATH`, or remove or
-demote the legacy `~/.local/bin/ccc` after reviewing cleanup. Release-bundle
-rollback paths under `~/.local/share/ccc` stay preserved by default unless you
-explicitly prune them.
-
-To uninstall the Cargo-installed binary:
+To uninstall the Cargo install:
 
 ```text
 cargo uninstall codex-cli-captain
 ```
 
-If you also want CCC-managed cleanup, run `ccc uninstall --dry-run` first to review the plan, then `ccc uninstall --confirm` only if the preview is correct. Use `ccc check-install` before removing MCP registration, `ccc-config.toml`, skills, or custom agents.
-
-Windows PowerShell uses the same primary Cargo path.
+If you also want CCC-managed cleanup, run `ccc uninstall --dry-run` first, then `ccc uninstall --confirm` only after reviewing the preview.
 
 Legacy release-bundle fallback only:
 
-macOS or Linux:
-
 ```text
-Install Codex-Cli-Captain from https://github.com/HoRi0506/Codex-Cli-Captain-Release by running:
 curl -fsSL https://github.com/HoRi0506/Codex-Cli-Captain-Release/releases/download/v0.0.11/install.sh | bash
-
-After installation finishes, fully exit Codex CLI.
-Start a new Codex CLI session.
-Then run:
-ccc check-install
 ```
 
 Windows PowerShell:
 
 ```text
-Install Codex-Cli-Captain from https://github.com/HoRi0506/Codex-Cli-Captain-Release by running:
 iwr -UseB https://github.com/HoRi0506/Codex-Cli-Captain-Release/releases/download/v0.0.11/install.ps1 | iex
-
-After installation finishes, fully exit Codex CLI.
-Start a new Codex CLI session.
-Then run:
-ccc check-install
 ```
 
-To update, rerun `cargo install codex-cli-captain --force` and then `ccc setup`, fully restart Codex CLI, and run `ccc check-install`. Use the legacy release-bundle installer only when you intentionally want the packaged `install.sh`/`install.ps1` release-asset fallback. The bundle installer stages the new bundle before switching the active path, preserves previous release bundles for rollback, refreshes CCC-managed plugin and `$cap` files, and only cleans CCC-managed stale cache/version entries plus the legacy packaged cap copy. Non-CCC Codex config is preserved. `cargo publish` is maintainer-only release work that needs the release token and approval outside this end-user README.
+## Other Settings
 
-Release-bundle fallback installers target `v0.0.11` and are published as release assets alongside
-matching validated bundle assets. Cargo remains the primary `0.0.11` install
-path. Set `CCC_VERSION` only when you intentionally want a different
-release-bundle fallback.
+Edit `~/.config/ccc/ccc-config.toml` to change CCC role models, reasoning tier, and fast-mode settings. After editing, run `ccc setup`, restart Codex CLI, and run `ccc check-install`.
 
-## Basic Use
+Codex plugin hooks are opt-in. If you enable them, edit `~/.codex/config.toml`, set `[features] plugin_hooks = true`, restart Codex CLI, review `/hooks`, approve the CCC hooks, and then run `ccc check-install`.
 
-Start a CCC-managed task by adding `$cap` before your request:
+## Supported OS
 
-```text
-$cap Refactor the auth flow and keep tests passing
-```
+CCC supports macOS, Windows, and Linux in principle. In some environments, Windows and Linux may not work normally, so verify with `ccc check-install` after installation.
 
-CCC owns persisted LongWay, task cards, checklist/projection, fan-in, status, and restart handoff. Host `/plan`, `/goal`, and graph commands are not CCC public entrypoints.
+## 0.0.11 Note
 
-## Reapply Config Changes
-
-Edit `~/.config/ccc/ccc-config.toml` to change each CCC role's model, reasoning tier, and fast-mode setting. After editing, paste this into Codex CLI:
-
-```text
-Run:
-ccc setup
-
-Then fully exit Codex CLI.
-Start a new Codex CLI session.
-Then run:
-ccc check-install
-```
-
-`ccc setup` preserves user-customized values while backfilling missing generated defaults and refreshing MCP registration, the packaged `$cap` skill, and CCC-managed custom agents.
-
-Codex plugin hooks are opt-in. CCC does not silently enable the under-development `plugin_hooks` feature for you, and hook commands require a `/hooks` review in Codex CLI before they can run. To turn them on:
-
-1. edit `~/.codex/config.toml`
-2. set `[features] plugin_hooks = true`
-3. restart Codex CLI
-4. open `/hooks` and approve the five CCC hooks: `PermissionRequest`, `PostToolUse`, `SessionStart`, `UserPromptSubmit`, and `Stop`
-5. run `ccc check-install`
-
-If you intentionally want to hide the unstable-feature warning after opting in, you can also set `suppress_unstable_features_warning = true` at the top level. That suppresses only the warning; it does not skip hook review or change hook behavior. The warning appears again on each fresh Codex CLI startup when the global config still has `plugin_hooks = true`. When hooks are not enabled or have not been reviewed, `ccc check-install` stays on the `ccc_fallback` path instead of reporting `runtime=hooks_first`.
-
-A Stop-hook warning after a turn is normal when the CCC Stop hook returns `status=clear`. Codex may label that message as a warning even though CCC did not block or escalate.
-
-`ccc setup` only installs or refreshes hook assets when the target Codex
-surface can load them safely. If hooks are unavailable, disabled, untrusted, or
-unsupported, CCC keeps the CLI/MCP/status/fan-in fallback active and visible.
-
-## Hooks and Readiness
-
-`ccc check-install` reports whether hooks are available and whether CCC is
-using hooks-first or the CCC fallback path for the current session. If you
-completed the opt-in steps above, expect `runtime=hooks_first`; otherwise
-expect `runtime=ccc_fallback`. Use that output together with the
-install-health and restart guidance to confirm the runtime path without
-exposing internal routing details.
-
-## Public Behavior
-
-- `$cap` is the public entrypoint.
-- CCC uses managed roles for planning, mutation, review, and fan-in behind the
-  scenes. Internal routing details stay in runtime state and release-work docs,
-  not in the public README.
-- `ccc setup` refreshes the packaged `$cap` skill, MCP registration, plugin
-  cache, and managed agents from the current binary and `ccc-config.toml`, and
-  only refreshes hook assets when the installed Codex surface can load them
-  safely.
-- `ccc check-install` reports the active binary, Cargo candidate, plugin/cache
-  discovery, hooks readiness, public config shape, packaged `$cap` skill,
-  stale paths, selected runtime path, and whether a restart is still required.
+`0.0.11` is the Odyssey transition baseline. It adds the current CCC install flow and keeps later Odyssey work for follow-up, with release-bundle fallback support still available.
