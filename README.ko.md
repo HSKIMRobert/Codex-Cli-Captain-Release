@@ -16,9 +16,26 @@
 원하는 작업 앞에 <code>$cap</code>만 붙이면 됩니다.<br>
 그러면 꽤 놀라운 일이 펼쳐질 수 있습니다.</em></p>
 
-현재 공개 릴리스: `0.0.10`.
+현재 공개 릴리스: `0.0.11`.
 
 CCC는 Codex CLI를 위한 captain-first orchestration layer입니다. `$cap`만 public entrypoint로 유지하고, LongWay/task-card/fan-in 상태를 저장하며, specialist 작업을 managed agent로 라우팅한 뒤 captain review로 합칩니다.
+
+## CCC가 추가하는 것
+
+- `$cap`은 Codex에서 CCC-managed work를 시작하는 공개 entrypoint입니다.
+- LongWay/task-card 상태, checklist/projection 출력, fan-in, recovery,
+  status를 저장해서 긴 작업을 이어서 보고 검토할 수 있습니다.
+- planning, source edit, docs, review, sentinel check, Ghost watchdog,
+  companion validation 같은 managed role을 분리해 모든 단계를 Captain 한
+  응답에 몰아넣지 않습니다.
+- compact status, projection, app-panel 출력은 evidence path, smoke
+  evidence, mission field, memory/hooks/LSP readiness, Graphify fallback,
+  Ghost dispatch proof 같은 operator-facing 상태를 보여 줍니다.
+- `0.0.11`은 Odyssey transition baseline입니다. mission-field status
+  surface와 runtime proof는 포함하지만, Graphify source-truth closure,
+  release/package provenance automation, hazard normalization,
+  maintainability modularization, workflow packaging audit은 후속 작업으로
+  이어집니다.
 
 ## 설치, 업데이트, 삭제
 
@@ -55,7 +72,7 @@ macOS 또는 Linux:
 
 ```text
 Install Codex-Cli-Captain from https://github.com/HoRi0506/Codex-Cli-Captain-Release by running:
-curl -fsSL https://github.com/HoRi0506/Codex-Cli-Captain-Release/releases/download/v0.0.10/install.sh | bash
+curl -fsSL https://github.com/HoRi0506/Codex-Cli-Captain-Release/releases/download/v0.0.11/install.sh | bash
 
 After installation finishes, fully exit Codex CLI.
 Start a new Codex CLI session.
@@ -67,7 +84,7 @@ Windows PowerShell:
 
 ```text
 Install Codex-Cli-Captain from https://github.com/HoRi0506/Codex-Cli-Captain-Release by running:
-iwr -UseB https://github.com/HoRi0506/Codex-Cli-Captain-Release/releases/download/v0.0.10/install.ps1 | iex
+iwr -UseB https://github.com/HoRi0506/Codex-Cli-Captain-Release/releases/download/v0.0.11/install.ps1 | iex
 
 After installation finishes, fully exit Codex CLI.
 Start a new Codex CLI session.
@@ -77,7 +94,7 @@ ccc check-install
 
 업데이트할 때도 `cargo install codex-cli-captain --force`를 다시 실행한 뒤 `ccc setup`을 실행하세요. 그 다음 Codex CLI를 완전히 재시작하고 `ccc check-install`을 실행하세요. installer는 새 bundle을 active path로 바꾸기 전에 stage하고, 이전 release bundle을 rollback용으로 보존하며, CCC-managed plugin 및 `$cap` 파일을 갱신합니다. stale cache/version entry와 legacy packaged cap copy 중 CCC가 관리하는 항목만 정리하고, non-CCC Codex config는 보존합니다.
 
-release-bundle fallback installer는 `v0.0.10` 기준이며, 매칭되는 검증 완료 bundle asset과 함께 release asset으로 publish됩니다. Cargo가 `0.0.10`의 기본 설치 경로입니다. `CCC_VERSION`은 의도적으로 다른 release-bundle fallback을 설치할 때만 설정하세요.
+release-bundle fallback installer는 `v0.0.11` 기준이며, 매칭되는 검증 완료 bundle asset과 함께 release asset으로 publish됩니다. Cargo가 `0.0.11`의 기본 설치 경로입니다. `CCC_VERSION`은 의도적으로 다른 release-bundle fallback을 설치할 때만 설정하세요.
 
 ## 기본 사용
 

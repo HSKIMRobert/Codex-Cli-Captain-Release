@@ -16,9 +16,25 @@ Then how about using CCC?<br>
 Just put <code>$cap</code> in front of what you want to do.<br>
 Then something remarkable can unfold.</em></p>
 
-Current release: `0.0.10`.
+Current release: `0.0.11`.
 
 CCC is a captain-first orchestration layer for Codex CLI. It keeps `$cap` as the only public entrypoint, persists LongWay/task-card/fan-in state, and routes specialist work through managed agents before captain review.
+
+## What CCC Adds
+
+- `$cap` is the public way to start CCC-managed work in Codex.
+- LongWay/task-card state, checklist/projection output, fan-in, recovery, and
+  status are persisted so long tasks can be resumed and reviewed.
+- Managed roles such as planning, source editing, documentation, review,
+  sentinel checks, Ghost watchdog, and companion validation keep work separated
+  instead of leaving every step to one Captain response.
+- Compact status, projection, and app-panel output show operator-facing state
+  such as evidence paths, smoke evidence, mission fields, memory/hooks/LSP
+  readiness, Graphify fallback, and Ghost dispatch proof.
+- `0.0.11` is an Odyssey transition baseline. It includes mission-field status
+  surfaces and runtime proof, while deeper Graphify source-truth closure,
+  release/package provenance automation, hazard normalization, maintainability
+  modularization, and workflow packaging audit continue as follow-up work.
 
 ## Install, Update, Uninstall
 
@@ -76,7 +92,7 @@ macOS or Linux:
 
 ```text
 Install Codex-Cli-Captain from https://github.com/HoRi0506/Codex-Cli-Captain-Release by running:
-curl -fsSL https://github.com/HoRi0506/Codex-Cli-Captain-Release/releases/download/v0.0.10/install.sh | bash
+curl -fsSL https://github.com/HoRi0506/Codex-Cli-Captain-Release/releases/download/v0.0.11/install.sh | bash
 
 After installation finishes, fully exit Codex CLI.
 Start a new Codex CLI session.
@@ -88,7 +104,7 @@ Windows PowerShell:
 
 ```text
 Install Codex-Cli-Captain from https://github.com/HoRi0506/Codex-Cli-Captain-Release by running:
-iwr -UseB https://github.com/HoRi0506/Codex-Cli-Captain-Release/releases/download/v0.0.10/install.ps1 | iex
+iwr -UseB https://github.com/HoRi0506/Codex-Cli-Captain-Release/releases/download/v0.0.11/install.ps1 | iex
 
 After installation finishes, fully exit Codex CLI.
 Start a new Codex CLI session.
@@ -98,8 +114,8 @@ ccc check-install
 
 To update, rerun `cargo install codex-cli-captain --force` and then `ccc setup`, fully restart Codex CLI, and run `ccc check-install`. Use the legacy release-bundle installer only when you intentionally want the packaged `install.sh`/`install.ps1` release-asset fallback. The bundle installer stages the new bundle before switching the active path, preserves previous release bundles for rollback, refreshes CCC-managed plugin and `$cap` files, and only cleans CCC-managed stale cache/version entries plus the legacy packaged cap copy. Non-CCC Codex config is preserved. `cargo publish` is maintainer-only release work that needs the release token and approval outside this end-user README.
 
-Release-bundle fallback installers target `v0.0.10` and are published as release assets alongside
-matching validated bundle assets. Cargo remains the primary `0.0.10` install
+Release-bundle fallback installers target `v0.0.11` and are published as release assets alongside
+matching validated bundle assets. Cargo remains the primary `0.0.11` install
 path. Set `CCC_VERSION` only when you intentionally want a different
 release-bundle fallback.
 
