@@ -54,13 +54,13 @@ If you also want CCC-managed cleanup, run `ccc uninstall --dry-run` first, then 
 Legacy release-bundle fallback only:
 
 ```text
-curl -fsSL https://github.com/HoRi0506/Codex-Cli-Captain-Release/releases/download/v0.0.11/install.sh | bash
+curl -fsSL https://github.com/HoRi0506/Codex-Cli-Captain-Release/releases/download/v0.0.12/install.sh | bash
 ```
 
 Windows PowerShell:
 
 ```text
-iwr -UseB https://github.com/HoRi0506/Codex-Cli-Captain-Release/releases/download/v0.0.11/install.ps1 | iex
+iwr -UseB https://github.com/HoRi0506/Codex-Cli-Captain-Release/releases/download/v0.0.12/install.ps1 | iex
 ```
 
 ## Other Settings

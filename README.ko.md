@@ -54,13 +54,13 @@ CCC-managed 정리도 필요하면 먼저 `ccc uninstall --dry-run`으로 미리
 레거시 release-bundle fallback만 사용할 때:
 
 ```text
-curl -fsSL https://github.com/HoRi0506/Codex-Cli-Captain-Release/releases/download/v0.0.11/install.sh | bash
+curl -fsSL https://github.com/HoRi0506/Codex-Cli-Captain-Release/releases/download/v0.0.12/install.sh | bash
 ```
 
 Windows PowerShell:
 
 ```text
-iwr -UseB https://github.com/HoRi0506/Codex-Cli-Captain-Release/releases/download/v0.0.11/install.ps1 | iex
+iwr -UseB https://github.com/HoRi0506/Codex-Cli-Captain-Release/releases/download/v0.0.12/install.ps1 | iex
 ```
 
 ## 기타 설정
