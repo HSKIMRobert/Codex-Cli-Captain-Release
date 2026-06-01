@@ -12,7 +12,7 @@
 
 <p align="center"><em>Codex CLI 작업을 계획, 실행, fan-in, 검토, 증명까지 한 흐름으로 끝냅니다.</em></p>
 
-CCC는 Codex CLI 작업용 공개 제어면입니다. 작업 앞에 `$cap`을 붙이면 CCC가 LongWay plan, task card, specialist routing, fan-in, review boundary, status projection, 설치 검증을 CCC-owned evidence surface 위에서 관리합니다.
+CCC는 Codex CLI 작업용 공개 제어면입니다. 공개 워크플로에는 `$ccc`를 사용하고, CCC는 LongWay plan, task card, specialist routing, fan-in, review boundary, status projection, 설치 검증을 CCC-owned evidence surface 위에서 관리합니다.
 
 현재 공개 릴리스: `0.0.13`.
 
@@ -20,7 +20,7 @@ CCC는 Codex CLI 작업용 공개 제어면입니다. 작업 앞에 `$cap`을 �
 
 | Surface | 동작 |
 | --- | --- |
-| `$cap` entry | 호스트 transcript 상태에 기대지 않고 CCC를 거치는 작업을 위한 안정적인 공개 접두어입니다. |
+| `$ccc` entry | 호스트 transcript 상태에 기대지 않고 CCC를 거치는 작업을 위한 공개 워크플로 접두어입니다. |
 | LongWay planning | 다단계 작업, 재시작 인계, 후속 연속성을 위한 plan/checklist 상태를 유지합니다. |
 | Specialist routing | CCC는 설정된 `ccc_*` role로 라우팅하고, generic transcript text 대신 간결한 fan-in을 기록합니다. |
 | Review boundary | 일반 검증은 Captain-owned입니다. 더 높은 위험의 release, destructive, security, operator-requested 작업은 review로 올립니다. |
@@ -56,7 +56,7 @@ Codex CLI용 Codex-Cli-Captain 0.0.13을 설치하거나 업데이트하세요.
 
 5. 결과를 요약합니다.
    - 설치된 버전
-   - `$cap` skill이 current인지 여부
+   - `$ccc` entry skill이 current인지 여부
    - MCP registration이 일치하는지 여부
    - custom agents가 synced 되었는지 여부
    - restart 또는 cache reload가 아직 필요한지 여부
@@ -80,27 +80,15 @@ ccc status --app-panel --text
 
 ## 사용
 
-CCC-managed 작업을 시작하려면 요청 앞에 `$cap`을 붙입니다.
+CCC-managed 작업을 시작하려면 요청에 `$ccc`를 사용합니다.
 
 ```text
-$cap release docs를 업데이트하고, 먼저 현재 코드베이스 증거를 확인한 뒤, 변경 내용을 보고해 줘
+$ccc release docs를 업데이트하고, 먼저 현재 코드베이스 증거를 확인한 뒤, 변경 내용을 보고해 줘
 ```
 
-후속 작업에서도 `$cap` 또는 CCC가 출력한 continuation hint를 계속 사용합니다. CCC는 workspace의 `.ccc` runtime artifact 아래에 LongWay/checklist/fan-in 상태를 저장하고, `ccc status`와 app-panel view로 현재 상태를 표시합니다.
+후속 작업에서도 `$ccc` 또는 CCC가 출력한 continuation hint를 계속 사용합니다. CCC는 workspace의 `.ccc` runtime artifact 아래에 LongWay/checklist/fan-in 상태를 저장하고, `ccc status`와 app-panel view로 현재 상태를 표시합니다.
 
-## 0.0.13 증명
-
-`v0.0.13`은 source commit `03b950d745beb6b021004124aaf144d3e23f96ae`에서 publish 되었습니다.
-
-| Proof | Current result |
-| --- | --- |
-| Cargo package | `cargo package --manifest-path rust/ccc-mcp/Cargo.toml --list`가 94개 파일을 나열했고, `cargo package --manifest-path rust/ccc-mcp/Cargo.toml`가 94개 파일을 패키징했습니다. |
-| Pre-publish local smoke | 격리된 `/private/tmp/ccc-smoke.9LY30n` setup/check-install/status/app-panel/graphify/start-run smoke가 public publish 전에 통과했습니다. |
-| GitHub release | `v0.0.13`에는 darwin arm64/x86_64, linux arm64/x86_64, windows x86_64 tarball과 `ccc-0.0.13-checksums.txt`가 들어 있습니다. |
-| Cargo publish | `cargo search codex-cli-captain --limit 1`가 `0.0.13`을 보고합니다. |
-| Public install smoke | `/private/tmp/ccc-public-smoke.Nqqea2`에서 새 crates.io install이 setup, check-install, status, app-panel, graphify, start, run policy smoke를 통과했습니다. |
-
-비차단 advisory:
+호스트가 아직 legacy skill entry를 노출하는 경우, 그 entry가 compatibility path로 계속 동작할 수 있습니다.
 
 - macOS cross-asset provenance 실행은 release script가 non-macOS binary를 실행하려고 하면 멈출 수 있습니다. `v0.0.13`은 cross asset에 temporary wrapper와 Zig linker settings를 사용했습니다.
 - crates.io-installed binary는 Cargo가 published crate에서 다시 빌드하므로 `source_commit=unknown` 또는 partial binary provenance를 보고할 수 있습니다.
@@ -136,4 +124,4 @@ cargo uninstall codex-cli-captain
 
 ## 공개 surface boundary
 
-`$cap`은 공개 user entrypoint입니다. internal role name, fan-in artifact, Graphify detail, LSP state, hook, memory readiness는 CCC 자체의 proof surface이며 host-owned transcript claim으로 취급하면 안 됩니다. host spawn/toast label은 host가 렌더링하므로 CCC status와 다를 수 있습니다.
+`$ccc`는 공개 user entrypoint입니다. internal role name, fan-in artifact, Graphify detail, LSP state, hook, memory readiness는 CCC 자체의 proof surface이며 host-owned transcript claim으로 취급하면 안 됩니다. host spawn/toast label은 host가 렌더링하므로 CCC status와 다를 수 있습니다.

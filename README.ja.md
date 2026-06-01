@@ -12,7 +12,7 @@
 
 <p align="center"><em>Codex CLI の作業を、計画、実行、fan-in、レビュー、証跡までひとつの流れで進めます。</em></p>
 
-CCC は Codex CLI 作業の公開コントロール面です。作業の前に `$cap` を付けると、CCC が LongWay plan、task card、specialist routing、fan-in、review boundary、status projection、インストール検証を CCC-owned evidence surface 上で管理します。
+CCC は Codex CLI 作業の公開コントロール面です。公開ワークフローでは `$ccc` を使い、CCC が LongWay plan、task card、specialist routing、fan-in、review boundary、status projection、インストール検証を CCC-owned evidence surface 上で管理します。
 
 現在の公開リリース: `0.0.13`。
 
@@ -20,7 +20,7 @@ CCC は Codex CLI 作業の公開コントロール面です。作業の前に `
 
 | Surface | 動作 |
 | --- | --- |
-| `$cap` entry | host transcript state に依存しない、CCC を通す作業向けの安定した public prefix です。 |
+| `$ccc` entry | host transcript state に依存しない、CCC を通す作業向けの public workflow prefix です。 |
 | LongWay planning | 複数手順の作業、再起動時の引き継ぎ、後続作業の連続性のために plan/checklist state を保持します。 |
 | Specialist routing | CCC は設定された `ccc_*` role にルーティングし、generic transcript text ではなく簡潔な fan-in を記録します。 |
 | Review boundary | 通常の検証は Captain-owned です。より高リスクの release, destructive, security, operator-requested 作業は review に昇格します。 |
@@ -56,7 +56,7 @@ Codex CLI 用の Codex-Cli-Captain 0.0.13 をインストールまたは更新�
 
 5. 結果を要約します。
    - インストールされた version
-   - `$cap` skill が current かどうか
+   - `$ccc` entry skill が current かどうか
    - MCP registration が一致しているかどうか
    - custom agents が synced されているかどうか
    - restart または cache reload がまだ必要かどうか
@@ -80,27 +80,15 @@ ccc status --app-panel --text
 
 ## 使い方
 
-CCC-managed 作業を始めるには、依頼の前に `$cap` を付けます。
+CCC-managed 作業を始めるには、依頼で `$ccc` を使います。
 
 ```text
-$cap release docs を更新して、まず現在のコードベース証跡を確認し、その後で変更点を報告して
+$ccc release docs を更新して、まず現在のコードベース証跡を確認し、その後で変更点を報告して
 ```
 
-フォローアップでも `$cap` か、CCC が出力した continuation hint を使い続けます。CCC は workspace の `.ccc` runtime artifact 配下に LongWay/checklist/fan-in state を保存し、`ccc status` と app-panel view で現在の状態を表示します。
+フォローアップでも `$ccc` か、CCC が出力した continuation hint を使い続けます。CCC は workspace の `.ccc` runtime artifact 配下に LongWay/checklist/fan-in state を保存し、`ccc status` と app-panel view で現在の状態を表示します。
 
-## 0.0.13 の証跡
-
-`v0.0.13` は source commit `03b950d745beb6b021004124aaf144d3e23f96ae` から publish されました。
-
-| Proof | Current result |
-| --- | --- |
-| Cargo package | `cargo package --manifest-path rust/ccc-mcp/Cargo.toml --list` は 94 files を列挙し、`cargo package --manifest-path rust/ccc-mcp/Cargo.toml` は 94 files を package しました。 |
-| Pre-publish local smoke | isolated `/private/tmp/ccc-smoke.9LY30n` の setup/check-install/status/app-panel/graphify/start-run smoke は public publish 前に通過しました。 |
-| GitHub release | `v0.0.13` には darwin arm64/x86_64, linux arm64/x86_64, windows x86_64 tarball と `ccc-0.0.13-checksums.txt` が含まれます。 |
-| Cargo publish | `cargo search codex-cli-captain --limit 1` は `0.0.13` を報告します。 |
-| Public install smoke | `/private/tmp/ccc-public-smoke.Nqqea2` での fresh crates.io install は setup, check-install, status, app-panel, graphify, start, run policy smoke を通過しました。 |
-
-非ブロッキングの注意点:
+ホストがまだ legacy skill entry を公開している場合、その entry が compatibility path として動作し続けることがあります。
 
 - macOS の cross-asset provenance execution は、release script が non-macOS binary を実行しようとすると停止することがあります。`v0.0.13` では cross asset に temporary wrapper と Zig linker settings を使いました。
 - crates.io-installed binary は Cargo が published crate から再ビルドするため、`source_commit=unknown` や partial binary provenance を報告することがあります。
@@ -136,4 +124,4 @@ cargo uninstall codex-cli-captain
 
 ## 公開 surface boundary
 
-`$cap` は公開 user entrypoint です。internal role name、fan-in artifact、Graphify detail、LSP state、hook、memory readiness は CCC 自身の proof surface であり、host-owned transcript claim として扱うべきではありません。host spawn/toast label は host が描画するため、CCC status と異なる場合があります。
+`$ccc` は公開 user entrypoint です。internal role name、fan-in artifact、Graphify detail、LSP state、hook、memory readiness は CCC 自身の proof surface であり、host-owned transcript claim として扱うべきではありません。host spawn/toast label は host が描画するため、CCC status と異なる場合があります。

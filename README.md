@@ -12,8 +12,8 @@
 
 <p align="center"><em>One public entrypoint for Codex CLI work that needs a plan, execution, fan-in, review, and proof.</em></p>
 
-CCC makes `$cap` the operator-facing control plane for Codex CLI. Add `$cap`
-before a task and CCC keeps the LongWay plan, task cards, specialist routing,
+CCC is the operator-facing control plane for Codex CLI. Use `$ccc` for public
+workflow and CCC keeps the LongWay plan, task cards, specialist routing,
 fan-in, review boundary, status projection, and install verification on
 CCC-owned evidence surfaces.
 
@@ -23,7 +23,7 @@ Current public release: `0.0.13`.
 
 | Surface | What it does |
 | --- | --- |
-| `$cap` entry | A stable public prefix for work that should go through CCC instead of ad hoc host transcript state. |
+| `$ccc` entry | The public workflow prefix for work that should go through CCC instead of ad hoc host transcript state. |
 | LongWay planning | Persistent plan/checklist state for multi-step work, restart handoff, and follow-up continuity. |
 | Specialist routing | CCC routes to configured `ccc_*` roles and records compact fan-in instead of relying on generic transcript text. |
 | Review boundary | Routine verification is Captain-owned; higher-risk release, destructive, security, or operator-requested work escalates to review. |
@@ -63,7 +63,7 @@ Please do this carefully:
 
 5. Summarize the result:
    - version installed
-   - whether `$cap` skill is current
+   - whether the `$ccc` entry skill is current
    - whether MCP registration matches
    - whether custom agents are synced
    - whether restart or cache reload is still required
@@ -87,31 +87,21 @@ ccc status --app-panel --text
 
 ## Use It
 
-Start a CCC-managed task by prefixing the request:
+Start a CCC-managed task by using `$ccc`:
 
 ```text
-$cap update the release docs, verify the current codebase evidence first, then report what changed
+$ccc update the release docs, verify the current codebase evidence first, then report what changed
 ```
 
-For follow-ups, keep using `$cap` or the continuation hint printed by CCC. CCC
+For follow-ups, keep using `$ccc` or the continuation hint printed by CCC. CCC
 stores the LongWay/checklist/fan-in state under the workspace `.ccc` runtime
 artifacts and renders the current state through `ccc status` and app-panel
 views.
 
-## Release 0.0.13 Proof
+If your host still exposes a legacy skill entry, that entry may continue to
+work as a compatibility path.
 
-`v0.0.13` was published from source commit
-`03b950d745beb6b021004124aaf144d3e23f96ae`.
-
-| Proof | Current result |
-| --- | --- |
-| Cargo package | `cargo package --manifest-path rust/ccc-mcp/Cargo.toml --list` listed 94 files; `cargo package --manifest-path rust/ccc-mcp/Cargo.toml` packaged 94 files. |
-| Pre-publish local smoke | Isolated `/private/tmp/ccc-smoke.9LY30n` setup/check-install/status/app-panel/graphify/start-run smoke passed before public publish. |
-| GitHub release | `v0.0.13` contains darwin arm64/x86_64, linux arm64/x86_64, windows x86_64 tarballs, plus `ccc-0.0.13-checksums.txt`. |
-| Cargo publish | `cargo search codex-cli-captain --limit 1` reports `0.0.13`. |
-| Public install smoke | Fresh crates.io install under `/private/tmp/ccc-public-smoke.Nqqea2` passed setup, check-install, status, app-panel, graphify, start, and run policy smoke. |
-
-Non-blocking advisories:
+## Release Advisories
 
 - macOS cross-asset provenance execution can hang if a release script tries to
   execute non-macOS binaries. `v0.0.13` used a temporary wrapper and Zig linker
@@ -154,7 +144,7 @@ preserving unrelated Codex data.
 
 ## Public Surface Boundary
 
-`$cap` is the public user entrypoint. Internal role names, fan-in artifacts,
+`$ccc` is the public user entrypoint. Internal role names, fan-in artifacts,
 Graphify details, LSP state, hooks, and memory readiness are proof surfaces for
 CCC itself; they should not be treated as host-owned transcript claims. Host
 spawn/toast labels are rendered by the host and can differ from CCC status.
