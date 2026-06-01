@@ -10,70 +10,130 @@
   <img src="./docs/assets/ccc-banner.png" alt="CCC Codex-Cli-Captain banner" width="100%">
 </p>
 
-<p align="center"><em>Codex CLI の作業を、ひとつの接頭辞で最後まで進められます。<br>
-やりたい作業の前に <code>$cap</code> を付けるだけで CCC が管理します。</em></p>
+<p align="center"><em>Codex CLI の作業を、計画、実行、fan-in、レビュー、証跡までひとつの流れで進めます。</em></p>
 
-CCC は、Codex CLI 向けに作られた Rust ベースの orchestration layer です。`$cap` を public entrypoint として保ち、内部の作業フローを管理して、大きなタスクでも手動の切り替えを減らします。
+CCC は Codex CLI 作業の公開コントロール面です。作業の前に `$cap` を付けると、CCC が LongWay plan、task card、specialist routing、fan-in、review boundary、status projection、インストール検証を CCC-owned evidence surface 上で管理します。
 
-## いつ使うか
+現在の公開リリース: `0.0.13`。
 
-最初から最後まで Codex に任せたいときに使います。計画、編集、レビュー、再起動後の引き継ぎのように、複数の手順をひとつの流れにまとめたい作業に向いています。
+## CCC が提供するもの
 
-## インストール、更新、削除
+| Surface | 動作 |
+| --- | --- |
+| `$cap` entry | host transcript state に依存しない、CCC を通す作業向けの安定した public prefix です。 |
+| LongWay planning | 複数手順の作業、再起動時の引き継ぎ、後続作業の連続性のために plan/checklist state を保持します。 |
+| Specialist routing | CCC は設定された `ccc_*` role にルーティングし、generic transcript text ではなく簡潔な fan-in を記録します。 |
+| Review boundary | 通常の検証は Captain-owned です。より高リスクの release, destructive, security, operator-requested 作業は review に昇格します。 |
+| Status proof | `ccc status --text`、app-panel output、checklist/projection、`ccc check-install --text` で現在の証跡と stale boundary を確認できます。 |
+| Tool readiness | Graphify context、LSP readiness、hooks、memory、skill registry、install surface を、advisory metadata を runtime truth と誤認しない形で報告します。 |
 
-基本のインストール方法:
+## AI エージェントでインストールする
+
+このブロックを Codex CLI、ChatGPT、または shell コマンドを実行できる別の AI エージェントに貼り付けてください。目的は binary のインストールだけではなく、現在の状態確認、インストールまたは更新、setup の実行、Codex CLI の再起動または再起動案内、そして結果の検証です。
 
 ```text
-cargo install codex-cli-captain
-ccc setup
+Codex CLI 用の Codex-Cli-Captain 0.0.13 をインストールまたは更新してください。
+
+次の手順を慎重に進めてください。
+
+1. まず現在の状態を確認します。
+   - `command -v ccc || true` を実行します。
+   - `ccc` があれば `ccc --version` と `ccc check-install --text` を実行します。
+   - 既存 binary が current, shadowed, stale, missing のどれかを報告します。
+
+2. Cargo からインストールまたは更新します。
+   - `cargo install codex-cli-captain --force` を実行します。
+   - `ccc setup` を実行します。
+
+3. Codex CLI を完全に終了して新しいセッションを開始するよう伝えるか、このホストが安全に対応しているなら Codex CLI cache を再読み込みするよう伝えます。
+
+4. 再起動後に次を検証します。
+   - `command -v ccc` を実行します。
+   - `ccc --version` を実行します。
+   - `ccc check-install --text` を実行します。
+   - `ccc status --text` を実行します。
+   - `ccc status --app-panel --text` を実行します。
+
+5. 結果を要約します。
+   - インストールされた version
+   - `$cap` skill が current かどうか
+   - MCP registration が一致しているかどうか
+   - custom agents が synced されているかどうか
+   - restart または cache reload がまだ必要かどうか
+   - PATH shadowing、stale plugin cache、legacy bundle warning の有無
 ```
 
-その後、Codex CLI を完全に終了して新しいセッションを開始し、次を実行します。
+直接インストールする場合は次を実行します。
 
-```text
-ccc check-install
-```
-
-既存の Cargo install を更新するときは次を実行します。
-
-```text
+```bash
 cargo install codex-cli-captain --force
 ccc setup
 ```
 
-その後、Codex CLI を再起動して `ccc check-install` で確認します。
+その後、Codex CLI を完全に再起動してから次で確認します。
 
-Cargo install を削除する場合は次を実行します。
+```bash
+ccc check-install --text
+ccc status --text
+ccc status --app-panel --text
+```
+
+## 使い方
+
+CCC-managed 作業を始めるには、依頼の前に `$cap` を付けます。
 
 ```text
+$cap release docs を更新して、まず現在のコードベース証跡を確認し、その後で変更点を報告して
+```
+
+フォローアップでも `$cap` か、CCC が出力した continuation hint を使い続けます。CCC は workspace の `.ccc` runtime artifact 配下に LongWay/checklist/fan-in state を保存し、`ccc status` と app-panel view で現在の状態を表示します。
+
+## 0.0.13 の証跡
+
+`v0.0.13` は source commit `03b950d745beb6b021004124aaf144d3e23f96ae` から publish されました。
+
+| Proof | Current result |
+| --- | --- |
+| Cargo package | `cargo package --manifest-path rust/ccc-mcp/Cargo.toml --list` は 94 files を列挙し、`cargo package --manifest-path rust/ccc-mcp/Cargo.toml` は 94 files を package しました。 |
+| Pre-publish local smoke | isolated `/private/tmp/ccc-smoke.9LY30n` の setup/check-install/status/app-panel/graphify/start-run smoke は public publish 前に通過しました。 |
+| GitHub release | `v0.0.13` には darwin arm64/x86_64, linux arm64/x86_64, windows x86_64 tarball と `ccc-0.0.13-checksums.txt` が含まれます。 |
+| Cargo publish | `cargo search codex-cli-captain --limit 1` は `0.0.13` を報告します。 |
+| Public install smoke | `/private/tmp/ccc-public-smoke.Nqqea2` での fresh crates.io install は setup, check-install, status, app-panel, graphify, start, run policy smoke を通過しました。 |
+
+非ブロッキングの注意点:
+
+- macOS の cross-asset provenance execution は、release script が non-macOS binary を実行しようとすると停止することがあります。`v0.0.13` では cross asset に temporary wrapper と Zig linker settings を使いました。
+- crates.io-installed binary は Cargo が published crate から再ビルドするため、`source_commit=unknown` や partial binary provenance を報告することがあります。
+- release 作業用の local files、たとえば tarball や checksum は upload 後もこの release repo checkout に残ることがあります。意図して commit していない限り source proof とはみなしません。
+
+## 互換性メモ
+
+| Area | Status |
+| --- | --- |
+| macOS | サポート済みで、local maintainer smoke path で検証済みです。 |
+| Linux | release asset は publish 済みです。install 後に環境で `ccc check-install --text` で確認してください。 |
+| Windows | release asset は publish 済みです。install 後に環境で `ccc check-install --text` で確認してください。 |
+| Codex plugin hooks | 任意です。有効化した場合は Codex CLI を再起動し、`ccc check-install --text` で確認してください。 |
+
+## 更新
+
+```bash
+cargo install codex-cli-captain --force
+ccc setup
+```
+
+Codex CLI を再起動してから `ccc check-install --text` を実行します。
+
+## 削除
+
+```bash
+ccc uninstall --dry-run
+ccc uninstall --confirm
 cargo uninstall codex-cli-captain
 ```
 
-CCC-managed の整理も必要なら、まず `ccc uninstall --dry-run` で確認し、内容が正しいときだけ `ccc uninstall --confirm` を実行します。
+まず dry-run を実行して path を確認してください。`cargo uninstall` は Cargo binary だけを削除し、`ccc uninstall --confirm` は unrelated Codex data を残したまま CCC-managed Codex surface を削除します。
 
-レガシー release-bundle fallback のみ:
+## 公開 surface boundary
 
-```text
-curl -fsSL https://github.com/HoRi0506/Codex-Cli-Captain-Release/releases/download/v0.0.12/install.sh | bash
-```
-
-Windows PowerShell:
-
-```text
-iwr -UseB https://github.com/HoRi0506/Codex-Cli-Captain-Release/releases/download/v0.0.12/install.ps1 | iex
-```
-
-## その他の設定
-
-| 設定 | 場所 | メモ |
-| --- | --- | --- |
-| CCC role model, reasoning tier, fast-mode | `~/.config/ccc/ccc-config.toml` | 変更後は `ccc setup` を実行し、Codex CLI を再起動してから `ccc check-install` を確認します。 |
-| Codex plugin hooks | `~/.codex/config.toml` | `[features] plugin_hooks = true` を設定し、Codex CLI を再起動して `/hooks` review で CCC hook を承認し、その後 `ccc check-install` を実行します。 |
-
-## 対応 OS
-
-| OS | 状態 | 注意 |
-| --- | --- | --- |
-| macOS | 対応 | インストール後に `ccc check-install` で確認してください。 |
-| Windows | 原則対応 | 環境によっては正常に動かない場合があるため、インストール後に確認してください。 |
-| Linux | 原則対応 | 環境によっては正常に動かない場合があるため、インストール後に確認してください。 |
+`$cap` は公開 user entrypoint です。internal role name、fan-in artifact、Graphify detail、LSP state、hook、memory readiness は CCC 自身の proof surface であり、host-owned transcript claim として扱うべきではありません。host spawn/toast label は host が描画するため、CCC status と異なる場合があります。
