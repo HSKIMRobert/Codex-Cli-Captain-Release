@@ -21,14 +21,26 @@ Current public release: `0.0.13`.
 
 ## What CCC Gives You
 
+The grouped inventory below records current `0.0.14` source readiness until
+that release is published. Published `0.0.13` evidence remains historical proof;
+`0.0.14` smoke and readiness evidence is pre-release evidence only.
+
 | Surface | What it does |
 | --- | --- |
-| `$ccc` entry | The public workflow prefix for work that should go through CCC instead of ad hoc host transcript state. |
-| LongWay planning | Persistent plan/checklist state for multi-step work, restart handoff, and follow-up continuity. |
-| Specialist routing | CCC routes to configured `ccc_*` roles and records compact fan-in instead of relying on generic transcript text. |
+| Public entry | `$ccc` is the public Codex operator entry from `0.0.14`; `$cap` is historical compatibility language only. `ccc setup` installs the standalone skill at `~/.codex/skills/ccc/SKILL.md` by default. |
+| Workflow/control plane | LongWay planning, checklist/projection, task cards, restart handoff, compact status, app-panel output, validation breadcrumbs, and next-action guidance are CCC-owned persisted surfaces. |
+| Specialist routing and fan-in | CCC routes specialist-owned work to configured `ccc_*` roles, records host-subagent lifecycle, requires evidence-backed fan-in, preserves a run-local pre-dispatch snapshot where feasible, and separates reclaim/reassign/fallback/review from host UI spawn/toast wording. |
 | Review boundary | Routine verification is Captain-owned; higher-risk release, destructive, security, or operator-requested work escalates to review. |
-| Status proof | `ccc status --text`, app-panel output, checklist/projection, and `ccc check-install --text` expose current evidence and stale boundaries. |
-| Tool readiness | Graphify context, LSP readiness, hooks, memory, skill registry, and install surfaces are reported without turning advisory metadata into runtime truth. |
+| Evidence/status/app-panel/check-install | `status`, `activity`, `check-install`, app-panel, capability projection, binary provenance, visibility signatures, install/update parity, PATH shadowing, and release-boundary diagnostics are evidence surfaces, not transcript claims. |
+| Operator transport wording | Operator-visible CCC lifecycle mutations use PATH `ccc` shell runs with expected transcript wording `Ran ccc ...`. `Called ...` or MCP tool-call wording belongs only to host-owned spawn/toast lines, app surfaces, structured inspection, or recorded CLI-unavailable fallback. |
+| Graph command surface | `ccc graph` is the public CLI keyword for graph queries, and `ccc graph generate` refreshes managed Graphify artifacts. Historical `codegraph` and `graphify generate` CLI names are hidden compatibility aliases only; the MCP tool name remains `ccc_code_graph`. |
+| Runtime readiness | Graphify context, native code graph, LSP readiness/bounded operations, hooks, dynamic rules, PostToolUse gates, memory/Tolaria, SSL skill registry, install surfaces, and custom-agent sync are readiness surfaces whose advisory metadata is not runtime truth. Current verified evidence says Graphify refresh is fresh with `release_blocker=false`, native legacy remains separate/fallback-only, and hooks fallback is accepted when assets are absent or inactive. |
+| Hook mutability | Dry-run and probe inspection are non-mutating; opt-in `entry_policy.auto_entry.enabled=true` may create a bounded run and must surface `auto_entry_outcome`. |
+| Skill/install surfaces | Standalone skill install is the default in `0.0.14`; plugin marketplace/cache is optional compatibility. Setup/check-install install parity, `cap_skill`/`capContinuity` compatibility, `ccc_skill`/`cccContinuity` aliases, custom-agent sync, and legacy cleanup are separate install surfaces. |
+| Authority/release gates | Preflight validation, Cargo install, package list, checksums, release assets, publish, public install smoke, generated-artifact hygiene, and companion authority split are separate gates. Local readiness does not imply publish readiness, and preflight does not imply package/tag/upload approval. |
+| Component boundaries | CCC is one root package with internal component responsibilities. Current component boundaries are documented in `docs/release-work/0.0.14/COMPONENT_REGISTRY.md`; CCC does not claim separate LazyCodex-style component packages until package-level boundaries exist. |
+| Specialist routing gate | Assigned-specialist work that mutates directly from Captain is a routing regression unless `specialist_dispatch_proof` or terminal fallback is recorded for the current task. Current `0.0.14` source has a fail-closed `specialist_dispatch_proof_or_terminal_fallback` merge gate and best-effort run-local pre-dispatch snapshots. |
+| `wccc` internal planner | `wccc` is host-internal Captain/Way/LongWay planner context surfaced by `check-install` and status as `wayPlannerSkill`. It is not installed under `~/.codex/skills`, not a visible Codex skill, and not a public command; `$ccc` remains the public entry. Current `PLAN_SEQUENCE` smoke is verified evidence for visibility only. |
 
 ## Install With An AI Agent
 
