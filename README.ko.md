@@ -62,12 +62,20 @@ Codex CLI용 Codex-Cli-Captain 0.0.14를 설치하거나 업데이트해줘.
 
 ## 명령
 
+Codex CLI 안에서는 아래 명령을 입력합니다.
+
 | 명령 | 용도 |
 | --- | --- |
 | `$ccc "task"` | CCC가 관리하는 Codex 작업을 시작합니다. |
-| `ccc status --text` | 현재 작업 상태와 다음 행동을 확인합니다. |
-| `ccc check-install --text` | 설치, hooks, skills, agents, Graph Context를 확인합니다. |
+
+터미널에서는 아래 명령을 실행합니다.
+
+| 명령 | 용도 |
+| --- | --- |
+| `cargo install codex-cli-captain --force` | crates.io에서 CCC binary를 설치하거나 업데이트합니다. |
 | `ccc setup` | 설치 또는 업데이트 후 Codex CLI 연동을 새로 고칩니다. |
+| `ccc check-install --text` | 설치, hooks, skills, agents, Graph Context를 확인합니다. |
+| `ccc status --text` | 현재 작업 상태와 다음 행동을 확인합니다. |
 
 ## CCC가 해주는 것
 

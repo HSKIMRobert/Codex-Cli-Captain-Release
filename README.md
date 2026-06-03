@@ -62,12 +62,20 @@ Install or update Codex-Cli-Captain 0.0.14 for Codex CLI.
 
 ## Commands
 
+Use this inside Codex CLI:
+
 | Command | Use it for |
 | --- | --- |
 | `$ccc "task"` | Start a CCC-managed Codex task. |
-| `ccc status --text` | See the current task state and next action. |
-| `ccc check-install --text` | Verify install, hooks, skills, agents, and Graph Context. |
+
+Run these in your terminal:
+
+| Command | Use it for |
+| --- | --- |
+| `cargo install codex-cli-captain --force` | Install or update the CCC binary from crates.io. |
 | `ccc setup` | Refresh the Codex CLI integration after install or update. |
+| `ccc check-install --text` | Verify install, hooks, skills, agents, and Graph Context. |
+| `ccc status --text` | See the current task state and next action. |
 
 ## What CCC Gives You
 
