@@ -14,7 +14,7 @@
 
 CCC는 Codex CLI 작업용 공개 제어면입니다. 공개 워크플로에는 `$ccc`를 사용하고, CCC는 LongWay plan, task card, specialist routing, fan-in, review boundary, status projection, 설치 검증을 CCC-owned evidence surface 위에서 관리합니다.
 
-현재 공개 릴리스: `0.0.13`.
+현재 공개 릴리스: `0.0.14`.
 
 ## CCC가 제공하는 것
 
@@ -24,7 +24,7 @@ CCC는 Codex CLI 작업용 공개 제어면입니다. 공개 워크플로에는 
 | LongWay planning | 다단계 작업, 재시작 인계, 후속 연속성을 위한 plan/checklist 상태를 유지합니다. |
 | Specialist routing | CCC는 설정된 `ccc_*` role로 라우팅하고, generic transcript text 대신 간결한 fan-in을 기록합니다. |
 | Review boundary | 일반 검증은 Captain-owned입니다. 더 높은 위험의 release, destructive, security, operator-requested 작업은 review로 올립니다. |
-| Status proof | `ccc status --text`, app-panel output, checklist/projection, `ccc check-install --text`로 현재 증거와 stale boundary를 확인합니다. |
+| Status proof | `ccc status --text`, checklist/projection, `ccc check-install --text`로 현재 증거와 stale boundary를 확인합니다. app-panel output은 진단용입니다. |
 | Tool readiness | Graphify context, LSP readiness, hooks, memory, skill registry, install surface를 advisory metadata가 runtime truth처럼 취급되지 않도록 보고합니다. |
 
 ## AI 에이전트로 설치하기
@@ -32,7 +32,7 @@ CCC는 Codex CLI 작업용 공개 제어면입니다. 공개 워크플로에는 
 이 블록을 Codex CLI, ChatGPT 또는 shell 명령을 실행할 수 있는 다른 AI 에이전트에 붙여넣으세요. 목적은 바이너리 설치만이 아니라, 현재 상태 확인, 설치 또는 업데이트, setup 실행, Codex CLI 재시작 또는 재시작 안내, 그리고 결과 검증입니다.
 
 ```text
-Codex CLI용 Codex-Cli-Captain 0.0.13을 설치하거나 업데이트하세요.
+Codex CLI용 Codex-Cli-Captain 0.0.14를 설치하거나 업데이트하세요.
 
 다음 절차를 신중하게 진행하세요.
 
@@ -52,7 +52,6 @@ Codex CLI용 Codex-Cli-Captain 0.0.13을 설치하거나 업데이트하세요.
    - `ccc --version`을 실행합니다.
    - `ccc check-install --text`를 실행합니다.
    - `ccc status --text`를 실행합니다.
-   - `ccc status --app-panel --text`를 실행합니다.
 
 5. 결과를 요약합니다.
    - 설치된 버전
@@ -75,7 +74,6 @@ ccc setup
 ```bash
 ccc check-install --text
 ccc status --text
-ccc status --app-panel --text
 ```
 
 ## 사용
@@ -86,7 +84,7 @@ CCC-managed 작업을 시작하려면 요청에 `$ccc`를 사용합니다.
 $ccc release docs를 업데이트하고, 먼저 현재 코드베이스 증거를 확인한 뒤, 변경 내용을 보고해 줘
 ```
 
-후속 작업에서도 `$ccc` 또는 CCC가 출력한 continuation hint를 계속 사용합니다. CCC는 workspace의 `.ccc` runtime artifact 아래에 LongWay/checklist/fan-in 상태를 저장하고, `ccc status`와 app-panel view로 현재 상태를 표시합니다.
+후속 작업에서도 `$ccc` 또는 CCC가 출력한 continuation hint를 계속 사용합니다. CCC는 workspace의 `.ccc` runtime artifact 아래에 LongWay/checklist/fan-in 상태를 저장하고, `ccc status`로 현재 상태를 표시합니다. app-panel output은 호스트가 아직 노출하는 경우의 진단용 표면입니다.
 
 호스트가 아직 legacy skill entry를 노출하는 경우, 그 entry가 compatibility path로 계속 동작할 수 있습니다.
 

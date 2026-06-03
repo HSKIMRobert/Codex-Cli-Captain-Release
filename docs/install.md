@@ -1,6 +1,6 @@
 # Install, Update, and Uninstall
 
-This guide matches the current public install flow.
+This guide matches the current public `0.0.14` install flow.
 
 ## Install
 
@@ -12,7 +12,8 @@ ccc setup
 Then fully exit Codex CLI, start a new session, and run:
 
 ```bash
-ccc check-install
+ccc check-install --text
+ccc status --text
 ```
 
 ## Update
@@ -24,7 +25,7 @@ cargo install codex-cli-captain --force
 ccc setup
 ```
 
-Then restart Codex CLI and run `ccc check-install`.
+Then restart Codex CLI and run `ccc check-install --text`.
 
 ## Uninstall
 
@@ -44,9 +45,9 @@ Edit `~/.config/ccc/ccc-config.toml` to change CCC role models, reasoning tier, 
 ccc setup
 ```
 
-Then restart Codex CLI and run `ccc check-install`.
+Then restart Codex CLI and run `ccc check-install --text`.
 
-Codex plugin hooks are opt-in. If you enable them, edit `~/.codex/config.toml`, set `[features] plugin_hooks = true`, restart Codex CLI, review `/hooks`, approve the CCC hooks, and run `ccc check-install`.
+Codex plugin hooks are opt-in. If you enable them, edit `~/.codex/config.toml`, set `[features] plugin_hooks = true`, restart Codex CLI, review `/hooks`, approve the CCC hooks, and run `ccc check-install --text`.
 
 ## Legacy Fallback
 
@@ -64,4 +65,4 @@ iwr -UseB https://github.com/HoRi0506/Codex-Cli-Captain-Release/releases/downloa
 
 ## Platform Note
 
-CCC targets macOS, Windows, and Linux, but Windows and Linux may not work normally in some environments. Always verify with `ccc check-install` after installation or update.
+CCC targets macOS, Windows, and Linux, but Windows and Linux may not work normally in some environments. Always verify with `ccc check-install --text` after installation or update.
