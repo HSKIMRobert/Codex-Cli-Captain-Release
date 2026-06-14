@@ -1,6 +1,7 @@
 # Install, Update, and Uninstall
 
-This guide matches the current public `0.0.14` install flow.
+This guide is bounded to the `0.0.15` candidate identity. It does not announce
+or imply a release, publish, or tag.
 
 ## Install
 

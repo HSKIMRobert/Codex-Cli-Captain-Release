@@ -16,20 +16,32 @@ CCC is a small control plane for Codex CLI. Use `$ccc` when a task needs more
 than a quick answer: planning, ordered work, specialist help, review, or proof
 that the result is really done.
 
-Release version: `0.0.14`.
+Candidate identity: `0.0.15` (not released, published, or tagged).
 
 ## Install
 
-For a direct install:
+For a first-time install or a safe update on a new PC:
 
 ```bash
 cargo install codex-cli-captain --force
 ccc setup
+ccc sync-custom-agents
 ```
 
-Then fully restart Codex CLI and verify:
+Verify the Codex MCP registration, then fully restart Codex CLI / Codex App
+when `ccc setup` or `ccc check-install` asks for it:
 
 ```bash
+codex mcp list
+ccc check-install --text
+```
+
+After restart, verify again:
+
+```bash
+command -v ccc
+ccc --version
+codex mcp list
 ccc check-install --text
 ccc status --text
 ```
@@ -37,7 +49,9 @@ ccc status --text
 If you want an AI agent to handle the install, paste this:
 
 ```text
-Install or update Codex-Cli-Captain 0.0.14 for Codex CLI.
+Install or update Codex-Cli-Captain for Codex CLI.
+Treat 0.0.15 as candidate identity only; do not claim it is released,
+published, or tagged.
 
 1. Check the current state with:
    - command -v ccc || true
@@ -47,17 +61,24 @@ Install or update Codex-Cli-Captain 0.0.14 for Codex CLI.
 2. Install or update:
    - cargo install codex-cli-captain --force
    - ccc setup
+   - ccc sync-custom-agents
 
-3. Ask me to fully restart Codex CLI.
+3. Verify before restart:
+   - codex mcp list
+   - ccc check-install --text
 
-4. After restart, verify:
+4. Ask me to fully restart Codex CLI / Codex App if the check asks for it.
+
+5. After restart, verify:
    - command -v ccc
    - ccc --version
+   - codex mcp list
    - ccc check-install --text
    - ccc status --text
 
-5. Report whether $ccc, MCP registration, hooks, custom agents, and Graph
-   Context are current, and whether any restart or PATH cleanup is still needed.
+6. Report whether $ccc, MCP registration, hooks/auto-entry, custom agents,
+   Graph Context, wccc/Way planner, restart requirements, and PATH cleanup are
+   current.
 ```
 
 ## Commands
@@ -74,8 +95,12 @@ Run these in your terminal:
 | --- | --- |
 | `cargo install codex-cli-captain --force` | Install or update the CCC binary from crates.io. |
 | `ccc setup` | Refresh the Codex CLI integration after install or update. |
+| `ccc sync-custom-agents` | Regenerate CCC-managed Codex custom agents from the current config. |
+| `ccc update` | Print the safe Cargo-first update path and verification checklist without running remote scripts. |
 | `ccc check-install --text` | Verify install, hooks, skills, agents, and Graph Context. |
 | `ccc status --text` | See the current task state and next action. |
+| `ccc uninstall --dry-run` | Preview CCC-managed cleanup paths without deleting files. |
+| `ccc uninstall --confirm` | Remove CCC-managed Codex surfaces while preserving unrelated Codex data. |
 
 ## What CCC Gives You
 
@@ -109,15 +134,24 @@ For small one-off questions, normal Codex CLI usage is usually enough.
 ## Update
 
 ```bash
+ccc update
 cargo install codex-cli-captain --force
 ccc setup
+ccc sync-custom-agents
 ```
 
-Restart Codex CLI, then run:
+Verify MCP registration, restart Codex CLI / Codex App when asked, then verify
+again:
 
 ```bash
+codex mcp list
 ccc check-install --text
+ccc status --text
 ```
+
+`ccc update` is a guidance command: it prints the supported Cargo-first update
+path and verification checklist, and it does not download or execute remote
+scripts. `ccc auto-update` is the explicit automatic Cargo-first helper.
 
 ## Uninstall
 
@@ -129,7 +163,17 @@ cargo uninstall codex-cli-captain
 
 Run the dry-run first and review the paths. `cargo uninstall` removes the Cargo
 binary. `ccc uninstall --confirm` removes CCC-managed Codex surfaces while
-preserving unrelated Codex data.
+preserving unrelated Codex config, unrelated MCP servers, unrelated agents, and
+user data. Shared CCC config, legacy standalone binaries, and legacy release
+bundles require explicit high-risk opt-in flags shown by `ccc uninstall
+--dry-run`.
+
+After uninstall, fully restart Codex CLI / Codex App and verify:
+
+```bash
+command -v ccc || true
+codex mcp list
+```
 
 ## Notes
 
