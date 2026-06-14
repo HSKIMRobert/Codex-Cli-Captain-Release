@@ -16,7 +16,7 @@ CCC は Codex CLI のための小さな control plane です。すぐ答えれ�
 ではなく、計画、順序立てた作業、specialist の支援、review、完了証跡が
 必要な作業では `$ccc` を使います。
 
-候補 identity: `0.0.15` (まだ release、publish、tag ではありません)。
+候補 identity: `0.0.15` (`v0.0.15` として tag 済み; GitHub Release、package publish、cargo publish は未実施です)。
 
 ## インストール
 
@@ -38,7 +38,8 @@ AI エージェントにインストールを任せる場合は、次を貼り�
 
 ```text
 Codex CLI 用の Codex-Cli-Captain をインストールまたは更新して。
-0.0.15 は candidate identity に限り、release、publish、tag とは主張しないで。
+0.0.15 は candidate identity に限り、`v0.0.15` として tag 済みだが、GitHub Release、
+package publish、cargo publish はまだ未実施だと案内して。
 
 1. まず現在の状態を確認して。
    - command -v ccc || true

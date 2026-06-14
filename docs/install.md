@@ -1,7 +1,8 @@
 # Install, Update, and Uninstall
 
-This guide is bounded to the `0.0.15` candidate identity. It does not announce
-or imply a release, publish, or tag.
+This guide is bounded to the `0.0.15` candidate identity. The `v0.0.15` tag
+exists, but this guide does not announce or authorize a GitHub Release, package
+publish, or cargo publish.
 
 ## Install
 

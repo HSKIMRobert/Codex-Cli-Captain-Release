@@ -16,7 +16,7 @@ CCC is a small control plane for Codex CLI. Use `$ccc` when a task needs more
 than a quick answer: planning, ordered work, specialist help, review, or proof
 that the result is really done.
 
-Candidate identity: `0.0.15` (not released, published, or tagged).
+Candidate identity: `0.0.15` (tagged as `v0.0.15`; GitHub Release, package publish, and cargo publish are not done).
 
 ## Install
 
@@ -50,8 +50,8 @@ If you want an AI agent to handle the install, paste this:
 
 ```text
 Install or update Codex-Cli-Captain for Codex CLI.
-Treat 0.0.15 as candidate identity only; do not claim it is released,
-published, or tagged.
+Treat 0.0.15 as candidate identity only; it is tagged as `v0.0.15`, but GitHub
+Release, package publish, and cargo publish are not done.
 
 1. Check the current state with:
    - command -v ccc || true
