@@ -1,8 +1,7 @@
 # Install, Update, and Uninstall
 
-This guide is bounded to the `0.0.15` candidate identity. The `v0.0.15` tag
-exists, but this guide does not announce or authorize a GitHub Release, package
-publish, or cargo publish.
+This guide is bounded to the published `v0.0.16` release. The `v0.0.16` tag,
+GitHub Release card, and crates.io package are published.
 
 ## Install
 
@@ -37,7 +36,7 @@ To remove the Cargo install:
 cargo uninstall codex-cli-captain
 ```
 
-If you also want CCC-managed cleanup, run `ccc uninstall --dry-run` first, then `ccc uninstall --confirm` only after reviewing the preview.
+If you also want CCC-managed cleanup, review Codex config first and remove local hook, MCP, or skill files only when you can identify them as CCC-managed.
 
 ## Config
 

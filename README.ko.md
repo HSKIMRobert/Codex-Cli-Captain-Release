@@ -16,7 +16,7 @@ CCC는 Codex CLI를 위한 작은 control plane입니다. 빠른 답변을 넘�
 순서 있는 작업, specialist 도움, review, 완료 증거가 필요한 작업에는 `$ccc`를
 사용합니다.
 
-후보 identity: `0.0.15` (`v0.0.15`로 tag됨; GitHub Release, package publish, cargo publish는 아직 안 됨).
+현재 release: `v0.0.16` (`v0.0.16` tag, GitHub Release card, crates.io package가 publish됨).
 
 ## 설치
 
@@ -38,8 +38,8 @@ AI 에이전트에게 설치를 맡기려면 아래 내용을 붙여넣으세요
 
 ```text
 Codex CLI용 Codex-Cli-Captain을 설치하거나 업데이트해줘.
-0.0.15는 candidate identity일 뿐이며 `v0.0.15`로 tag되어 있지만 GitHub Release,
-package publish, cargo publish는 아직 안 됐다고 안내해.
+crates.io에 publish된 `v0.0.16` release를 사용하고, 설치 후 `ccc setup`으로
+Codex CLI 연동을 새로 고쳐줘.
 
 1. 먼저 현재 상태를 확인해줘.
    - command -v ccc || true
@@ -59,7 +59,7 @@ package publish, cargo publish는 아직 안 됐다고 안내해.
    - ccc status --text
 
 5. $ccc, MCP registration, hooks, custom agents, Graph Context가 current인지,
-   restart나 PATH cleanup이 아직 필요한지 보고해줘.
+   LSP safety surface, restart나 PATH cleanup이 아직 필요한지 보고해줘.
 ```
 
 ## 명령
@@ -78,6 +78,8 @@ Codex CLI 안에서는 아래 명령을 입력합니다.
 | `ccc setup` | 설치 또는 업데이트 후 Codex CLI 연동을 새로 고칩니다. |
 | `ccc check-install --text` | 설치, hooks, skills, agents, Graph Context를 확인합니다. |
 | `ccc status --text` | 현재 작업 상태와 다음 행동을 확인합니다. |
+| `ccc activity --json` | bounded activity와 proof path를 확인합니다. |
+| `ccc readiness-runbook --json` | readiness gap과 다음 bounded command를 확인합니다. |
 
 ## CCC가 해주는 것
 
@@ -124,18 +126,15 @@ ccc check-install --text
 ## 삭제
 
 ```bash
-ccc uninstall --dry-run
-ccc uninstall --confirm
 cargo uninstall codex-cli-captain
 ```
 
-먼저 dry-run으로 경로를 확인하세요. `cargo uninstall`은 Cargo binary를
-제거합니다. `ccc uninstall --confirm`은 unrelated Codex data는 보존하면서
-CCC-managed Codex surface를 제거합니다.
+`cargo uninstall`은 Cargo binary를 제거합니다. 로컬 CCC-managed hook, MCP,
+skill 파일을 직접 제거하기 전에는 Codex config를 먼저 확인하세요.
 
 ## 메모
 
-- `$ccc`가 공개 진입점입니다. `wccc`, task card, fan-in, Graph Context,
+- `$ccc`가 공개 진입점입니다. role task card, fan-in, Graph Context,
   hooks, review detail은 CCC 내부 proof surface입니다.
 - Codex plugin hooks는 선택 사항입니다. 활성화했다면 Codex CLI를 다시
   시작하고 `ccc check-install --text`로 확인하세요.

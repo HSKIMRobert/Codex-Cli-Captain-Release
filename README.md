@@ -16,7 +16,7 @@ CCC is a small control plane for Codex CLI. Use `$ccc` when a task needs more
 than a quick answer: planning, ordered work, specialist help, review, or proof
 that the result is really done.
 
-Candidate identity: `0.0.15` (tagged as `v0.0.15`; GitHub Release, package publish, and cargo publish are not done).
+Current release: `v0.0.16` (`v0.0.16` tag, GitHub Release card, and crates.io package are published).
 
 ## Install
 
@@ -25,7 +25,6 @@ For a first-time install or a safe update on a new PC:
 ```bash
 cargo install codex-cli-captain --force
 ccc setup
-ccc sync-custom-agents
 ```
 
 Verify the Codex MCP registration, then fully restart Codex CLI / Codex App
@@ -50,8 +49,8 @@ If you want an AI agent to handle the install, paste this:
 
 ```text
 Install or update Codex-Cli-Captain for Codex CLI.
-Treat 0.0.15 as candidate identity only; it is tagged as `v0.0.15`, but GitHub
-Release, package publish, and cargo publish are not done.
+Use the published `v0.0.16` release from crates.io, then refresh the Codex CLI
+integration with `ccc setup`.
 
 1. Check the current state with:
    - command -v ccc || true
@@ -61,7 +60,6 @@ Release, package publish, and cargo publish are not done.
 2. Install or update:
    - cargo install codex-cli-captain --force
    - ccc setup
-   - ccc sync-custom-agents
 
 3. Verify before restart:
    - codex mcp list
@@ -76,9 +74,8 @@ Release, package publish, and cargo publish are not done.
    - ccc check-install --text
    - ccc status --text
 
-6. Report whether $ccc, MCP registration, hooks/auto-entry, custom agents,
-   Graph Context, wccc/Way planner, restart requirements, and PATH cleanup are
-   current.
+6. Report whether $ccc, MCP registration, hooks, graph-card planning context,
+   LSP safety surface, restart requirements, and PATH cleanup are current.
 ```
 
 ## Commands
@@ -95,12 +92,10 @@ Run these in your terminal:
 | --- | --- |
 | `cargo install codex-cli-captain --force` | Install or update the CCC binary from crates.io. |
 | `ccc setup` | Refresh the Codex CLI integration after install or update. |
-| `ccc sync-custom-agents` | Regenerate CCC-managed Codex custom agents from the current config. |
-| `ccc update` | Print the safe Cargo-first update path and verification checklist without running remote scripts. |
 | `ccc check-install --text` | Verify install, hooks, skills, agents, and Graph Context. |
 | `ccc status --text` | See the current task state and next action. |
-| `ccc uninstall --dry-run` | Preview CCC-managed cleanup paths without deleting files. |
-| `ccc uninstall --confirm` | Remove CCC-managed Codex surfaces while preserving unrelated Codex data. |
+| `ccc activity --json` | Inspect bounded activity and proof paths. |
+| `ccc readiness-runbook --json` | Inspect readiness gaps and the next bounded command. |
 
 ## What CCC Gives You
 
@@ -134,10 +129,8 @@ For small one-off questions, normal Codex CLI usage is usually enough.
 ## Update
 
 ```bash
-ccc update
 cargo install codex-cli-captain --force
 ccc setup
-ccc sync-custom-agents
 ```
 
 Verify MCP registration, restart Codex CLI / Codex App when asked, then verify
@@ -149,24 +142,17 @@ ccc check-install --text
 ccc status --text
 ```
 
-`ccc update` is a guidance command: it prints the supported Cargo-first update
-path and verification checklist, and it does not download or execute remote
-scripts. `ccc auto-update` is the explicit automatic Cargo-first helper.
+Use the Cargo-first path above for normal updates. CCC does not require
+release-bundle scripts for the normal update path.
 
 ## Uninstall
 
 ```bash
-ccc uninstall --dry-run
-ccc uninstall --confirm
 cargo uninstall codex-cli-captain
 ```
 
-Run the dry-run first and review the paths. `cargo uninstall` removes the Cargo
-binary. `ccc uninstall --confirm` removes CCC-managed Codex surfaces while
-preserving unrelated Codex config, unrelated MCP servers, unrelated agents, and
-user data. Shared CCC config, legacy standalone binaries, and legacy release
-bundles require explicit high-risk opt-in flags shown by `ccc uninstall
---dry-run`.
+`cargo uninstall` removes the Cargo binary. Review Codex config before removing
+any local CCC-managed hook, MCP, or skill files by hand.
 
 After uninstall, fully restart Codex CLI / Codex App and verify:
 
@@ -177,7 +163,7 @@ codex mcp list
 
 ## Notes
 
-- `$ccc` is the public entrypoint. `wccc`, task cards, fan-in, Graph Context,
+- `$ccc` is the public entrypoint. Role task cards, fan-in, Graph Context,
   hooks, and review details are internal CCC proof surfaces.
 - Codex plugin hooks are optional. If enabled, restart Codex CLI and verify with
   `ccc check-install --text`.

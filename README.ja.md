@@ -16,7 +16,7 @@ CCC は Codex CLI のための小さな control plane です。すぐ答えれ�
 ではなく、計画、順序立てた作業、specialist の支援、review、完了証跡が
 必要な作業では `$ccc` を使います。
 
-候補 identity: `0.0.15` (`v0.0.15` として tag 済み; GitHub Release、package publish、cargo publish は未実施です)。
+現在の release: `v0.0.16` (`v0.0.16` tag、GitHub Release card、crates.io package は publish 済みです)。
 
 ## インストール
 
@@ -38,8 +38,8 @@ AI エージェントにインストールを任せる場合は、次を貼り�
 
 ```text
 Codex CLI 用の Codex-Cli-Captain をインストールまたは更新して。
-0.0.15 は candidate identity に限り、`v0.0.15` として tag 済みだが、GitHub Release、
-package publish、cargo publish はまだ未実施だと案内して。
+crates.io に publish 済みの `v0.0.16` release を使い、install 後に
+`ccc setup` で Codex CLI 連携を更新して。
 
 1. まず現在の状態を確認して。
    - command -v ccc || true
@@ -58,7 +58,7 @@ package publish、cargo publish はまだ未実施だと案内して。
    - ccc check-install --text
    - ccc status --text
 
-5. $ccc、MCP registration、hooks、custom agents、Graph Context が current か、
+5. $ccc、MCP registration、hooks、custom agents、Graph Context、LSP safety surface が current か、
    restart や PATH cleanup がまだ必要かを報告して。
 ```
 
@@ -78,6 +78,8 @@ Codex CLI の中では次を入力します。
 | `ccc setup` | install または update 後に Codex CLI 連携を更新します。 |
 | `ccc check-install --text` | install、hooks、skills、agents、Graph Context を確認します。 |
 | `ccc status --text` | 現在の作業状態と次の行動を確認します。 |
+| `ccc activity --json` | bounded activity と proof path を確認します。 |
+| `ccc readiness-runbook --json` | readiness gap と次の bounded command を確認します。 |
 
 ## CCC がしてくれること
 
@@ -124,18 +126,15 @@ ccc check-install --text
 ## 削除
 
 ```bash
-ccc uninstall --dry-run
-ccc uninstall --confirm
 cargo uninstall codex-cli-captain
 ```
 
-まず dry-run で path を確認してください。`cargo uninstall` は Cargo binary
-を削除します。`ccc uninstall --confirm` は unrelated Codex data を残したまま
-CCC-managed Codex surface を削除します。
+`cargo uninstall` は Cargo binary を削除します。ローカルの CCC-managed
+hook、MCP、skill file を手動で削除する前に Codex config を確認してください。
 
 ## メモ
 
-- `$ccc` が公開エントリです。`wccc`、task card、fan-in、Graph Context、
+- `$ccc` が公開エントリです。role task card、fan-in、Graph Context、
   hooks、review detail は CCC 内部の proof surface です。
 - Codex plugin hooks は任意です。有効にした場合は Codex CLI を再起動し、
   `ccc check-install --text` で確認してください。
