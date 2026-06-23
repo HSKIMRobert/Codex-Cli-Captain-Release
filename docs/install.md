@@ -1,7 +1,13 @@
 # Install, Update, and Uninstall
 
 This guide is bounded to the published `v0.0.18` crates.io release. The
-`v0.0.18` tag and GitHub Release card remain pending separate authorization.
+`v0.0.18` tag is published; the GitHub Release card remains pending separate
+authorization.
+
+Scope note: `v0.0.18` covers delegated-flow guardrails and first-slice
+team-mode lifecycle gate/projection surfaces. It does not claim full durable
+LazyCodex-style host-hook teammode execution; that remains planned for
+`v0.0.19`.
 
 ## Install
 

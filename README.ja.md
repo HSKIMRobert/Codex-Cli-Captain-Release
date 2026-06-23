@@ -16,8 +16,8 @@ CCC は Codex CLI のための小さな control plane です。すぐ答えれ�
 ではなく、計画、順序立てた作業、specialist の支援、review、完了証跡が
 必要な作業では `$ccc` を使います。
 
-現在の release は `v0.0.18` です。crates.io package は publish 済みで、
-`v0.0.18` tag と GitHub Release card は別途承認が必要です。
+現在の release は `v0.0.18` です。crates.io package と `v0.0.18` tag は
+publish 済みで、GitHub Release card は別途承認が必要です。
 
 ## インストール
 
@@ -111,6 +111,11 @@ Codex CLI の中では次を入力します。
 | Captain orchestration | host Codex が指揮し、必要な specialist 作業を CCC がルーティングします。 |
 | 静かな進捗管理 | status、checklist、fan-in を transcript noise ではなく CCC surface に保持します。 |
 | 証跡ベースの完了 | 現在の validation と review evidence を完了判断の基準にします。 |
+
+Scope note: `v0.0.18` は delegated-flow guardrail と team-mode lifecycle
+gate/projection の最初の surface を公開します。完全な LazyCodex 型
+durable host-hook teammode 実装ではなく、durable subagent team execution
+は `v0.0.19` の計画として残っています。
 
 ## 使い方
 

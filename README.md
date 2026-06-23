@@ -16,8 +16,8 @@ CCC is a small control plane for Codex CLI. Use `$ccc` when a task needs more
 than a quick answer: planning, ordered work, specialist help, review, or proof
 that the result is really done.
 
-Current release: `v0.0.18`. The crates.io package is published; the `v0.0.18`
-tag and GitHub Release card remain pending separate authorization.
+Current release: `v0.0.18`. The crates.io package and `v0.0.18` tag are
+published; the GitHub Release card remains pending separate authorization.
 
 ## Install
 
@@ -123,6 +123,11 @@ Run these in your terminal:
 | Captain orchestration | The host Codex stays in charge while CCC routes specialist work when useful. |
 | Quiet progress tracking | Status, checklist, and fan-in stay in CCC surfaces instead of noisy transcript text. |
 | Evidence-based finish | CCC treats current validation and review evidence as the source of truth. |
+
+Scope note: `v0.0.18` publishes delegated-flow guardrails and the first
+team-mode lifecycle gate/projection surfaces. It is not a full durable
+LazyCodex-style host-hook teammode implementation; durable subagent team
+execution remains planned for `v0.0.19`.
 
 ## Use It
 
