@@ -16,8 +16,8 @@ CCC는 Codex CLI를 위한 작은 control plane입니다. 빠른 답변을 넘�
 순서 있는 작업, specialist 도움, review, 완료 증거가 필요한 작업에는 `$ccc`를
 사용합니다.
 
-현재 release: `v0.0.17` (`v0.0.17` tag, GitHub Release card, crates.io
-package가 publish됨).
+현재 release: `v0.0.18`입니다. crates.io package는 publish되었고,
+`v0.0.18` tag와 GitHub Release card는 별도 승인이 필요합니다.
 
 ## 설치
 
@@ -42,7 +42,7 @@ AI 에이전트에게 설치를 맡기려면 아래 내용을 붙여넣으세요
 
 ```text
 Codex CLI용 Codex-Cli-Captain을 설치하거나 업데이트해줘.
-crates.io에 publish된 `v0.0.17` release를 사용하고, 설치 후 plugin 지원까지
+crates.io에 publish된 `v0.0.18` release를 사용하고, 설치 후 plugin 지원까지
 포함해서 Codex CLI 연동을 새로 고쳐줘.
 
 1. 먼저 현재 상태를 확인해줘.
