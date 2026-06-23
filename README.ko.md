@@ -25,12 +25,15 @@ package가 publish됨).
 
 ```bash
 cargo install codex-cli-captain --force
-ccc setup
+ccc setup --with-plugin
 ```
 
 그다음 Codex CLI를 완전히 다시 시작하고 확인합니다.
 
 ```bash
+codex mcp list
+codex plugin marketplace list
+codex plugin list
 ccc check-install --text
 ccc status --text
 ```
@@ -39,8 +42,8 @@ AI 에이전트에게 설치를 맡기려면 아래 내용을 붙여넣으세요
 
 ```text
 Codex CLI용 Codex-Cli-Captain을 설치하거나 업데이트해줘.
-crates.io에 publish된 `v0.0.17` release를 사용하고, 설치 후 `ccc setup`으로
-Codex CLI 연동을 새로 고쳐줘.
+crates.io에 publish된 `v0.0.17` release를 사용하고, 설치 후 plugin 지원까지
+포함해서 Codex CLI 연동을 새로 고쳐줘.
 
 1. 먼저 현재 상태를 확인해줘.
    - command -v ccc || true
@@ -49,17 +52,35 @@ Codex CLI 연동을 새로 고쳐줘.
 
 2. 설치 또는 업데이트해줘.
    - cargo install codex-cli-captain --force
-   - ccc setup
+   - ccc setup --with-plugin
 
-3. 내가 Codex CLI를 완전히 재시작하도록 안내해줘.
+3. 재시작 전에 확인해줘.
+   - codex mcp list
+   - codex plugin marketplace list
+   - codex plugin list
+   - ccc check-install --text
 
-4. 재시작 후 확인해줘.
+4. 검사 결과가 요구하면 내가 Codex CLI / Codex App을 완전히 재시작하도록 안내해줘.
+
+5. 재시작 후 확인해줘.
    - command -v ccc
    - ccc --version
+   - codex mcp list
+   - codex plugin marketplace list
+   - codex plugin list
    - ccc check-install --text
    - ccc status --text
 
-5. $ccc, MCP registration, hooks, custom agents, Graph Context가 current인지,
+6. `codex plugin list`에 `ccc@ccc-dev`가 installed/enabled로 보이지 않으면,
+   plugin hooks에 의존하기 전에 `ccc setup --with-plugin`을 다시 실행해줘.
+
+7. plugin hooks, graph-card planning context, LSP lifecycle proof가 아직 missing이면,
+   작은 명시적 $ccc 요청을 한 번 실행해서 host가 WAVE/PostToolUse/LSP/Stop lifecycle
+   proof를 관찰하게 한 뒤 아래를 다시 실행해줘.
+   - ccc check-install --text
+   - ccc status --text
+
+8. $ccc, MCP registration, hooks, custom agents, Graph Context가 current인지,
    LSP safety surface, restart나 PATH cleanup이 아직 필요한지 보고해줘.
 ```
 
@@ -76,7 +97,7 @@ Codex CLI 안에서는 아래 명령을 입력합니다.
 | 명령 | 용도 |
 | --- | --- |
 | `cargo install codex-cli-captain --force` | crates.io에서 CCC binary를 설치하거나 업데이트합니다. |
-| `ccc setup` | 설치 또는 업데이트 후 Codex CLI 연동을 새로 고칩니다. |
+| `ccc setup --with-plugin` | 설치 또는 업데이트 후 Codex CLI 연동, plugin marketplace/cache, hooks, skills, agents를 새로 고칩니다. |
 | `ccc check-install --text` | 설치, hooks, skills, agents, Graph Context를 확인합니다. |
 | `ccc status --text` | 현재 작업 상태와 다음 행동을 확인합니다. |
 | `ccc activity --json` | bounded activity와 proof path를 확인합니다. |
@@ -115,7 +136,7 @@ continuation command를 사용합니다.
 
 ```bash
 cargo install codex-cli-captain --force
-ccc setup
+ccc setup --with-plugin
 ```
 
 Codex CLI를 다시 시작한 뒤 실행합니다.

@@ -7,15 +7,29 @@ GitHub Release card, and crates.io package are published.
 
 ```bash
 cargo install codex-cli-captain
-ccc setup
+ccc setup --with-plugin
 ```
 
 Then fully exit Codex CLI, start a new session, and run:
 
 ```bash
+codex mcp list
+codex plugin marketplace list
+codex plugin list
 ccc check-install --text
 ccc status --text
 ```
+
+`ccc setup --with-plugin` refreshes the CCC MCP registration, custom agents,
+plugin marketplace/cache, and hook assets. If `codex plugin list` does not show
+`ccc@ccc-dev` installed and enabled, run `ccc setup --with-plugin` again before
+relying on plugin hooks.
+
+Some lifecycle proof surfaces, such as plugin hook visibility, graph-card
+planning context, and LSP safety loop evidence, are observed during an explicit
+`$ccc` task rather than at install time. After setup and restart, run one small
+explicit `$ccc` request if those surfaces still report missing, then rerun
+`ccc check-install --text` and `ccc status --text`.
 
 ## Update
 
@@ -23,7 +37,7 @@ For an existing Cargo install:
 
 ```bash
 cargo install codex-cli-captain --force
-ccc setup
+ccc setup --with-plugin
 ```
 
 Then restart Codex CLI and run `ccc check-install --text`.
@@ -43,7 +57,7 @@ If you also want CCC-managed cleanup, review Codex config first and remove local
 Edit `~/.config/ccc/ccc-config.toml` to change CCC role models, reasoning tier, and fast-mode settings. After editing, run:
 
 ```bash
-ccc setup
+ccc setup --with-plugin
 ```
 
 Then restart Codex CLI and run `ccc check-install --text`.

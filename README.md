@@ -25,14 +25,16 @@ For a first-time install or a safe update on a new PC:
 
 ```bash
 cargo install codex-cli-captain --force
-ccc setup
+ccc setup --with-plugin
 ```
 
-Verify the Codex MCP registration, then fully restart Codex CLI / Codex App
-when `ccc setup` or `ccc check-install` asks for it:
+Verify the Codex MCP/plugin registration, then fully restart Codex CLI /
+Codex App when `ccc setup --with-plugin` or `ccc check-install` asks for it:
 
 ```bash
 codex mcp list
+codex plugin marketplace list
+codex plugin list
 ccc check-install --text
 ```
 
@@ -42,6 +44,8 @@ After restart, verify again:
 command -v ccc
 ccc --version
 codex mcp list
+codex plugin marketplace list
+codex plugin list
 ccc check-install --text
 ccc status --text
 ```
@@ -51,7 +55,7 @@ If you want an AI agent to handle the install, paste this:
 ```text
 Install or update Codex-Cli-Captain for Codex CLI.
 Use the published `v0.0.17` release from crates.io, then refresh the Codex CLI
-integration with `ccc setup`.
+integration with plugin support.
 
 1. Check the current state with:
    - command -v ccc || true
@@ -60,10 +64,12 @@ integration with `ccc setup`.
 
 2. Install or update:
    - cargo install codex-cli-captain --force
-   - ccc setup
+   - ccc setup --with-plugin
 
 3. Verify before restart:
    - codex mcp list
+   - codex plugin marketplace list
+   - codex plugin list
    - ccc check-install --text
 
 4. Ask me to fully restart Codex CLI / Codex App if the check asks for it.
@@ -72,10 +78,21 @@ integration with `ccc setup`.
    - command -v ccc
    - ccc --version
    - codex mcp list
+   - codex plugin marketplace list
+   - codex plugin list
    - ccc check-install --text
    - ccc status --text
 
-6. Report whether $ccc, MCP registration, hooks, graph-card planning context,
+6. If `codex plugin list` does not show `ccc@ccc-dev` installed and enabled,
+   run `ccc setup --with-plugin` again before relying on plugin hooks.
+
+7. If plugin hooks, graph-card planning context, or LSP lifecycle proof still
+   show missing, run one small explicit $ccc request so the host can observe
+   WAVE/PostToolUse/LSP/Stop lifecycle proof, then run:
+   - ccc check-install --text
+   - ccc status --text
+
+8. Report whether $ccc, MCP registration, hooks, graph-card planning context,
    LSP safety surface, restart requirements, and PATH cleanup are current.
 ```
 
@@ -92,7 +109,7 @@ Run these in your terminal:
 | Command | Use it for |
 | --- | --- |
 | `cargo install codex-cli-captain --force` | Install or update the CCC binary from crates.io. |
-| `ccc setup` | Refresh the Codex CLI integration after install or update. |
+| `ccc setup --with-plugin` | Refresh the Codex CLI integration, plugin marketplace/cache, hooks, skills, and agents after install or update. |
 | `ccc check-install --text` | Verify install, hooks, skills, agents, and Graph Context. |
 | `ccc status --text` | See the current task state and next action. |
 | `ccc activity --json` | Inspect bounded activity and proof paths. |
@@ -131,14 +148,16 @@ For small one-off questions, normal Codex CLI usage is usually enough.
 
 ```bash
 cargo install codex-cli-captain --force
-ccc setup
+ccc setup --with-plugin
 ```
 
-Verify MCP registration, restart Codex CLI / Codex App when asked, then verify
-again:
+Verify MCP/plugin registration, restart Codex CLI / Codex App when asked, then
+verify again:
 
 ```bash
 codex mcp list
+codex plugin marketplace list
+codex plugin list
 ccc check-install --text
 ccc status --text
 ```
