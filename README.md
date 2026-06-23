@@ -16,9 +16,9 @@ CCC is a small control plane for Codex CLI. Use `$ccc` when a task needs more
 than a quick answer: planning, ordered work, specialist help, review, or proof
 that the result is really done.
 
-Current release candidate: `v0.0.17`. The `v0.0.17` tag, GitHub Release card,
-and crates.io package are publish targets and are not claimed as published until
-the release step completes.
+Current crates.io release: `v0.0.17`. The crates.io package is published; the
+`v0.0.17` GitHub tag and GitHub Release card remain pending unless separately
+authorized.
 
 ## Install
 
@@ -51,8 +51,8 @@ If you want an AI agent to handle the install, paste this:
 
 ```text
 Install or update Codex-Cli-Captain for Codex CLI.
-Use the `v0.0.17` release from crates.io after it is published, then refresh the
-Codex CLI integration with `ccc setup`.
+Use the published `v0.0.17` release from crates.io, then refresh the Codex CLI
+integration with `ccc setup`.
 
 1. Check the current state with:
    - command -v ccc || true
