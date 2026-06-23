@@ -1,7 +1,8 @@
 # Install, Update, and Uninstall
 
-This guide is bounded to the published `v0.0.16` release. The `v0.0.16` tag,
-GitHub Release card, and crates.io package are published.
+This guide is bounded to the `v0.0.17` release candidate. The `v0.0.17` tag,
+GitHub Release card, and crates.io package are publish targets and are not
+claimed as published until the release step completes.
 
 ## Install
 
