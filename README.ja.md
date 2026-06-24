@@ -16,8 +16,9 @@ CCC は Codex CLI のための小さな control plane です。すぐ答えれ�
 ではなく、計画、順序立てた作業、specialist の支援、review、完了証跡が
 必要な作業では `$ccc` を使います。
 
-現在の release は `v0.0.18` です。crates.io package と `v0.0.18` tag は
-publish 済みで、GitHub Release card は別途承認が必要です。
+現在の release は `v0.0.19` です。crates.io package は publish 済みで、
+`v0.0.19` tag と GitHub Release card は別途 follow-up の publication
+手順です。
 
 ## インストール
 
@@ -42,7 +43,7 @@ AI エージェントにインストールを任せる場合は、次を貼り�
 
 ```text
 Codex CLI 用の Codex-Cli-Captain をインストールまたは更新して。
-crates.io に publish 済みの `v0.0.18` release を使い、install 後に
+crates.io に publish 済みの `v0.0.19` release を使い、install 後に
 plugin support まで含めて Codex CLI 連携を更新して。
 
 1. まず現在の状態を確認して。
@@ -112,10 +113,11 @@ Codex CLI の中では次を入力します。
 | 静かな進捗管理 | status、checklist、fan-in を transcript noise ではなく CCC surface に保持します。 |
 | 証跡ベースの完了 | 現在の validation と review evidence を完了判断の基準にします。 |
 
-Scope note: `v0.0.18` は delegated-flow guardrail と team-mode lifecycle
-gate/projection の最初の surface を公開します。完全な LazyCodex 型
-durable host-hook teammode 実装ではなく、durable subagent team execution
-は `v0.0.19` の計画として残っています。
+Scope note: `v0.0.19` は durable host-hook teammode proof surface を公開します。
+lifecycle team registry state、per-lane dispatch receipt、fan-in/verifier
+handoff receipt、LSP/reverify/Stop closeout gate、retry/repair blocker、
+visible `CCC MODE ACTIVATE` banner を含みます。tag、push、GitHub Release、
+release repository mutation は引き続き明示的な operator 承認手順です。
 
 ## 使い方
 

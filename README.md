@@ -16,8 +16,8 @@ CCC is a small control plane for Codex CLI. Use `$ccc` when a task needs more
 than a quick answer: planning, ordered work, specialist help, review, or proof
 that the result is really done.
 
-Current release: `v0.0.18`. The crates.io package and `v0.0.18` tag are
-published; the GitHub Release card remains pending separate authorization.
+Current release: `v0.0.19`. The crates.io package is published; the `v0.0.19`
+tag and GitHub Release card remain separate follow-up publication steps.
 
 ## Install
 
@@ -54,7 +54,7 @@ If you want an AI agent to handle the install, paste this:
 
 ```text
 Install or update Codex-Cli-Captain for Codex CLI.
-Use the published `v0.0.18` release from crates.io, then refresh the Codex CLI
+Use the published `v0.0.19` release from crates.io, then refresh the Codex CLI
 integration with plugin support.
 
 1. Check the current state with:
@@ -124,10 +124,11 @@ Run these in your terminal:
 | Quiet progress tracking | Status, checklist, and fan-in stay in CCC surfaces instead of noisy transcript text. |
 | Evidence-based finish | CCC treats current validation and review evidence as the source of truth. |
 
-Scope note: `v0.0.18` publishes delegated-flow guardrails and the first
-team-mode lifecycle gate/projection surfaces. It is not a full durable
-LazyCodex-style host-hook teammode implementation; durable subagent team
-execution remains planned for `v0.0.19`.
+Scope note: `v0.0.19` publishes durable host-hook teammode proof surfaces:
+lifecycle team registry state, per-lane dispatch receipts, fan-in and verifier
+handoff receipts, LSP/reverify/Stop closeout gates, retry/repair blockers, and
+the visible `CCC MODE ACTIVATE` banner. Tag, push, GitHub Release, and release
+repository mutation remain explicit operator-controlled steps.
 
 ## Use It
 

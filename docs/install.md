@@ -1,13 +1,13 @@
 # Install, Update, and Uninstall
 
-This guide is bounded to the published `v0.0.18` crates.io release. The
-`v0.0.18` tag is published; the GitHub Release card remains pending separate
-authorization.
+This guide is bounded to the published `v0.0.19` crates.io release. The
+`v0.0.19` tag and GitHub Release card remain separate follow-up publication
+steps.
 
-Scope note: `v0.0.18` covers delegated-flow guardrails and first-slice
-team-mode lifecycle gate/projection surfaces. It does not claim full durable
-LazyCodex-style host-hook teammode execution; that remains planned for
-`v0.0.19`.
+Scope note: `v0.0.19` covers durable host-hook teammode proof surfaces:
+lifecycle team registry state, per-lane dispatch receipts, fan-in and verifier
+handoff receipts, LSP/reverify/Stop closeout gates, retry/repair blockers, and
+the visible `CCC MODE ACTIVATE` banner.
 
 ## Install
 
