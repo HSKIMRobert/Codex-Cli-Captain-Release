@@ -64,6 +64,7 @@ Final post-publish readiness evidence showed:
 
 ## Publication Boundary
 
-The crates.io package is published. The canonical release repo tag,
-downloadable asset bundle, and GitHub Release card publication remain separate
+The crates.io package is published and this release card source is published in
+the release repository. The canonical release repo tag, downloadable asset
+bundle, and external GitHub Release publication remain separate
 operator-controlled steps unless they are explicitly performed.

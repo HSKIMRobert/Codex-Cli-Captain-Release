@@ -3,8 +3,9 @@
 This guide is bounded to the published `v0.0.20` crates.io release. The
 crates.io package was published after installed-local pre-publish gates, and
 post-publish verification passed after a registry install. The canonical
-release repo tag, downloadable asset bundle, and GitHub Release card remain
-separate follow-up publication steps.
+release repo tag and downloadable asset bundle remain separate follow-up
+publication steps. The release card source is published in this repo at
+[`docs/release-card-v0.0.20.md`](./release-card-v0.0.20.md).
 
 Scope note: `v0.0.20` keeps the durable host-hook teammode proof surfaces from
 `v0.0.19` and repairs the installed App lifecycle path used by natural `$ccc`

@@ -19,8 +19,9 @@ CCC は Codex CLI のための小さな control plane です。すぐ答えれ�
 現在の crates.io release は `v0.0.20` です。crates.io package は
 installed-local pre-publish gate の後に publish 済みで、registry install
 による post-publish verification も通過しています。canonical release repo
-tag、downloadable asset bundle、GitHub Release card は別途 follow-up の
-publication 手順です。
+tag、downloadable asset bundle は別途 follow-up の publication 手順です。
+
+Release card: [`docs/release-card-v0.0.20.md`](./docs/release-card-v0.0.20.md).
 
 ## インストール
 
@@ -121,8 +122,8 @@ Scope note: `v0.0.20` は `v0.0.19` の durable host-hook teammode proof surface
 projection、host update_plan mirror/ACK、PostToolUse hooks、App-native Worker
 と Arbiter の spawn/fan-in/close、proof-command drift protection、LSP
 bridge/safety、team registry readiness、Stop closeout、`CCC WAVE DEACTIVE` が
-含まれます。tag、push、GitHub Release、downloadable assets、release repository
-mutation は引き続き明示的な operator 承認手順です。
+含まれます。tag、push、downloadable assets、external GitHub Release
+publication は引き続き明示的な operator 承認手順です。
 
 ## 使い方
 

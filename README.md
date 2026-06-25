@@ -19,7 +19,9 @@ that the result is really done.
 Current crates.io release: `v0.0.20`. The crates.io package was published after
 installed-local pre-publish gates, and post-publish verification passed after a
 registry install. The canonical release repo tag, downloadable asset bundle,
-and GitHub Release card remain separate follow-up publication steps.
+remain separate follow-up publication steps.
+
+Release card: [`docs/release-card-v0.0.20.md`](./docs/release-card-v0.0.20.md).
 
 ## Install
 
@@ -132,8 +134,8 @@ runs. The verified release covers WAVE/ODYSSEY persistence, graph-card and
 compact projection, host update_plan mirror/ACK, PostToolUse hooks,
 App-native Worker and Arbiter spawn/fan-in/close, proof-command drift
 protection, LSP bridge/safety, team registry readiness, Stop closeout, and
-`CCC WAVE DEACTIVE`. Tag, push, GitHub Release, downloadable assets, and
-release repository mutation remain explicit operator-controlled steps.
+`CCC WAVE DEACTIVE`. Tag, push, downloadable assets, and external GitHub
+Release publication remain explicit operator-controlled steps.
 
 ## Use It
 
