@@ -1,13 +1,18 @@
 # Install, Update, and Uninstall
 
-This guide is bounded to the published `v0.0.19` crates.io release. The
-`v0.0.19` tag and GitHub Release card remain separate follow-up publication
-steps.
+This guide is bounded to the published `v0.0.20` crates.io release. The
+crates.io package was published after installed-local pre-publish gates, and
+post-publish verification passed after a registry install. The canonical
+release repo tag, downloadable asset bundle, and GitHub Release card remain
+separate follow-up publication steps.
 
-Scope note: `v0.0.19` covers durable host-hook teammode proof surfaces:
-lifecycle team registry state, per-lane dispatch receipts, fan-in and verifier
-handoff receipts, LSP/reverify/Stop closeout gates, retry/repair blockers, and
-the visible `CCC MODE ACTIVATE` banner.
+Scope note: `v0.0.20` keeps the durable host-hook teammode proof surfaces from
+`v0.0.19` and repairs the installed App lifecycle path used by natural `$ccc`
+runs. The verified release covers WAVE/ODYSSEY persistence, graph-card and
+compact projection, host update_plan mirror/ACK, PostToolUse hooks,
+App-native Worker and Arbiter spawn/fan-in/close, proof-command drift
+protection, LSP bridge/safety, team registry readiness, Stop closeout, and
+`CCC WAVE DEACTIVE`.
 
 ## Install
 

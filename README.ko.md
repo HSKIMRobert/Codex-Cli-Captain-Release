@@ -16,8 +16,11 @@ CCC는 Codex CLI를 위한 작은 control plane입니다. 빠른 답변을 넘�
 순서 있는 작업, specialist 도움, review, 완료 증거가 필요한 작업에는 `$ccc`를
 사용합니다.
 
-현재 release: `v0.0.19`입니다. crates.io package는 publish되었고,
-`v0.0.19` tag와 GitHub Release card는 별도 후속 publish 단계입니다.
+현재 crates.io release는 `v0.0.20`입니다. crates.io package는
+installed-local pre-publish gate 이후 publish되었고, registry install 기반
+post-publish verification도 통과했습니다. canonical release repo tag,
+downloadable asset bundle, GitHub Release card는 별도 후속 publication
+단계입니다.
 
 ## 설치
 
@@ -42,7 +45,7 @@ AI 에이전트에게 설치를 맡기려면 아래 내용을 붙여넣으세요
 
 ```text
 Codex CLI용 Codex-Cli-Captain을 설치하거나 업데이트해줘.
-crates.io에 publish된 `v0.0.19` release를 사용하고, 설치 후 plugin 지원까지
+crates.io에 publish된 `v0.0.20` release를 사용하고, 설치 후 plugin 지원까지
 포함해서 Codex CLI 연동을 새로 고쳐줘.
 
 1. 먼저 현재 상태를 확인해줘.
@@ -112,11 +115,14 @@ Codex CLI 안에서는 아래 명령을 입력합니다.
 | 조용한 진행 추적 | status, checklist, fan-in을 transcript noise 대신 CCC 표면에 보관합니다. |
 | 증거 기반 완료 | 현재 검증과 review evidence를 완료 판단의 기준으로 삼습니다. |
 
-범위 참고: `v0.0.19`는 durable host-hook teammode proof 표면을 공개합니다.
-lifecycle team registry state, per-lane dispatch receipt, fan-in/verifier
-handoff receipt, LSP/reverify/Stop closeout gate, retry/repair blocker,
-visible `CCC MODE ACTIVATE` banner를 포함합니다. tag, push, GitHub Release,
-release repository mutation은 계속 명시적 operator 승인 단계입니다.
+범위 참고: `v0.0.20`은 `v0.0.19`의 durable host-hook teammode proof 표면을
+유지하고, 자연스러운 `$ccc` 실행에서 사용하는 installed App lifecycle path를
+수리합니다. 검증된 release 범위에는 WAVE/ODYSSEY persistence, graph-card와
+compact projection, host update_plan mirror/ACK, PostToolUse hooks,
+App-native Worker와 Arbiter spawn/fan-in/close, proof-command drift protection,
+LSP bridge/safety, team registry readiness, Stop closeout, `CCC WAVE DEACTIVE`가
+포함됩니다. tag, push, GitHub Release, downloadable assets, release repository
+mutation은 계속 명시적 operator 승인 단계입니다.
 
 ## 사용
 

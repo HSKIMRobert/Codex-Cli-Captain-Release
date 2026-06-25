@@ -16,8 +16,10 @@ CCC is a small control plane for Codex CLI. Use `$ccc` when a task needs more
 than a quick answer: planning, ordered work, specialist help, review, or proof
 that the result is really done.
 
-Current release: `v0.0.19`. The crates.io package is published; the `v0.0.19`
-tag and GitHub Release card remain separate follow-up publication steps.
+Current crates.io release: `v0.0.20`. The crates.io package was published after
+installed-local pre-publish gates, and post-publish verification passed after a
+registry install. The canonical release repo tag, downloadable asset bundle,
+and GitHub Release card remain separate follow-up publication steps.
 
 ## Install
 
@@ -54,7 +56,7 @@ If you want an AI agent to handle the install, paste this:
 
 ```text
 Install or update Codex-Cli-Captain for Codex CLI.
-Use the published `v0.0.19` release from crates.io, then refresh the Codex CLI
+Use the published `v0.0.20` release from crates.io, then refresh the Codex CLI
 integration with plugin support.
 
 1. Check the current state with:
@@ -124,11 +126,14 @@ Run these in your terminal:
 | Quiet progress tracking | Status, checklist, and fan-in stay in CCC surfaces instead of noisy transcript text. |
 | Evidence-based finish | CCC treats current validation and review evidence as the source of truth. |
 
-Scope note: `v0.0.19` publishes durable host-hook teammode proof surfaces:
-lifecycle team registry state, per-lane dispatch receipts, fan-in and verifier
-handoff receipts, LSP/reverify/Stop closeout gates, retry/repair blockers, and
-the visible `CCC MODE ACTIVATE` banner. Tag, push, GitHub Release, and release
-repository mutation remain explicit operator-controlled steps.
+Scope note: `v0.0.20` keeps the durable host-hook teammode proof surfaces from
+`v0.0.19` and repairs the installed App lifecycle path used by natural `$ccc`
+runs. The verified release covers WAVE/ODYSSEY persistence, graph-card and
+compact projection, host update_plan mirror/ACK, PostToolUse hooks,
+App-native Worker and Arbiter spawn/fan-in/close, proof-command drift
+protection, LSP bridge/safety, team registry readiness, Stop closeout, and
+`CCC WAVE DEACTIVE`. Tag, push, GitHub Release, downloadable assets, and
+release repository mutation remain explicit operator-controlled steps.
 
 ## Use It
 

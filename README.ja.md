@@ -16,9 +16,11 @@ CCC は Codex CLI のための小さな control plane です。すぐ答えれ�
 ではなく、計画、順序立てた作業、specialist の支援、review、完了証跡が
 必要な作業では `$ccc` を使います。
 
-現在の release は `v0.0.19` です。crates.io package は publish 済みで、
-`v0.0.19` tag と GitHub Release card は別途 follow-up の publication
-手順です。
+現在の crates.io release は `v0.0.20` です。crates.io package は
+installed-local pre-publish gate の後に publish 済みで、registry install
+による post-publish verification も通過しています。canonical release repo
+tag、downloadable asset bundle、GitHub Release card は別途 follow-up の
+publication 手順です。
 
 ## インストール
 
@@ -43,7 +45,7 @@ AI エージェントにインストールを任せる場合は、次を貼り�
 
 ```text
 Codex CLI 用の Codex-Cli-Captain をインストールまたは更新して。
-crates.io に publish 済みの `v0.0.19` release を使い、install 後に
+crates.io に publish 済みの `v0.0.20` release を使い、install 後に
 plugin support まで含めて Codex CLI 連携を更新して。
 
 1. まず現在の状態を確認して。
@@ -113,11 +115,14 @@ Codex CLI の中では次を入力します。
 | 静かな進捗管理 | status、checklist、fan-in を transcript noise ではなく CCC surface に保持します。 |
 | 証跡ベースの完了 | 現在の validation と review evidence を完了判断の基準にします。 |
 
-Scope note: `v0.0.19` は durable host-hook teammode proof surface を公開します。
-lifecycle team registry state、per-lane dispatch receipt、fan-in/verifier
-handoff receipt、LSP/reverify/Stop closeout gate、retry/repair blocker、
-visible `CCC MODE ACTIVATE` banner を含みます。tag、push、GitHub Release、
-release repository mutation は引き続き明示的な operator 承認手順です。
+Scope note: `v0.0.20` は `v0.0.19` の durable host-hook teammode proof surface
+を維持し、自然な `$ccc` run で使われる installed App lifecycle path を修復します。
+検証済みの release 範囲には WAVE/ODYSSEY persistence、graph-card と compact
+projection、host update_plan mirror/ACK、PostToolUse hooks、App-native Worker
+と Arbiter の spawn/fan-in/close、proof-command drift protection、LSP
+bridge/safety、team registry readiness、Stop closeout、`CCC WAVE DEACTIVE` が
+含まれます。tag、push、GitHub Release、downloadable assets、release repository
+mutation は引き続き明示的な operator 承認手順です。
 
 ## 使い方
 
