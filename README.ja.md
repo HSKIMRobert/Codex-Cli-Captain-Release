@@ -20,7 +20,29 @@ CCC は Codex CLI のための小さな control plane です。すぐ答えれ�
 workflow green gate の後に publish 済みで、registry install による
 post-publish verification も通過しています。
 
-Release card: [`docs/release-card-v0.0.22.md`](./docs/release-card-v0.0.22.md).
+## Release Card
+
+| 項目 | 状態 |
+| --- | --- |
+| Version | `v0.0.22` |
+| crates.io | `codex-cli-captain 0.0.22` publish 済み |
+| Git tag | `v0.0.22` |
+| Release commit | `cd5fb5d` |
+| Published install | `cargo install codex-cli-captain --version 0.0.22 --force` 成功 |
+| Installed verification | `ccc --version` -> `0.0.22` |
+| Natural-command E2E smoke | 短い `ccc 'README 설치 안내가 0.0.22 후보 기준으로 명확한지 검증해줘'` request が WAVE、Scout/graph-card preflight、ODYSSEY lane contract、host `update_plan` ACK、App-native Scribe/Arbiter lifecycle receipt、fan-in、LSP safety、reverify CLEAR、Stop closeout、`CCC WAVE DEACTIVE` まで通過しました。 |
+| Final gates | `install_runtime_ready=true`, `install_release_blocking_gaps=0`, `workflow_parity_gaps=0` |
+
+Highlights:
+
+- 短い自然言語の CCC request が、operator が WAVE、Scout、ODYSSEY、role
+  lane、Arbiter、Stop closeout を説明しなくても installed orchestrator
+  path に入ります。
+- Tactician、Scout、Raider、Scribe、Ghost、Arbiter、Sentinel、Oracle の
+  role-specific CCC agent が install されます。
+- installed workflow green proof gate、docs read-only proof、App-native
+  lifecycle receipt、fan-in、Arbiter reverify、LSP safety、Stop closeout を
+  含みます。
 
 ## インストール
 

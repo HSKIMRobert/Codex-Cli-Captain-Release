@@ -2,9 +2,8 @@
 
 This guide is bounded to the published `v0.0.22` crates.io release. The
 crates.io package was published after installed workflow green gates, and
-post-publish verification passed after a registry install. The release card
-source is published in this repo at
-[`docs/release-card-v0.0.22.md`](./release-card-v0.0.22.md).
+post-publish verification passed after a registry install. The release card is
+published in the repository README files.
 
 Scope note: `v0.0.22` makes short natural-language `$ccc` requests enter the
 installed orchestrator path without the operator describing WAVE, Scout,

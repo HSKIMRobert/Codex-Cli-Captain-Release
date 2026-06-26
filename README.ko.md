@@ -20,7 +20,29 @@ CCC는 Codex CLI를 위한 작은 control plane입니다. 빠른 답변을 넘�
 workflow green gate 이후 publish되었고, registry install 기반 post-publish
 verification도 통과했습니다.
 
-Release card: [`docs/release-card-v0.0.22.md`](./docs/release-card-v0.0.22.md).
+## Release Card
+
+| 항목 | 상태 |
+| --- | --- |
+| Version | `v0.0.22` |
+| crates.io | `codex-cli-captain 0.0.22` publish 완료 |
+| Git tag | `v0.0.22` |
+| Release commit | `cd5fb5d` |
+| Published install | `cargo install codex-cli-captain --version 0.0.22 --force` 성공 |
+| 설치 검증 | `ccc --version` -> `0.0.22` |
+| 자연어 명령 E2E smoke | 짧은 `ccc 'README 설치 안내가 0.0.22 후보 기준으로 명확한지 검증해줘'` 요청이 WAVE, Scout/graph-card preflight, ODYSSEY lane contract, host `update_plan` ACK, App-native Scribe/Arbiter lifecycle receipt, fan-in, LSP safety, reverify CLEAR, Stop closeout, `CCC WAVE DEACTIVE`까지 통과했습니다. |
+| 최종 gate | `install_runtime_ready=true`, `install_release_blocking_gaps=0`, `workflow_parity_gaps=0` |
+
+Highlights:
+
+- 짧은 자연어 CCC 요청이 사용자가 WAVE, Scout, ODYSSEY, role lane,
+  Arbiter, Stop closeout을 설명하지 않아도 installed orchestrator 경로로
+  들어갑니다.
+- Tactician, Scout, Raider, Scribe, Ghost, Arbiter, Sentinel, Oracle 역할별
+  CCC agent가 설치됩니다.
+- installed workflow green proof gate, docs read-only proof, App-native
+  lifecycle receipt, fan-in, Arbiter reverify, LSP safety, Stop closeout이
+  포함됩니다.
 
 ## 설치
 

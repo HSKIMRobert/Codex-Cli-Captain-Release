@@ -20,7 +20,29 @@ Current crates.io release: `v0.0.22`. The crates.io package was published after
 installed workflow green gates, and post-publish verification passed after a
 registry install.
 
-Release card: [`docs/release-card-v0.0.22.md`](./docs/release-card-v0.0.22.md).
+## Release Card
+
+| Item | Status |
+| --- | --- |
+| Version | `v0.0.22` |
+| crates.io | `codex-cli-captain 0.0.22` published |
+| Git tag | `v0.0.22` |
+| Release commit | `cd5fb5d` |
+| Published install | `cargo install codex-cli-captain --version 0.0.22 --force` succeeded |
+| Installed verification | `ccc --version` -> `0.0.22` |
+| Natural-command E2E smoke | A short `ccc 'README 설치 안내가 0.0.22 후보 기준으로 명확한지 검증해줘'` request completed WAVE, Scout/graph-card preflight, ODYSSEY lane contract, host `update_plan` ACK, App-native Scribe/Arbiter lifecycle receipts, fan-in, LSP safety, reverify CLEAR, Stop closeout, and `CCC WAVE DEACTIVE`. |
+| Final gates | `install_runtime_ready=true`, `install_release_blocking_gaps=0`, `workflow_parity_gaps=0` |
+
+Highlights:
+
+- Short natural-language CCC requests now enter the installed orchestrator path
+  without the operator describing WAVE, Scout, ODYSSEY, role lanes, Arbiter, or
+  Stop closeout.
+- Role-specific CCC agents are installed for Tactician, Scout, Raider, Scribe,
+  Ghost, Arbiter, Sentinel, and Oracle.
+- The release includes installed workflow green proof gates, docs read-only
+  proof, App-native lifecycle receipts, fan-in, Arbiter reverify, LSP safety,
+  and Stop closeout.
 
 ## Install
 
