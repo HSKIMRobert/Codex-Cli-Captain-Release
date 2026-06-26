@@ -1,17 +1,17 @@
 # Install, Update, and Uninstall
 
-This guide is bounded to the published `v0.0.22` crates.io release. The
-crates.io package was published after installed workflow green gates, and
-post-publish verification passed after a registry install. The release card is
-published in the repository README files.
+This guide is bounded to the published `v0.0.23` crates.io release. The
+crates.io package was published after full-suite readiness projection repair,
+installed workflow green gates, and post-publish verification passed after a
+registry install. The release card is published in the repository README files.
 
-Scope note: `v0.0.22` makes short natural-language `$ccc` requests enter the
-installed orchestrator path without the operator describing WAVE, Scout,
-ODYSSEY, role lanes, Arbiter, or Stop closeout. The verified release covers
-WAVE activation, Scout/graph-card preflight, ODYSSEY lane contracts, host
-update_plan mirror/ACK, role-specific agents, App-native lifecycle receipts,
-fan-in, Arbiter reverify, docs read-only proof, LSP safety, Stop closeout, and
-`CCC WAVE DEACTIVE`.
+Scope note: `v0.0.23` keeps short natural-language `$ccc` requests on the
+installed orchestrator path while tightening proof staging. The verified release
+covers WAVE activation, Scout/graph-card preflight, ODYSSEY lane contracts and
+lane queues, host update_plan mirror/ACK, role-specific agents, App-native
+lifecycle receipts, docs read-only proof, same-run fan-in, LSP safety, Arbiter
+reverify, Stop closeout, `CCC WAVE DEACTIVE`, and `install_runtime_ready=true`
+with release-blocking gaps at zero.
 
 ## Install
 

@@ -16,33 +16,38 @@ CCC는 Codex CLI를 위한 작은 control plane입니다. 빠른 답변을 넘�
 순서 있는 작업, specialist 도움, review, 완료 증거가 필요한 작업에는 `$ccc`를
 사용합니다.
 
-현재 crates.io release는 `v0.0.22`입니다. crates.io package는 installed
-workflow green gate 이후 publish되었고, registry install 기반 post-publish
-verification도 통과했습니다.
+현재 crates.io release는 `v0.0.23`입니다. crates.io package는 full-suite
+readiness projection repair와 installed workflow green gate 이후 publish되었고,
+registry install 기반 post-publish verification도 통과했습니다.
 
 ## Release Card
 
 | 항목 | 상태 |
 | --- | --- |
-| Version | `v0.0.22` |
-| crates.io | `codex-cli-captain 0.0.22` publish 완료 |
-| Git tag | `v0.0.22` |
-| Release commit | `cd5fb5d` |
-| Published install | `cargo install codex-cli-captain --version 0.0.22 --force` 성공 |
-| 설치 검증 | `ccc --version` -> `0.0.22` |
-| 자연어 명령 E2E smoke | 짧은 `ccc 'README 설치 안내가 0.0.22 후보 기준으로 명확한지 검증해줘'` 요청이 WAVE, Scout/graph-card preflight, ODYSSEY lane contract, host `update_plan` ACK, App-native Scribe/Arbiter lifecycle receipt, fan-in, LSP safety, reverify CLEAR, Stop closeout, `CCC WAVE DEACTIVE`까지 통과했습니다. |
+| Version | `v0.0.23` |
+| crates.io | `codex-cli-captain 0.0.23` publish 완료 |
+| Git tag | `v0.0.23` |
+| Release commit | `f8ac125` |
+| Published install | `cargo install codex-cli-captain --version 0.0.23 --force` 성공 |
+| 설치 검증 | `ccc --version` -> `0.0.23` |
+| 자연어 명령 E2E smoke | 짧은 자연어 role/team 요청이 WAVE, graph-card/Scout preflight, ODYSSEY lane queue, host `update_plan` ACK, App-native role lifecycle receipt, fan-in, LSP safety, Arbiter reverify CLEAR, Stop closeout, `CCC WAVE DEACTIVE`, 최종 `ccc status/check-install` green gate까지 통과했습니다. |
 | 최종 gate | `install_runtime_ready=true`, `install_release_blocking_gaps=0`, `workflow_parity_gaps=0` |
 
 Highlights:
 
-- 짧은 자연어 CCC 요청이 사용자가 WAVE, Scout, ODYSSEY, role lane,
-  Arbiter, Stop closeout을 설명하지 않아도 installed orchestrator 경로로
-  들어갑니다.
-- Tactician, Scout, Raider, Scribe, Ghost, Arbiter, Sentinel, Oracle 역할별
-  CCC agent가 설치됩니다.
-- installed workflow green proof gate, docs read-only proof, App-native
-  lifecycle receipt, fan-in, Arbiter reverify, LSP safety, Stop closeout이
-  포함됩니다.
+- Scout, Scribe, Raider, Oracle, Arbiter, Ghost 자연어 요청 경로가 role-router와
+  team-mode lifecycle hardening으로 보강되었습니다.
+- verified loop, workflow parity, installed real-use UX, Stop closeout,
+  team registry readiness는 올바른 proof stage 전까지 fail-closed로 유지됩니다.
+- `workflow_green` 준비 proof가 실제 PostToolUse, visibility, Stop evidence보다
+  먼저 lifecycle phase를 앞당기지 않도록 분리했습니다.
+- installed single-entry closeout은 release-readiness smoke에만 bounded completion
+  path를 제공하고 자연어 명령 lifecycle gate는 약화하지 않습니다.
+- docs read-only proof binding, fan-in, Arbiter reverify, LSP safety, App-native
+  lifecycle receipt, Stop closeout을 수정하고 focused regression으로 덮었습니다.
+- 최종 preflight는 `cargo fmt --check`, `git diff --check`, `cargo check`,
+  `fresh_runtime_architecture` 408/408, `cargo package`, `cargo publish --dry-run`,
+  published install, installed `ccc status/check-install` green gate를 통과했습니다.
 
 ## 설치
 
@@ -67,7 +72,7 @@ AI 에이전트에게 설치를 맡기려면 아래 내용을 붙여넣으세요
 
 ```text
 Codex CLI용 Codex-Cli-Captain을 설치하거나 업데이트해줘.
-crates.io에 publish된 `v0.0.22` release를 사용하고, 설치 후 plugin 지원까지
+crates.io에 publish된 `v0.0.23` release를 사용하고, 설치 후 plugin 지원까지
 포함해서 Codex CLI 연동을 새로 고쳐줘.
 
 1. 먼저 현재 상태를 확인해줘.
@@ -137,12 +142,13 @@ Codex CLI 안에서는 아래 명령을 입력합니다.
 | 조용한 진행 추적 | status, checklist, fan-in을 transcript noise 대신 CCC 표면에 보관합니다. |
 | 증거 기반 완료 | 현재 검증과 review evidence를 완료 판단의 기준으로 삼습니다. |
 
-범위 참고: `v0.0.22`는 짧은 자연어 `$ccc` 요청이 사용자가 workflow를 설명하지
-않아도 installed orchestrator 경로로 들어가게 합니다. 검증된 release 범위에는
-WAVE activation, Scout/graph-card preflight, ODYSSEY lane contract, host
+범위 참고: `v0.0.23`는 짧은 자연어 `$ccc` 요청을 installed orchestrator 경로에
+유지하면서 proof staging을 더 엄격하게 합니다. 검증된 release 범위에는 WAVE
+activation, Scout/graph-card preflight, ODYSSEY lane contract와 lane queue, host
 update_plan mirror/ACK, Tactician/Scout/Raider/Scribe/Ghost/Arbiter/Sentinel/Oracle
-역할 표면, App-native lifecycle receipt, fan-in, Arbiter reverify,
-docs read-only proof, LSP safety, Stop closeout, `CCC WAVE DEACTIVE`가 포함됩니다.
+역할 표면, App-native lifecycle receipt, docs read-only proof, same-run fan-in,
+LSP safety, Arbiter reverify, Stop closeout, `CCC WAVE DEACTIVE`,
+`install_runtime_ready=true`와 release-blocking gap 0이 포함됩니다.
 
 ## 사용
 
