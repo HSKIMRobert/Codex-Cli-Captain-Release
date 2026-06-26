@@ -16,12 +16,11 @@ CCC is a small control plane for Codex CLI. Use `$ccc` when a task needs more
 than a quick answer: planning, ordered work, specialist help, review, or proof
 that the result is really done.
 
-Current crates.io release: `v0.0.20`. The crates.io package was published after
-installed-local pre-publish gates, and post-publish verification passed after a
-registry install. The canonical release repo tag, downloadable asset bundle,
-remain separate follow-up publication steps.
+Current crates.io release: `v0.0.22`. The crates.io package was published after
+installed workflow green gates, and post-publish verification passed after a
+registry install.
 
-Release card: [`docs/release-card-v0.0.20.md`](./docs/release-card-v0.0.20.md).
+Release card: [`docs/release-card-v0.0.22.md`](./docs/release-card-v0.0.22.md).
 
 ## Install
 
@@ -29,11 +28,12 @@ For a first-time install or a safe update on a new PC:
 
 ```bash
 cargo install codex-cli-captain --force
-ccc setup --with-plugin
+ccc setup --with-plugin --recreate-config
 ```
 
 Verify the Codex MCP/plugin registration, then fully restart Codex CLI /
-Codex App when `ccc setup --with-plugin` or `ccc check-install` asks for it:
+Codex App when `ccc setup --with-plugin --recreate-config` or
+`ccc check-install` asks for it:
 
 ```bash
 codex mcp list
@@ -58,7 +58,7 @@ If you want an AI agent to handle the install, paste this:
 
 ```text
 Install or update Codex-Cli-Captain for Codex CLI.
-Use the published `v0.0.20` release from crates.io, then refresh the Codex CLI
+Use the published `v0.0.22` release from crates.io, then refresh the Codex CLI
 integration with plugin support.
 
 1. Check the current state with:
@@ -68,7 +68,7 @@ integration with plugin support.
 
 2. Install or update:
    - cargo install codex-cli-captain --force
-   - ccc setup --with-plugin
+   - ccc setup --with-plugin --recreate-config
 
 3. Verify before restart:
    - codex mcp list
@@ -88,7 +88,7 @@ integration with plugin support.
    - ccc status --text
 
 6. If `codex plugin list` does not show `ccc@ccc-dev` installed and enabled,
-   run `ccc setup --with-plugin` again before relying on plugin hooks.
+   run `ccc setup --with-plugin --recreate-config` again before relying on plugin hooks.
 
 7. If plugin hooks, graph-card planning context, or LSP lifecycle proof still
    show missing, run one small explicit $ccc request so the host can observe
@@ -113,7 +113,7 @@ Run these in your terminal:
 | Command | Use it for |
 | --- | --- |
 | `cargo install codex-cli-captain --force` | Install or update the CCC binary from crates.io. |
-| `ccc setup --with-plugin` | Refresh the Codex CLI integration, plugin marketplace/cache, hooks, skills, and agents after install or update. |
+| `ccc setup --with-plugin --recreate-config` | Refresh the Codex CLI integration, plugin marketplace/cache, hooks, skills, agents, and config after install or update. |
 | `ccc check-install --text` | Verify install, hooks, skills, agents, and Graph Context. |
 | `ccc status --text` | See the current task state and next action. |
 | `ccc activity --json` | Inspect bounded activity and proof paths. |
@@ -128,14 +128,13 @@ Run these in your terminal:
 | Quiet progress tracking | Status, checklist, and fan-in stay in CCC surfaces instead of noisy transcript text. |
 | Evidence-based finish | CCC treats current validation and review evidence as the source of truth. |
 
-Scope note: `v0.0.20` keeps the durable host-hook teammode proof surfaces from
-`v0.0.19` and repairs the installed App lifecycle path used by natural `$ccc`
-runs. The verified release covers WAVE/ODYSSEY persistence, graph-card and
-compact projection, host update_plan mirror/ACK, PostToolUse hooks,
-App-native Worker and Arbiter spawn/fan-in/close, proof-command drift
-protection, LSP bridge/safety, team registry readiness, Stop closeout, and
-`CCC WAVE DEACTIVE`. Tag, push, downloadable assets, and external GitHub
-Release publication remain explicit operator-controlled steps.
+Scope note: `v0.0.22` makes short natural-language `$ccc` requests enter the
+full installed orchestrator path without the operator describing the workflow.
+The verified release covers WAVE activation, Scout/graph-card preflight,
+ODYSSEY lane contracts, host update_plan mirror/ACK, role-specific
+Tactician/Scout/Raider/Scribe/Ghost/Arbiter/Sentinel/Oracle surfaces,
+App-native lifecycle receipts, fan-in, Arbiter reverify, docs read-only proof,
+LSP safety, Stop closeout, and `CCC WAVE DEACTIVE`.
 
 ## Use It
 
@@ -161,7 +160,7 @@ For small one-off questions, normal Codex CLI usage is usually enough.
 
 ```bash
 cargo install codex-cli-captain --force
-ccc setup --with-plugin
+ccc setup --with-plugin --recreate-config
 ```
 
 Verify MCP/plugin registration, restart Codex CLI / Codex App when asked, then

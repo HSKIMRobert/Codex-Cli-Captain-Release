@@ -16,12 +16,11 @@ CCC は Codex CLI のための小さな control plane です。すぐ答えれ�
 ではなく、計画、順序立てた作業、specialist の支援、review、完了証跡が
 必要な作業では `$ccc` を使います。
 
-現在の crates.io release は `v0.0.20` です。crates.io package は
-installed-local pre-publish gate の後に publish 済みで、registry install
-による post-publish verification も通過しています。canonical release repo
-tag、downloadable asset bundle は別途 follow-up の publication 手順です。
+現在の crates.io release は `v0.0.22` です。crates.io package は installed
+workflow green gate の後に publish 済みで、registry install による
+post-publish verification も通過しています。
 
-Release card: [`docs/release-card-v0.0.20.md`](./docs/release-card-v0.0.20.md).
+Release card: [`docs/release-card-v0.0.22.md`](./docs/release-card-v0.0.22.md).
 
 ## インストール
 
@@ -29,7 +28,7 @@ Release card: [`docs/release-card-v0.0.20.md`](./docs/release-card-v0.0.20.md).
 
 ```bash
 cargo install codex-cli-captain --force
-ccc setup --with-plugin
+ccc setup --with-plugin --recreate-config
 ```
 
 その後、Codex CLI を完全に再起動して確認します。
@@ -46,7 +45,7 @@ AI エージェントにインストールを任せる場合は、次を貼り�
 
 ```text
 Codex CLI 用の Codex-Cli-Captain をインストールまたは更新して。
-crates.io に publish 済みの `v0.0.20` release を使い、install 後に
+crates.io に publish 済みの `v0.0.22` release を使い、install 後に
 plugin support まで含めて Codex CLI 連携を更新して。
 
 1. まず現在の状態を確認して。
@@ -56,7 +55,7 @@ plugin support まで含めて Codex CLI 連携を更新して。
 
 2. インストールまたは更新して。
    - cargo install codex-cli-captain --force
-   - ccc setup --with-plugin
+   - ccc setup --with-plugin --recreate-config
 
 3. 再起動前に確認して。
    - codex mcp list
@@ -76,7 +75,7 @@ plugin support まで含めて Codex CLI 連携を更新して。
    - ccc status --text
 
 6. `codex plugin list` に `ccc@ccc-dev` が installed/enabled として表示されない場合は、
-   plugin hooks に依存する前に `ccc setup --with-plugin` をもう一度実行して。
+   plugin hooks に依存する前に `ccc setup --with-plugin --recreate-config` をもう一度実行して。
 
 7. plugin hooks、graph-card planning context、または LSP lifecycle proof がまだ
    missing の場合は、小さな明示的な $ccc request を 1 回実行し、host が
@@ -101,7 +100,7 @@ Codex CLI の中では次を入力します。
 | コマンド | 用途 |
 | --- | --- |
 | `cargo install codex-cli-captain --force` | crates.io から CCC binary をインストールまたは更新します。 |
-| `ccc setup --with-plugin` | install または update 後に Codex CLI 連携、plugin marketplace/cache、hooks、skills、agents を更新します。 |
+| `ccc setup --with-plugin --recreate-config` | install または update 後に Codex CLI 連携、plugin marketplace/cache、hooks、skills、agents、config を更新します。 |
 | `ccc check-install --text` | install、hooks、skills、agents、Graph Context を確認します。 |
 | `ccc status --text` | 現在の作業状態と次の行動を確認します。 |
 | `ccc activity --json` | bounded activity と proof path を確認します。 |
@@ -116,14 +115,13 @@ Codex CLI の中では次を入力します。
 | 静かな進捗管理 | status、checklist、fan-in を transcript noise ではなく CCC surface に保持します。 |
 | 証跡ベースの完了 | 現在の validation と review evidence を完了判断の基準にします。 |
 
-Scope note: `v0.0.20` は `v0.0.19` の durable host-hook teammode proof surface
-を維持し、自然な `$ccc` run で使われる installed App lifecycle path を修復します。
-検証済みの release 範囲には WAVE/ODYSSEY persistence、graph-card と compact
-projection、host update_plan mirror/ACK、PostToolUse hooks、App-native Worker
-と Arbiter の spawn/fan-in/close、proof-command drift protection、LSP
-bridge/safety、team registry readiness、Stop closeout、`CCC WAVE DEACTIVE` が
-含まれます。tag、push、downloadable assets、external GitHub Release
-publication は引き続き明示的な operator 承認手順です。
+Scope note: `v0.0.22` は、短い自然言語の `$ccc` request が、operator が
+workflow を説明しなくても installed orchestrator path に入るようにします。
+検証済みの release 範囲には WAVE activation、Scout/graph-card preflight、
+ODYSSEY lane contract、host update_plan mirror/ACK、
+Tactician/Scout/Raider/Scribe/Ghost/Arbiter/Sentinel/Oracle の role surface、
+App-native lifecycle receipt、fan-in、Arbiter reverify、docs read-only proof、
+LSP safety、Stop closeout、`CCC WAVE DEACTIVE` が含まれます。
 
 ## 使い方
 
@@ -149,7 +147,7 @@ $ccc release docs を更新して、まず現在の証跡を確認し、その�
 
 ```bash
 cargo install codex-cli-captain --force
-ccc setup --with-plugin
+ccc setup --with-plugin --recreate-config
 ```
 
 Codex CLI を再起動してから実行します。

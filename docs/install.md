@@ -1,25 +1,24 @@
 # Install, Update, and Uninstall
 
-This guide is bounded to the published `v0.0.20` crates.io release. The
-crates.io package was published after installed-local pre-publish gates, and
-post-publish verification passed after a registry install. The canonical
-release repo tag and downloadable asset bundle remain separate follow-up
-publication steps. The release card source is published in this repo at
-[`docs/release-card-v0.0.20.md`](./release-card-v0.0.20.md).
+This guide is bounded to the published `v0.0.22` crates.io release. The
+crates.io package was published after installed workflow green gates, and
+post-publish verification passed after a registry install. The release card
+source is published in this repo at
+[`docs/release-card-v0.0.22.md`](./release-card-v0.0.22.md).
 
-Scope note: `v0.0.20` keeps the durable host-hook teammode proof surfaces from
-`v0.0.19` and repairs the installed App lifecycle path used by natural `$ccc`
-runs. The verified release covers WAVE/ODYSSEY persistence, graph-card and
-compact projection, host update_plan mirror/ACK, PostToolUse hooks,
-App-native Worker and Arbiter spawn/fan-in/close, proof-command drift
-protection, LSP bridge/safety, team registry readiness, Stop closeout, and
+Scope note: `v0.0.22` makes short natural-language `$ccc` requests enter the
+installed orchestrator path without the operator describing WAVE, Scout,
+ODYSSEY, role lanes, Arbiter, or Stop closeout. The verified release covers
+WAVE activation, Scout/graph-card preflight, ODYSSEY lane contracts, host
+update_plan mirror/ACK, role-specific agents, App-native lifecycle receipts,
+fan-in, Arbiter reverify, docs read-only proof, LSP safety, Stop closeout, and
 `CCC WAVE DEACTIVE`.
 
 ## Install
 
 ```bash
 cargo install codex-cli-captain
-ccc setup --with-plugin
+ccc setup --with-plugin --recreate-config
 ```
 
 Then fully exit Codex CLI, start a new session, and run:
@@ -32,10 +31,10 @@ ccc check-install --text
 ccc status --text
 ```
 
-`ccc setup --with-plugin` refreshes the CCC MCP registration, custom agents,
-plugin marketplace/cache, and hook assets. If `codex plugin list` does not show
-`ccc@ccc-dev` installed and enabled, run `ccc setup --with-plugin` again before
-relying on plugin hooks.
+`ccc setup --with-plugin --recreate-config` refreshes the CCC MCP registration,
+custom agents, plugin marketplace/cache, hook assets, and config. If
+`codex plugin list` does not show `ccc@ccc-dev` installed and enabled, run
+`ccc setup --with-plugin --recreate-config` again before relying on plugin hooks.
 
 Some lifecycle proof surfaces, such as plugin hook visibility, graph-card
 planning context, and LSP safety loop evidence, are observed during an explicit
@@ -49,7 +48,7 @@ For an existing Cargo install:
 
 ```bash
 cargo install codex-cli-captain --force
-ccc setup --with-plugin
+ccc setup --with-plugin --recreate-config
 ```
 
 Then restart Codex CLI and run `ccc check-install --text`.
@@ -69,7 +68,7 @@ If you also want CCC-managed cleanup, review Codex config first and remove local
 Edit `~/.config/ccc/ccc-config.toml` to change CCC role models, reasoning tier, and fast-mode settings. After editing, run:
 
 ```bash
-ccc setup --with-plugin
+ccc setup --with-plugin --recreate-config
 ```
 
 Then restart Codex CLI and run `ccc check-install --text`.

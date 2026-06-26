@@ -16,12 +16,11 @@ CCC는 Codex CLI를 위한 작은 control plane입니다. 빠른 답변을 넘�
 순서 있는 작업, specialist 도움, review, 완료 증거가 필요한 작업에는 `$ccc`를
 사용합니다.
 
-현재 crates.io release는 `v0.0.20`입니다. crates.io package는
-installed-local pre-publish gate 이후 publish되었고, registry install 기반
-post-publish verification도 통과했습니다. canonical release repo tag,
-downloadable asset bundle은 별도 후속 publication 단계입니다.
+현재 crates.io release는 `v0.0.22`입니다. crates.io package는 installed
+workflow green gate 이후 publish되었고, registry install 기반 post-publish
+verification도 통과했습니다.
 
-Release card: [`docs/release-card-v0.0.20.md`](./docs/release-card-v0.0.20.md).
+Release card: [`docs/release-card-v0.0.22.md`](./docs/release-card-v0.0.22.md).
 
 ## 설치
 
@@ -29,7 +28,7 @@ Release card: [`docs/release-card-v0.0.20.md`](./docs/release-card-v0.0.20.md).
 
 ```bash
 cargo install codex-cli-captain --force
-ccc setup --with-plugin
+ccc setup --with-plugin --recreate-config
 ```
 
 그다음 Codex CLI를 완전히 다시 시작하고 확인합니다.
@@ -46,7 +45,7 @@ AI 에이전트에게 설치를 맡기려면 아래 내용을 붙여넣으세요
 
 ```text
 Codex CLI용 Codex-Cli-Captain을 설치하거나 업데이트해줘.
-crates.io에 publish된 `v0.0.20` release를 사용하고, 설치 후 plugin 지원까지
+crates.io에 publish된 `v0.0.22` release를 사용하고, 설치 후 plugin 지원까지
 포함해서 Codex CLI 연동을 새로 고쳐줘.
 
 1. 먼저 현재 상태를 확인해줘.
@@ -56,7 +55,7 @@ crates.io에 publish된 `v0.0.20` release를 사용하고, 설치 후 plugin 지
 
 2. 설치 또는 업데이트해줘.
    - cargo install codex-cli-captain --force
-   - ccc setup --with-plugin
+   - ccc setup --with-plugin --recreate-config
 
 3. 재시작 전에 확인해줘.
    - codex mcp list
@@ -76,7 +75,7 @@ crates.io에 publish된 `v0.0.20` release를 사용하고, 설치 후 plugin 지
    - ccc status --text
 
 6. `codex plugin list`에 `ccc@ccc-dev`가 installed/enabled로 보이지 않으면,
-   plugin hooks에 의존하기 전에 `ccc setup --with-plugin`을 다시 실행해줘.
+   plugin hooks에 의존하기 전에 `ccc setup --with-plugin --recreate-config`를 다시 실행해줘.
 
 7. plugin hooks, graph-card planning context, LSP lifecycle proof가 아직 missing이면,
    작은 명시적 $ccc 요청을 한 번 실행해서 host가 WAVE/PostToolUse/LSP/Stop lifecycle
@@ -101,7 +100,7 @@ Codex CLI 안에서는 아래 명령을 입력합니다.
 | 명령 | 용도 |
 | --- | --- |
 | `cargo install codex-cli-captain --force` | crates.io에서 CCC binary를 설치하거나 업데이트합니다. |
-| `ccc setup --with-plugin` | 설치 또는 업데이트 후 Codex CLI 연동, plugin marketplace/cache, hooks, skills, agents를 새로 고칩니다. |
+| `ccc setup --with-plugin --recreate-config` | 설치 또는 업데이트 후 Codex CLI 연동, plugin marketplace/cache, hooks, skills, agents, config를 새로 고칩니다. |
 | `ccc check-install --text` | 설치, hooks, skills, agents, Graph Context를 확인합니다. |
 | `ccc status --text` | 현재 작업 상태와 다음 행동을 확인합니다. |
 | `ccc activity --json` | bounded activity와 proof path를 확인합니다. |
@@ -116,14 +115,12 @@ Codex CLI 안에서는 아래 명령을 입력합니다.
 | 조용한 진행 추적 | status, checklist, fan-in을 transcript noise 대신 CCC 표면에 보관합니다. |
 | 증거 기반 완료 | 현재 검증과 review evidence를 완료 판단의 기준으로 삼습니다. |
 
-범위 참고: `v0.0.20`은 `v0.0.19`의 durable host-hook teammode proof 표면을
-유지하고, 자연스러운 `$ccc` 실행에서 사용하는 installed App lifecycle path를
-수리합니다. 검증된 release 범위에는 WAVE/ODYSSEY persistence, graph-card와
-compact projection, host update_plan mirror/ACK, PostToolUse hooks,
-App-native Worker와 Arbiter spawn/fan-in/close, proof-command drift protection,
-LSP bridge/safety, team registry readiness, Stop closeout, `CCC WAVE DEACTIVE`가
-포함됩니다. tag, push, downloadable assets, external GitHub Release publication은
-계속 명시적 operator 승인 단계입니다.
+범위 참고: `v0.0.22`는 짧은 자연어 `$ccc` 요청이 사용자가 workflow를 설명하지
+않아도 installed orchestrator 경로로 들어가게 합니다. 검증된 release 범위에는
+WAVE activation, Scout/graph-card preflight, ODYSSEY lane contract, host
+update_plan mirror/ACK, Tactician/Scout/Raider/Scribe/Ghost/Arbiter/Sentinel/Oracle
+역할 표면, App-native lifecycle receipt, fan-in, Arbiter reverify,
+docs read-only proof, LSP safety, Stop closeout, `CCC WAVE DEACTIVE`가 포함됩니다.
 
 ## 사용
 
@@ -149,7 +146,7 @@ continuation command를 사용합니다.
 
 ```bash
 cargo install codex-cli-captain --force
-ccc setup --with-plugin
+ccc setup --with-plugin --recreate-config
 ```
 
 Codex CLI를 다시 시작한 뒤 실행합니다.
