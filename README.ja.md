@@ -16,38 +16,38 @@ CCC は Codex CLI のための小さな control plane です。すぐ答えれ�
 ではなく、計画、順序立てた作業、specialist の支援、review、完了証跡が
 必要な作業では `$ccc` を使います。
 
-現在の crates.io release は `v0.0.23` です。crates.io package は full-suite
-readiness projection repair と installed workflow green gate の後に publish 済みで、
-registry install による post-publish verification も通過しています。
+現在の crates.io release は `v0.0.24` です。crates.io package は App-native
+role/team-mode orchestration hardening と installed readiness gap closure の後に
+publish 済みで、registry install による post-publish verification も通過しています。
 
 ## Release Card
 
 | 項目 | 状態 |
 | --- | --- |
-| Version | `v0.0.23` |
-| crates.io | `codex-cli-captain 0.0.23` publish 済み |
-| Git tag | `v0.0.23` |
-| Release commit | `f8ac125` |
-| Published install | `cargo install codex-cli-captain --version 0.0.23 --force` 成功 |
-| Installed verification | `ccc --version` -> `0.0.23` |
-| Natural-command E2E smoke | 短い自然言語の role/team request が WAVE、graph-card/Scout preflight、ODYSSEY lane queue、host `update_plan` ACK、App-native role lifecycle receipt、fan-in、LSP safety、Arbiter reverify CLEAR、Stop closeout、`CCC WAVE DEACTIVE`、最終 `ccc status/check-install` green gate まで通過しました。 |
+| Version | `v0.0.24` |
+| crates.io | `codex-cli-captain 0.0.24` publish 済み |
+| Git tag | `v0.0.24` |
+| GitHub Release | [`v0.0.24`](https://github.com/HoRi0506/Codex-Cli-Captain/releases/tag/v0.0.24) |
+| Release commit | `201cff4` |
+| Published install | `cargo install codex-cli-captain --version 0.0.24 --force` 成功 |
+| Installed verification | `ccc --version` -> `0.0.24` |
+| Natural-command E2E smoke | 短い自然言語の role/team request が WAVE、graph-card/Scout preflight、ODYSSEY lane queue、host `update_plan` ACK、App-native role lifecycle receipt、durable fan-in、LSP safety、Arbiter reverify CLEAR、Stop closeout、`CCC WAVE DEACTIVE`、最終 `ccc status/check-install` green gate まで通過しました。 |
 | Final gates | `install_runtime_ready=true`, `install_release_blocking_gaps=0`, `workflow_parity_gaps=0` |
 
 Highlights:
 
-- Scout、Scribe、Raider、Oracle、Arbiter、Ghost の自然言語 request path を
-  role-router と team-mode lifecycle hardening で強化しました。
-- verified loop、workflow parity、installed real-use UX、Stop closeout、team
-  registry readiness は、正しい proof stage まで fail-closed のままです。
-- `workflow_green` の準備 proof が、対応する PostToolUse、visibility、Stop
-  evidence より先に lifecycle phase を進めないよう分離しました。
-- installed single-entry closeout は release-readiness smoke 専用の bounded
-  completion path を提供し、自然言語 command の lifecycle gate は弱めません。
-- docs read-only proof binding、fan-in、Arbiter reverify、LSP safety、
-  App-native lifecycle receipt、Stop closeout を修正し、focused regression で
-  カバーしました。
+- Scout、Scribe、Raider、Ghost、Arbiter の App-native role/team-mode
+  orchestration と proof binding を強化しました。
+- Durable fan-in、Arbiter reverify、Stop closeout、`CCC WAVE DEACTIVE`
+  projection が同じ run/lane evidence を基準に揃うようになりました。
+- host native hook dispatch、App-native spawn bridge、rule consumption、LSP
+  search/safety proof の installed readiness gap を閉じました。
+- README/install documentation target coverage に localized README verification
+  と install guide proof binding を含めました。
+- stale、wrong-run、wrong-role、fake lifecycle、missing fan-in、missing Stop
+  closeout、public mutation bypass は引き続き fail-closed です。
 - final preflight は `cargo fmt --check`、`git diff --check`、`cargo check`、
-  `fresh_runtime_architecture` 408/408、`cargo package`、`cargo publish --dry-run`、
+  `fresh_runtime_architecture` 467/467、`cargo package`、`cargo publish --dry-run`、
   published install、installed `ccc status/check-install` green gate を通過しました。
 
 ## インストール
@@ -73,7 +73,7 @@ AI エージェントにインストールを任せる場合は、次を貼り�
 
 ```text
 Codex CLI 用の Codex-Cli-Captain をインストールまたは更新して。
-crates.io に publish 済みの `v0.0.23` release を使い、install 後に
+crates.io に publish 済みの `v0.0.24` release を使い、install 後に
 plugin support まで含めて Codex CLI 連携を更新して。
 
 1. まず現在の状態を確認して。
@@ -143,14 +143,14 @@ Codex CLI の中では次を入力します。
 | 静かな進捗管理 | status、checklist、fan-in を transcript noise ではなく CCC surface に保持します。 |
 | 証跡ベースの完了 | 現在の validation と review evidence を完了判断の基準にします。 |
 
-Scope note: `v0.0.23` は、短い自然言語の `$ccc` request を installed
-orchestrator path に保ちながら proof staging をより厳格にします。検証済みの
-release 範囲には WAVE activation、Scout/graph-card preflight、ODYSSEY lane
-contract と lane queue、host update_plan mirror/ACK、
+Scope note: `v0.0.24` は、短い自然言語の `$ccc` request を installed
+orchestrator path に保ちながら App-native proof binding をより厳格にします。
+検証済みの release 範囲には WAVE activation、Scout/graph-card preflight、
+ODYSSEY lane contract と lane queue、host update_plan mirror/ACK、
 Tactician/Scout/Raider/Scribe/Ghost/Arbiter/Sentinel/Oracle の role surface、
-App-native lifecycle receipt、docs read-only proof、same-run fan-in、LSP safety、
-Arbiter reverify、Stop closeout、`CCC WAVE DEACTIVE`、`install_runtime_ready=true`
-と release-blocking gap 0 が含まれます。
+App-native lifecycle receipt、docs read-only proof、same-run durable fan-in、
+LSP safety、Arbiter reverify、Stop closeout、`CCC WAVE DEACTIVE`、
+`install_runtime_ready=true` と release-blocking gap 0 が含まれます。
 
 ## 使い方
 

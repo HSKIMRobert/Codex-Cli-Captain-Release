@@ -16,39 +16,38 @@ CCC is a small control plane for Codex CLI. Use `$ccc` when a task needs more
 than a quick answer: planning, ordered work, specialist help, review, or proof
 that the result is really done.
 
-Current crates.io release: `v0.0.23`. The crates.io package was published after
-full-suite readiness projection repair, installed workflow green gates, and
-post-publish verification passed after a registry install.
+Current crates.io release: `v0.0.24`. The crates.io package was published after
+App-native role/team-mode orchestration hardening, installed readiness gap
+closure, and post-publish verification passed after a registry install.
 
 ## Release Card
 
 | Item | Status |
 | --- | --- |
-| Version | `v0.0.23` |
-| crates.io | `codex-cli-captain 0.0.23` published |
-| Git tag | `v0.0.23` |
-| Release commit | `f8ac125` |
-| Published install | `cargo install codex-cli-captain --version 0.0.23 --force` succeeded |
-| Installed verification | `ccc --version` -> `0.0.23` |
-| Natural-command E2E smoke | A short natural role/team request completed WAVE, graph-card/Scout preflight, ODYSSEY lane queue, host `update_plan` ACK, App-native role lifecycle receipts, fan-in, LSP safety, Arbiter reverify CLEAR, Stop closeout, `CCC WAVE DEACTIVE`, and final `ccc status/check-install` green gates. |
+| Version | `v0.0.24` |
+| crates.io | `codex-cli-captain 0.0.24` published |
+| Git tag | `v0.0.24` |
+| GitHub Release | [`v0.0.24`](https://github.com/HoRi0506/Codex-Cli-Captain/releases/tag/v0.0.24) |
+| Release commit | `201cff4` |
+| Published install | `cargo install codex-cli-captain --version 0.0.24 --force` succeeded |
+| Installed verification | `ccc --version` -> `0.0.24` |
+| Natural-command E2E smoke | Short natural role/team requests completed WAVE, graph-card/Scout preflight, ODYSSEY lane queue, host `update_plan` ACK, App-native role lifecycle receipts, durable fan-in, LSP safety, Arbiter reverify CLEAR, Stop closeout, `CCC WAVE DEACTIVE`, and final `ccc status/check-install` green gates. |
 | Final gates | `install_runtime_ready=true`, `install_release_blocking_gaps=0`, `workflow_parity_gaps=0` |
 
 Highlights:
 
-- Role-router and team-mode lifecycle hardening preserve the Scout, Scribe,
-  Raider, Oracle, Arbiter, and Ghost natural-command paths.
-- Full-suite readiness projection repair keeps verified loop, workflow parity,
-  installed real-use UX, Stop closeout, and team registry readiness fail-closed
-  until the correct proof stage.
-- `workflow_green` preparatory proofs no longer advance lifecycle phases before
-  the matching PostToolUse, visibility, or Stop evidence exists.
-- Installed single-entry closeout now gives release-readiness smoke tests a
-  bounded completion path without weakening natural-command lifecycle gates.
-- Docs read-only proof binding, fan-in, Arbiter reverify, LSP safety,
-  App-native lifecycle receipts, and Stop closeout were repaired and covered by
-  focused regressions.
+- App-native role/team-mode orchestration was hardened for Scout, Scribe,
+  Raider, Ghost, and Arbiter proof binding.
+- Durable fan-in, Arbiter reverify, Stop closeout, and `CCC WAVE DEACTIVE`
+  projection now agree on the same run and lane evidence.
+- Installed readiness gaps for host native hook dispatch, App-native spawn
+  bridge, rule consumption, and LSP search/safety proof were closed.
+- README/install documentation target coverage now includes localized README
+  verification and install guide proof binding.
+- Stale, wrong-run, wrong-role, fake lifecycle, missing fan-in, missing Stop
+  closeout, and public mutation bypasses remain fail-closed.
 - Final preflight passed: `cargo fmt --check`, `git diff --check`,
-  `cargo check`, `fresh_runtime_architecture` 408/408, `cargo package`,
+  `cargo check`, `fresh_runtime_architecture` 467/467, `cargo package`,
   `cargo publish --dry-run`, published install, and installed
   `ccc status/check-install` green gates.
 
@@ -88,7 +87,7 @@ If you want an AI agent to handle the install, paste this:
 
 ```text
 Install or update Codex-Cli-Captain for Codex CLI.
-Use the published `v0.0.23` release from crates.io, then refresh the Codex CLI
+Use the published `v0.0.24` release from crates.io, then refresh the Codex CLI
 integration with plugin support.
 
 1. Check the current state with:
@@ -158,13 +157,13 @@ Run these in your terminal:
 | Quiet progress tracking | Status, checklist, and fan-in stay in CCC surfaces instead of noisy transcript text. |
 | Evidence-based finish | CCC treats current validation and review evidence as the source of truth. |
 
-Scope note: `v0.0.23` keeps short natural-language `$ccc` requests on the
-installed orchestrator path while tightening proof staging. The verified release
-covers WAVE activation, Scout/graph-card preflight, ODYSSEY lane contracts and
-lane queues, host update_plan mirror/ACK, role-specific
+Scope note: `v0.0.24` keeps short natural-language `$ccc` requests on the
+installed orchestrator path while tightening App-native proof binding. The
+verified release covers WAVE activation, Scout/graph-card preflight, ODYSSEY
+lane contracts and lane queues, host update_plan mirror/ACK, role-specific
 Tactician/Scout/Raider/Scribe/Ghost/Arbiter/Sentinel/Oracle surfaces,
-App-native lifecycle receipts, docs read-only proof, same-run fan-in, LSP
-safety, Arbiter reverify, Stop closeout, `CCC WAVE DEACTIVE`, and
+App-native lifecycle receipts, docs read-only proof, same-run durable fan-in,
+LSP safety, Arbiter reverify, Stop closeout, `CCC WAVE DEACTIVE`, and
 `install_runtime_ready=true` with release-blocking gaps at zero.
 
 ## Use It
