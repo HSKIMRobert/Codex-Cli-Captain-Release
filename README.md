@@ -20,20 +20,6 @@ Current crates.io release: `v0.0.25`. The crates.io package was published after
 App-native role/team-mode orchestration hardening, installed readiness gap
 closure, and post-publish verification passed after a registry install.
 
-## Release Card
-
-| Item | Status |
-| --- | --- |
-| Version | `v0.0.25` |
-| crates.io | `codex-cli-captain 0.0.25` published |
-| Git tag | `v0.0.25` |
-| GitHub Release | Not verified in this release repo context |
-| Release commit | `1eb61e6e31eb1a502fc3d32efd07e9df2505be16` |
-| Published install | `cargo install codex-cli-captain --version 0.0.25 --force` succeeded |
-| Installed verification | `ccc --version` -> `0.0.25` |
-| Natural-command E2E smoke | Short natural role/team requests completed WAVE, graph-card/Scout preflight, ODYSSEY lane queue, host `update_plan` ACK, App-native role lifecycle receipts, durable fan-in, LSP safety, Arbiter reverify CLEAR, Stop closeout, `CCC WAVE DEACTIVE`, and final `ccc status/check-install` green gates. |
-| Final gates | `install_runtime_ready=true`, `install_release_blocking_gaps=0`, `workflow_parity_gaps=0` |
-
 Highlights:
 
 - App-native role/team-mode orchestration was hardened for Scout, Scribe,

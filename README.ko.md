@@ -20,20 +20,6 @@ CCC는 Codex CLI를 위한 작은 control plane입니다. 빠른 답변을 넘�
 role/team-mode orchestration hardening, installed readiness gap closure 이후
 publish되었고, registry install 기반 post-publish verification도 통과했습니다.
 
-## Release Card
-
-| 항목 | 상태 |
-| --- | --- |
-| Version | `v0.0.25` |
-| crates.io | `codex-cli-captain 0.0.25` publish 완료 |
-| Git tag | `v0.0.25` |
-| GitHub Release | 이 release repo context에서는 검증되지 않음 |
-| Release commit | `1eb61e6e31eb1a502fc3d32efd07e9df2505be16` |
-| Published install | `cargo install codex-cli-captain --version 0.0.25 --force` 성공 |
-| 설치 검증 | `ccc --version` -> `0.0.25` |
-| 자연어 명령 E2E smoke | 짧은 자연어 role/team 요청이 WAVE, graph-card/Scout preflight, ODYSSEY lane queue, host `update_plan` ACK, App-native role lifecycle receipt, durable fan-in, LSP safety, Arbiter reverify CLEAR, Stop closeout, `CCC WAVE DEACTIVE`, 최종 `ccc status/check-install` green gate까지 통과했습니다. |
-| 최종 gate | `install_runtime_ready=true`, `install_release_blocking_gaps=0`, `workflow_parity_gaps=0` |
-
 Highlights:
 
 - Scout, Scribe, Raider, Ghost, Arbiter의 App-native role/team-mode
