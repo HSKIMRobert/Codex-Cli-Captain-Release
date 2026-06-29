@@ -16,7 +16,7 @@ CCC は Codex CLI のための小さな control plane です。すぐ答えれ�
 ではなく、計画、順序立てた作業、specialist の支援、review、完了証跡が
 必要な作業では `$ccc` を使います。
 
-現在の crates.io release は `v0.0.24` です。crates.io package は App-native
+現在の crates.io release は `v0.0.25` です。crates.io package は App-native
 role/team-mode orchestration hardening と installed readiness gap closure の後に
 publish 済みで、registry install による post-publish verification も通過しています。
 
@@ -24,13 +24,13 @@ publish 済みで、registry install による post-publish verification も通�
 
 | 項目 | 状態 |
 | --- | --- |
-| Version | `v0.0.24` |
-| crates.io | `codex-cli-captain 0.0.24` publish 済み |
-| Git tag | `v0.0.24` |
-| GitHub Release | [`v0.0.24`](https://github.com/HoRi0506/Codex-Cli-Captain/releases/tag/v0.0.24) |
-| Release commit | `201cff4` |
-| Published install | `cargo install codex-cli-captain --version 0.0.24 --force` 成功 |
-| Installed verification | `ccc --version` -> `0.0.24` |
+| Version | `v0.0.25` |
+| crates.io | `codex-cli-captain 0.0.25` publish 済み |
+| Git tag | `v0.0.25` |
+| GitHub Release | この release repo context では未検証 |
+| Release commit | `1eb61e6e31eb1a502fc3d32efd07e9df2505be16` |
+| Published install | `cargo install codex-cli-captain --version 0.0.25 --force` 成功 |
+| Installed verification | `ccc --version` -> `0.0.25` |
 | Natural-command E2E smoke | 短い自然言語の role/team request が WAVE、graph-card/Scout preflight、ODYSSEY lane queue、host `update_plan` ACK、App-native role lifecycle receipt、durable fan-in、LSP safety、Arbiter reverify CLEAR、Stop closeout、`CCC WAVE DEACTIVE`、最終 `ccc status/check-install` green gate まで通過しました。 |
 | Final gates | `install_runtime_ready=true`, `install_release_blocking_gaps=0`, `workflow_parity_gaps=0` |
 
@@ -55,7 +55,7 @@ Highlights:
 直接インストールする場合:
 
 ```bash
-cargo install codex-cli-captain --force
+cargo install codex-cli-captain --version 0.0.25 --force
 ccc setup --with-plugin --recreate-config
 ```
 
@@ -73,7 +73,7 @@ AI エージェントにインストールを任せる場合は、次を貼り�
 
 ```text
 Codex CLI 用の Codex-Cli-Captain をインストールまたは更新して。
-crates.io に publish 済みの `v0.0.24` release を使い、install 後に
+crates.io に publish 済みの `v0.0.25` release を使い、install 後に
 plugin support まで含めて Codex CLI 連携を更新して。
 
 1. まず現在の状態を確認して。
@@ -82,7 +82,7 @@ plugin support まで含めて Codex CLI 連携を更新して。
    - ccc があれば ccc check-install --text
 
 2. インストールまたは更新して。
-   - cargo install codex-cli-captain --force
+   - cargo install codex-cli-captain --version 0.0.25 --force
    - ccc setup --with-plugin --recreate-config
 
 3. 再起動前に確認して。
@@ -127,7 +127,7 @@ Codex CLI の中では次を入力します。
 
 | コマンド | 用途 |
 | --- | --- |
-| `cargo install codex-cli-captain --force` | crates.io から CCC binary をインストールまたは更新します。 |
+| `cargo install codex-cli-captain --version 0.0.25 --force` | crates.io から CCC binary をインストールまたは更新します。 |
 | `ccc setup --with-plugin --recreate-config` | install または update 後に Codex CLI 連携、plugin marketplace/cache、hooks、skills、agents、config を更新します。 |
 | `ccc check-install --text` | install、hooks、skills、agents、Graph Context を確認します。 |
 | `ccc status --text` | 現在の作業状態と次の行動を確認します。 |
@@ -143,7 +143,7 @@ Codex CLI の中では次を入力します。
 | 静かな進捗管理 | status、checklist、fan-in を transcript noise ではなく CCC surface に保持します。 |
 | 証跡ベースの完了 | 現在の validation と review evidence を完了判断の基準にします。 |
 
-Scope note: `v0.0.24` は、短い自然言語の `$ccc` request を installed
+Scope note: `v0.0.25` は、短い自然言語の `$ccc` request を installed
 orchestrator path に保ちながら App-native proof binding をより厳格にします。
 検証済みの release 範囲には WAVE activation、Scout/graph-card preflight、
 ODYSSEY lane contract と lane queue、host update_plan mirror/ACK、
@@ -175,7 +175,7 @@ $ccc release docs を更新して、まず現在の証跡を確認し、その�
 ## 更新
 
 ```bash
-cargo install codex-cli-captain --force
+cargo install codex-cli-captain --version 0.0.25 --force
 ccc setup --with-plugin --recreate-config
 ```
 

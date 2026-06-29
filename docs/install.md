@@ -1,12 +1,12 @@
 # Install, Update, and Uninstall
 
-This guide is bounded to the published `v0.0.24` crates.io release. The
+This guide is bounded to the published `v0.0.25` crates.io release. The
 crates.io package was published after App-native role/team-mode orchestration
 hardening, installed readiness gap closure, and post-publish verification
 passed after a registry install. The release card is published in the repository
 README files.
 
-Scope note: `v0.0.24` keeps short natural-language `$ccc` requests on the
+Scope note: `v0.0.25` keeps short natural-language `$ccc` requests on the
 installed orchestrator path while tightening App-native proof binding. The
 verified release covers WAVE activation, Scout/graph-card preflight, ODYSSEY
 lane contracts and lane queues, host update_plan mirror/ACK, role-specific
@@ -17,7 +17,7 @@ fan-in, LSP safety, Arbiter reverify, Stop closeout, `CCC WAVE DEACTIVE`, and
 ## Install
 
 ```bash
-cargo install codex-cli-captain
+cargo install codex-cli-captain --version 0.0.25 --force
 ccc setup --with-plugin --recreate-config
 ```
 
@@ -47,7 +47,7 @@ explicit `$ccc` request if those surfaces still report missing, then rerun
 For an existing Cargo install:
 
 ```bash
-cargo install codex-cli-captain --force
+cargo install codex-cli-captain --version 0.0.25 --force
 ccc setup --with-plugin --recreate-config
 ```
 
