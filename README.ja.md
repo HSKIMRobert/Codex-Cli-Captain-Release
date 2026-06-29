@@ -20,22 +20,6 @@ CCC は Codex CLI のための小さな control plane です。すぐ答えれ�
 role/team-mode orchestration hardening と installed readiness gap closure の後に
 publish 済みで、registry install による post-publish verification も通過しています。
 
-Highlights:
-
-- Scout、Scribe、Raider、Ghost、Arbiter の App-native role/team-mode
-  orchestration と proof binding を強化しました。
-- Durable fan-in、Arbiter reverify、Stop closeout、`CCC WAVE DEACTIVE`
-  projection が同じ run/lane evidence を基準に揃うようになりました。
-- host native hook dispatch、App-native spawn bridge、rule consumption、LSP
-  search/safety proof の installed readiness gap を閉じました。
-- README/install documentation target coverage に localized README verification
-  と install guide proof binding を含めました。
-- stale、wrong-run、wrong-role、fake lifecycle、missing fan-in、missing Stop
-  closeout、public mutation bypass は引き続き fail-closed です。
-- final preflight は `cargo fmt --check`、`git diff --check`、`cargo check`、
-  `fresh_runtime_architecture` 467/467、`cargo package`、`cargo publish --dry-run`、
-  published install、installed `ccc status/check-install` green gate を通過しました。
-
 ## インストール
 
 直接インストールする場合:

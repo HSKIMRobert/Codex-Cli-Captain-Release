@@ -20,23 +20,6 @@ Current crates.io release: `v0.0.25`. The crates.io package was published after
 App-native role/team-mode orchestration hardening, installed readiness gap
 closure, and post-publish verification passed after a registry install.
 
-Highlights:
-
-- App-native role/team-mode orchestration was hardened for Scout, Scribe,
-  Raider, Ghost, and Arbiter proof binding.
-- Durable fan-in, Arbiter reverify, Stop closeout, and `CCC WAVE DEACTIVE`
-  projection now agree on the same run and lane evidence.
-- Installed readiness gaps for host native hook dispatch, App-native spawn
-  bridge, rule consumption, and LSP search/safety proof were closed.
-- README/install documentation target coverage now includes localized README
-  verification and install guide proof binding.
-- Stale, wrong-run, wrong-role, fake lifecycle, missing fan-in, missing Stop
-  closeout, and public mutation bypasses remain fail-closed.
-- Final preflight passed: `cargo fmt --check`, `git diff --check`,
-  `cargo check`, `fresh_runtime_architecture` 467/467, `cargo package`,
-  `cargo publish --dry-run`, published install, and installed
-  `ccc status/check-install` green gates.
-
 ## Install
 
 For a first-time install or a safe update on a new PC:
