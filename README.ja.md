@@ -16,8 +16,9 @@ CCC は Codex CLI のための小さな control plane です。すぐ答えれ�
 ではなく、計画、順序立てた作業、specialist の支援、review、完了証跡が
 必要な作業では `$ccc` を使います。
 
-現在の crates.io release は `v0.0.25` です。crates.io package は App-native
-role/team-mode orchestration hardening と installed readiness gap closure の後に
+現在の crates.io release は `v0.0.26` です。crates.io package は visible WAVE
+lifecycle repair、ODYSSEY/graph-card visibility、global rule/LSP/compact
+discipline、fast-mode role config、installed lifecycle readiness closure の後に
 publish 済みで、registry install による post-publish verification も通過しています。
 
 ## インストール
@@ -25,7 +26,7 @@ publish 済みで、registry install による post-publish verification も通�
 直接インストールする場合:
 
 ```bash
-cargo install codex-cli-captain --version 0.0.25 --force
+cargo install codex-cli-captain --version 0.0.26 --force
 ccc setup --with-plugin --recreate-config
 ```
 
@@ -43,7 +44,7 @@ AI エージェントにインストールを任せる場合は、次を貼り�
 
 ```text
 Codex CLI 用の Codex-Cli-Captain をインストールまたは更新して。
-crates.io に publish 済みの `v0.0.25` release を使い、install 後に
+crates.io に publish 済みの `v0.0.26` release を使い、install 後に
 plugin support まで含めて Codex CLI 連携を更新して。
 
 1. まず現在の状態を確認して。
@@ -52,7 +53,7 @@ plugin support まで含めて Codex CLI 連携を更新して。
    - ccc があれば ccc check-install --text
 
 2. インストールまたは更新して。
-   - cargo install codex-cli-captain --version 0.0.25 --force
+   - cargo install codex-cli-captain --version 0.0.26 --force
    - ccc setup --with-plugin --recreate-config
 
 3. 再起動前に確認して。
@@ -97,7 +98,7 @@ Codex CLI の中では次を入力します。
 
 | コマンド | 用途 |
 | --- | --- |
-| `cargo install codex-cli-captain --version 0.0.25 --force` | crates.io から CCC binary をインストールまたは更新します。 |
+| `cargo install codex-cli-captain --version 0.0.26 --force` | crates.io から CCC binary をインストールまたは更新します。 |
 | `ccc setup --with-plugin --recreate-config` | install または update 後に Codex CLI 連携、plugin marketplace/cache、hooks、skills、agents、config を更新します。 |
 | `ccc check-install --text` | install、hooks、skills、agents、Graph Context を確認します。 |
 | `ccc status --text` | 現在の作業状態と次の行動を確認します。 |
@@ -113,13 +114,12 @@ Codex CLI の中では次を入力します。
 | 静かな進捗管理 | status、checklist、fan-in を transcript noise ではなく CCC surface に保持します。 |
 | 証跡ベースの完了 | 現在の validation と review evidence を完了判断の基準にします。 |
 
-Scope note: `v0.0.25` は、短い自然言語の `$ccc` request を installed
-orchestrator path に保ちながら App-native proof binding をより厳格にします。
-検証済みの release 範囲には WAVE activation、Scout/graph-card preflight、
-ODYSSEY lane contract と lane queue、host update_plan mirror/ACK、
-Tactician/Scout/Raider/Scribe/Ghost/Arbiter/Sentinel/Oracle の role surface、
-App-native lifecycle receipt、docs read-only proof、same-run durable fan-in、
-LSP safety、Arbiter reverify、Stop closeout、`CCC WAVE DEACTIVE`、
+Scope note: `v0.0.26` は App-native role/team-mode path を維持しつつ、
+WAVE lifecycle と ODYSSEY planning proof を operator に見える形に整えます。
+検証済みの release 範囲には visible WAVE activation/deactivation、Scout-backed
+graph-card preflight、ODYSSEY lane rationale と host update_plan progress、
+global rule consumption、LSP safety、compact rehydration、role fast-mode config、
+Scribe/Raider/Ghost/Arbiter proof binding、Stop closeout、
 `install_runtime_ready=true` と release-blocking gap 0 が含まれます。
 
 ## 使い方
@@ -145,7 +145,7 @@ $ccc release docs を更新して、まず現在の証跡を確認し、その�
 ## 更新
 
 ```bash
-cargo install codex-cli-captain --version 0.0.25 --force
+cargo install codex-cli-captain --version 0.0.26 --force
 ccc setup --with-plugin --recreate-config
 ```
 

@@ -16,16 +16,18 @@ CCC is a small control plane for Codex CLI. Use `$ccc` when a task needs more
 than a quick answer: planning, ordered work, specialist help, review, or proof
 that the result is really done.
 
-Current crates.io release: `v0.0.25`. The crates.io package was published after
-App-native role/team-mode orchestration hardening, installed readiness gap
-closure, and post-publish verification passed after a registry install.
+Current crates.io release: `v0.0.26`. The crates.io package was published after
+visible WAVE lifecycle repair, ODYSSEY/graph-card visibility, global
+rule/LSP/compact discipline, fast-mode role config, installed lifecycle
+readiness closure, and post-publish verification passed after a registry
+install.
 
 ## Install
 
 For a first-time install or a safe update on a new PC:
 
 ```bash
-cargo install codex-cli-captain --version 0.0.25 --force
+cargo install codex-cli-captain --version 0.0.26 --force
 ccc setup --with-plugin --recreate-config
 ```
 
@@ -56,7 +58,7 @@ If you want an AI agent to handle the install, paste this:
 
 ```text
 Install or update Codex-Cli-Captain for Codex CLI.
-Use the published `v0.0.25` release from crates.io, then refresh the Codex CLI
+Use the published `v0.0.26` release from crates.io, then refresh the Codex CLI
 integration with plugin support.
 
 1. Check the current state with:
@@ -65,7 +67,7 @@ integration with plugin support.
    - ccc check-install --text, if ccc exists
 
 2. Install or update:
-   - cargo install codex-cli-captain --version 0.0.25 --force
+   - cargo install codex-cli-captain --version 0.0.26 --force
    - ccc setup --with-plugin --recreate-config
 
 3. Verify before restart:
@@ -110,7 +112,7 @@ Run these in your terminal:
 
 | Command | Use it for |
 | --- | --- |
-| `cargo install codex-cli-captain --version 0.0.25 --force` | Install or update the CCC binary from crates.io. |
+| `cargo install codex-cli-captain --version 0.0.26 --force` | Install or update the CCC binary from crates.io. |
 | `ccc setup --with-plugin --recreate-config` | Refresh the Codex CLI integration, plugin marketplace/cache, hooks, skills, agents, and config after install or update. |
 | `ccc check-install --text` | Verify install, hooks, skills, agents, and Graph Context. |
 | `ccc status --text` | See the current task state and next action. |
@@ -126,13 +128,12 @@ Run these in your terminal:
 | Quiet progress tracking | Status, checklist, and fan-in stay in CCC surfaces instead of noisy transcript text. |
 | Evidence-based finish | CCC treats current validation and review evidence as the source of truth. |
 
-Scope note: `v0.0.25` keeps short natural-language `$ccc` requests on the
-installed orchestrator path while tightening App-native proof binding. The
-verified release covers WAVE activation, Scout/graph-card preflight, ODYSSEY
-lane contracts and lane queues, host update_plan mirror/ACK, role-specific
-Tactician/Scout/Raider/Scribe/Ghost/Arbiter/Sentinel/Oracle surfaces,
-App-native lifecycle receipts, docs read-only proof, same-run durable fan-in,
-LSP safety, Arbiter reverify, Stop closeout, `CCC WAVE DEACTIVE`, and
+Scope note: `v0.0.26` preserves the App-native role/team-mode path while
+making the WAVE lifecycle and ODYSSEY planning proof visible to operators. The
+verified release covers visible WAVE activation/deactivation, Scout-backed
+graph-card preflight, ODYSSEY lane rationale and host update_plan progress,
+global rule consumption, LSP safety, compact rehydration, configurable role
+fast-mode, Scribe/Raider/Ghost/Arbiter proof binding, Stop closeout, and
 `install_runtime_ready=true` with release-blocking gaps at zero.
 
 ## Use It
@@ -158,7 +159,7 @@ For small one-off questions, normal Codex CLI usage is usually enough.
 ## Update
 
 ```bash
-cargo install codex-cli-captain --version 0.0.25 --force
+cargo install codex-cli-captain --version 0.0.26 --force
 ccc setup --with-plugin --recreate-config
 ```
 

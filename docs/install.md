@@ -1,23 +1,24 @@
 # Install, Update, and Uninstall
 
-This guide is bounded to the published `v0.0.25` crates.io release. The
-crates.io package was published after App-native role/team-mode orchestration
-hardening, installed readiness gap closure, and post-publish verification
-passed after a registry install. The release card is published in the repository
-README files.
+This guide is bounded to the published `v0.0.26` crates.io release. The
+crates.io package was published after visible WAVE lifecycle repair,
+ODYSSEY/graph-card visibility, global rule/LSP/compact discipline, fast-mode
+role config, installed lifecycle readiness closure, and post-publish
+verification passed after a registry install. The release card is published in
+the repository README files.
 
-Scope note: `v0.0.25` keeps short natural-language `$ccc` requests on the
-installed orchestrator path while tightening App-native proof binding. The
-verified release covers WAVE activation, Scout/graph-card preflight, ODYSSEY
-lane contracts and lane queues, host update_plan mirror/ACK, role-specific
-agents, App-native lifecycle receipts, docs read-only proof, same-run durable
-fan-in, LSP safety, Arbiter reverify, Stop closeout, `CCC WAVE DEACTIVE`, and
+Scope note: `v0.0.26` preserves the App-native role/team-mode path while
+making the WAVE lifecycle and ODYSSEY planning proof visible to operators. The
+verified release covers visible WAVE activation/deactivation, Scout-backed
+graph-card preflight, ODYSSEY lane rationale and host update_plan progress,
+global rule consumption, LSP safety, compact rehydration, configurable role
+fast-mode, Scribe/Raider/Ghost/Arbiter proof binding, Stop closeout, and
 `install_runtime_ready=true` with release-blocking gaps at zero.
 
 ## Install
 
 ```bash
-cargo install codex-cli-captain --version 0.0.25 --force
+cargo install codex-cli-captain --version 0.0.26 --force
 ccc setup --with-plugin --recreate-config
 ```
 
@@ -47,7 +48,7 @@ explicit `$ccc` request if those surfaces still report missing, then rerun
 For an existing Cargo install:
 
 ```bash
-cargo install codex-cli-captain --version 0.0.25 --force
+cargo install codex-cli-captain --version 0.0.26 --force
 ccc setup --with-plugin --recreate-config
 ```
 
