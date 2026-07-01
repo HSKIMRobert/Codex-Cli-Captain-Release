@@ -16,7 +16,7 @@ CCC は Codex CLI のための小さな control plane です。すぐ答えれ�
 ではなく、計画、順序立てた作業、specialist の支援、review、完了証跡が
 必要な作業では `$ccc` を使います。
 
-現在の crates.io release は `v0.0.26` です。crates.io package は visible WAVE
+現在の crates.io release は `v0.0.27` です。crates.io package は visible WAVE
 lifecycle repair、ODYSSEY/graph-card visibility、global rule/LSP/compact
 discipline、fast-mode role config、installed lifecycle readiness closure の後に
 publish 済みで、registry install による post-publish verification も通過しています。
@@ -26,7 +26,7 @@ publish 済みで、registry install による post-publish verification も通�
 直接インストールする場合:
 
 ```bash
-cargo install codex-cli-captain --version 0.0.26 --force
+cargo install codex-cli-captain --version 0.0.27 --force
 ccc setup --with-plugin --recreate-config
 ```
 
@@ -44,7 +44,7 @@ AI エージェントにインストールを任せる場合は、次を貼り�
 
 ```text
 Codex CLI 用の Codex-Cli-Captain をインストールまたは更新して。
-crates.io に publish 済みの `v0.0.26` release を使い、install 後に
+crates.io に publish 済みの `v0.0.27` release を使い、install 後に
 plugin support まで含めて Codex CLI 連携を更新して。
 
 1. まず現在の状態を確認して。
@@ -53,7 +53,7 @@ plugin support まで含めて Codex CLI 連携を更新して。
    - ccc があれば ccc check-install --text
 
 2. インストールまたは更新して。
-   - cargo install codex-cli-captain --version 0.0.26 --force
+   - cargo install codex-cli-captain --version 0.0.27 --force
    - ccc setup --with-plugin --recreate-config
 
 3. 再起動前に確認して。
@@ -98,7 +98,7 @@ Codex CLI の中では次を入力します。
 
 | コマンド | 用途 |
 | --- | --- |
-| `cargo install codex-cli-captain --version 0.0.26 --force` | crates.io から CCC binary をインストールまたは更新します。 |
+| `cargo install codex-cli-captain --version 0.0.27 --force` | crates.io から CCC binary をインストールまたは更新します。 |
 | `ccc setup --with-plugin --recreate-config` | install または update 後に Codex CLI 連携、plugin marketplace/cache、hooks、skills、agents、config を更新します。 |
 | `ccc check-install --text` | install、hooks、skills、agents、Graph Context を確認します。 |
 | `ccc status --text` | 現在の作業状態と次の行動を確認します。 |
@@ -114,7 +114,7 @@ Codex CLI の中では次を入力します。
 | 静かな進捗管理 | status、checklist、fan-in を transcript noise ではなく CCC surface に保持します。 |
 | 証跡ベースの完了 | 現在の validation と review evidence を完了判断の基準にします。 |
 
-Scope note: `v0.0.26` は App-native role/team-mode path を維持しつつ、
+Scope note: `v0.0.27` は App-native role/team-mode path を維持しつつ、
 WAVE lifecycle と ODYSSEY planning proof を operator に見える形に整えます。
 検証済みの release 範囲には visible WAVE activation/deactivation、Scout-backed
 graph-card preflight、ODYSSEY lane rationale と host update_plan progress、
@@ -145,7 +145,7 @@ $ccc release docs を更新して、まず現在の証跡を確認し、その�
 ## 更新
 
 ```bash
-cargo install codex-cli-captain --version 0.0.26 --force
+cargo install codex-cli-captain --version 0.0.27 --force
 ccc setup --with-plugin --recreate-config
 ```
 
