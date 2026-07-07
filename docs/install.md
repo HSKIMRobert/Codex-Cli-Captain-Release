@@ -1,15 +1,15 @@
 # Install, Update, and Uninstall
 
-This guide is bounded to the published `v0.0.26` crates.io release. The
+This guide is bounded to the published `v0.0.28` crates.io release. The
 crates.io package was published after visible WAVE lifecycle repair,
 ODYSSEY/graph-card visibility, global rule/LSP/compact discipline, fast-mode
 role config, installed lifecycle readiness closure, and post-publish
 verification passed after a registry install. The release card is published in
 the repository README files.
 
-Scope note: `v0.0.26` preserves the App-native role/team-mode path while
+Scope note: `v0.0.28` preserves the App-native role/team-mode path while
 making the WAVE lifecycle and ODYSSEY planning proof visible to operators. The
-verified release covers visible WAVE activation/deactivation, Scout-backed
+verified release covers visible WAVE LAUNCH/ANCHOR, Scout-backed
 graph-card preflight, ODYSSEY lane rationale and host update_plan progress,
 global rule consumption, LSP safety, compact rehydration, configurable role
 fast-mode, Scribe/Raider/Ghost/Arbiter proof binding, Stop closeout, and
@@ -18,7 +18,7 @@ fast-mode, Scribe/Raider/Ghost/Arbiter proof binding, Stop closeout, and
 ## Install
 
 ```bash
-cargo install codex-cli-captain --version 0.0.26 --force
+cargo install codex-cli-captain --version 0.0.28 --force
 ccc setup --with-plugin --recreate-config
 ```
 
@@ -48,7 +48,7 @@ explicit `$ccc` request if those surfaces still report missing, then rerun
 For an existing Cargo install:
 
 ```bash
-cargo install codex-cli-captain --version 0.0.26 --force
+cargo install codex-cli-captain --version 0.0.28 --force
 ccc setup --with-plugin --recreate-config
 ```
 
